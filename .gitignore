@@ -1,1 +1,19 @@
-/build/
+# Eclipse
+.project
+.classpath
+.settings/
+
+# Build output
+bin/
+build/
+target/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Tomecat
+Servers/
