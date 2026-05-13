@@ -9,6 +9,7 @@ public class UsersBean implements Serializable{
 	private String nome;
 	private String password;
 	private String ruolo;
+	private int active;
 	
 	public UsersBean() {}
 	
@@ -16,8 +17,32 @@ public class UsersBean implements Serializable{
 		return id;
 	}
 	
+	public void setNome(String nome) {
+		this.nome=nome;
+	}
+	
+	public void setPassword(String password) {
+		this.password=password;
+	}
+	
+	public void setRuolo(String ruolo) {
+		this.ruolo=ruolo;
+	}
+	
+	public void setActive(int active) {
+		this.active=active;
+	}
+	
 	public String getNome(){
 		return nome;
 	}
-	
+	public String getPassword() {
+		return password;
+	}
+	public String getRuolo() {
+		return ruolo;
+	}
+	public int getActive() {
+		return active;
+	}
 }
