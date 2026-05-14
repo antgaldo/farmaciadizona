@@ -1,30 +1,31 @@
 package control;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.ServletConfig;
-import jakarta.servlet.ServletException;
-import java.io.IOException;
-import java.sql.SQLException;
-import javax.sql.DataSource;
-import dao.UsersDao;
-import dao.UsersDaoImp;
 import model.UsersBean;
 import util.PasswordUtil;
+import dao.interfaceDao.UsersDao;
+import dao.UsersDaoImp;
+import model.UsersBean;
+import java.io.IOException;
+import java.sql.SQLException;
+
+import javax.sql.DataSource;
 
 /**
- * Servlet implementation class Register
+ * Servlet implementation class Login
  */
-@WebServlet("/register")
-public class Register extends HttpServlet {
+@WebServlet("/login")
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private UsersDao usersDao;
-    
-    @Override
+	private UsersDao usersDao;
+       
+	 @Override
     public void init(ServletConfig servletConfig) throws ServletException{
     	super.init(servletConfig);
     	DataSource ds= (DataSource) getServletContext().getAttribute("DataSource");
@@ -33,11 +34,11 @@ public class Register extends HttpServlet {
     	}
     	usersDao= new UsersDaoImp(ds);
     }
-    
+	 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Register() {
+    public LoginServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -47,9 +48,8 @@ public class Register extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/views/Register.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/views/Login.jsp");
 		dispatcher.forward(request,response);
-		
 	}
 
 	/**
@@ -58,23 +58,28 @@ public class Register extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		 try {
-		      insertUser(request);
-		    } catch (SQLException e) {
-		        throw new ServletException(e);
-		    }
+			 UsersBean user= checkUser(request);
+			 if(user != null) {
+				 response.sendRedirect(request.getContextPath() +"/admin/" + user.getId() + "/dashboard");
+			 }
+	    } catch (SQLException e) {
+	        throw new ServletException(e);
+	    }
 	}
 	
-	private void insertUser(HttpServletRequest request) throws SQLException{
-		String nome= request.getParameter("nome");
+	private UsersBean checkUser(HttpServletRequest request) throws SQLException{
+		String email= request.getParameter("email");
 		String password= request.getParameter("password");
-		String ruolo= request.getParameter("ruolo");
 		UsersBean user= new UsersBean();
 		PasswordUtil encryptpass= new PasswordUtil();
-		user.setNome(nome);
+		user.setEmail(email);
 		user.setPassword(encryptpass.toDigest(password));
-		user.setRuolo(ruolo);
-		user.setActive(user.getRuolo().equals("USER") ? 1:0);
-		usersDao.doSave(user);
+		UsersBean usercheck=usersDao.login(user);
+		if(usercheck !=null) {
+			request.getSession().setAttribute("role", usercheck.getRuolo());
+			request.getSession().setAttribute("userid", usercheck.getId());
+		}
+		return usercheck;
 	}
 
 }

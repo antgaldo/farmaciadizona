@@ -7,7 +7,36 @@ public class FarmacieBean implements Serializable{
 	
 	private int id;
 	private int cap;
-	private boolean attive;
+	private boolean active;
+	private String nome;
 	
 	public FarmacieBean() {}
+	
+	public int getId() {
+		return id;
+	}
+	
+	public int getCap() {
+		return cap;
+	}
+	
+	public boolean getActive() {
+		return active;
+	}
+	
+	public String getNome() {
+		return nome;
+	}
+	
+	public void setCap(int cap) {
+		this.cap=cap;
+	}
+	
+	public void setActive(boolean active) {
+		this.active=active;
+	}
+	
+	public void setNome(String nome) {
+		this.nome=nome;
+	}
 }

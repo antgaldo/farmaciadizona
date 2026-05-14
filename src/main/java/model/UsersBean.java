@@ -9,6 +9,7 @@ public class UsersBean implements Serializable{
 	private String nome;
 	private String password;
 	private String ruolo;
+	private String email;
 	private int active;
 	
 	public UsersBean() {}
@@ -33,6 +34,10 @@ public class UsersBean implements Serializable{
 		this.active=active;
 	}
 	
+	public void setEmail(String email) {
+		this.email=email;
+	}
+	
 	public String getNome(){
 		return nome;
 	}
@@ -44,5 +49,8 @@ public class UsersBean implements Serializable{
 	}
 	public int getActive() {
 		return active;
+	}
+	public String getEmail() {
+		return email;
 	}
 }

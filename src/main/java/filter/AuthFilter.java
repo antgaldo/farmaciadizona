@@ -24,9 +24,14 @@ public class AuthFilter extends HttpFilter{
 		    // Controllo che il token sia in sessione
 		    HttpSession session = request.getSession(false);
 		    String role = (session != null) ? (String) session.getAttribute("role") : null;
+		    Integer userid = (session != null) ? (Integer) session.getAttribute("userid") : null;
+		    // recupera id dal path
+		    String[] parts = path.split("/");
+		    int requestedId = Integer.parseInt(parts[2]);
 		    // Controllo autenticazione e autorizzazione
 		    boolean autorizzato = false;
-		    if (role.equals("ADMIN")) {
+		    //controlla se l'id in sessione è uguale all'id del path
+		    if (role.equals("ADMIN") && userid.equals(requestedId)) {
 		    		if (path.startsWith("/admin/")) {
 		            autorizzato = role.equalsIgnoreCase(role.trim());
 		        } else if (path.startsWith("/common/")) {

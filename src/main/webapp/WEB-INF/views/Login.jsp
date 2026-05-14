@@ -9,8 +9,8 @@
 <body>
 <form action="login" method="POST">
 	<fieldset>
-		<label>nome</label>
-		<input id="nome" type="text" name="nome" placeholder="nome">
+		<label>email</label>
+		<input id="email" type="text" name="email" placeholder="email">
 		<label>password</label>
 		<input id="password" type="password" name="password" placeholder="password">
 		<input type="submit" value="submit">
