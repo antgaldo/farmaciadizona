@@ -12,7 +12,7 @@ public class VendeBean implements Serializable{
 	
 	public VendeBean() {}
 	
-	public void setFarmadiaId(int farmacia_id) {
+	public void setFarmaciaId(int farmacia_id) {
 		this.farmacia_id=farmacia_id;
 	}
 	public void setProdottoId(int prodotto_id) {
@@ -39,5 +39,9 @@ public class VendeBean implements Serializable{
 	}
 	public int getQuantita() {
 		return quantita;
+	}
+	
+	public String toString() {
+		return "VendeBean{" +"farmaciaid=" + farmacia_id + ", prodottoid='" + prodotto_id + '\'' +'}';
 	}
 }

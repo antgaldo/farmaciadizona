@@ -11,10 +11,11 @@ import model.UsersBean;
 import util.PasswordUtil;
 import dao.interfaceDao.UsersDao;
 import dao.UsersDaoImp;
+import dao.GestisceDaoImp;
+import dao.interfaceDao.GestisceDao;
 import model.UsersBean;
 import java.io.IOException;
 import java.sql.SQLException;
-
 import javax.sql.DataSource;
 
 /**
@@ -24,6 +25,7 @@ import javax.sql.DataSource;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UsersDao usersDao;
+	private GestisceDao gestisceDao;
        
 	 @Override
     public void init(ServletConfig servletConfig) throws ServletException{
@@ -33,6 +35,7 @@ public class LoginServlet extends HttpServlet {
     		throw new ServletException("DataSource non disponibile nel contesto");
     	}
     	usersDao= new UsersDaoImp(ds);
+    	gestisceDao= new GestisceDaoImp(ds);
     }
 	 
     /**
@@ -78,6 +81,10 @@ public class LoginServlet extends HttpServlet {
 		if(usercheck !=null) {
 			request.getSession().setAttribute("role", usercheck.getRuolo());
 			request.getSession().setAttribute("userid", usercheck.getId());
+			if(usercheck.getRuolo().equals("ADMIN")) {
+				int idFarmacia= gestisceDao.getGestisce(usercheck);
+				request.getSession().setAttribute("idFarmacia", idFarmacia);
+			}
 		}
 		return usercheck;
 	}

@@ -32,4 +32,9 @@ public class ProdottiBean implements Serializable{
 	public void setDescrizione(String descrizione) {
 		this.descrizione=descrizione;
 	}
+	
+	@Override
+	public String toString() {
+	    return "ProdottiBean{" +"id=" + id + ", nome='" + nome + '\'' +'}';
+	}
 }

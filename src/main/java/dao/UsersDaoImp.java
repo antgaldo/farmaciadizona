@@ -37,7 +37,7 @@ public class UsersDaoImp implements UsersDao{
 	
 	@Override
 	public UsersBean login(UsersBean users) throws SQLException{
-		String selectSQL= "SELECT email,password,ruolo " + "FROM users " + "WHERE " + "email=?";
+		String selectSQL= "SELECT id,email,password,ruolo FROM users WHERE email=?";
 		try(Connection connection= ds.getConnection();
 			PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)){
 			preparedStatement.setString(1, users.getEmail());
@@ -47,6 +47,7 @@ public class UsersDaoImp implements UsersDao{
 					 UsersBean u = new UsersBean();
 			            u.setEmail(rs.getString("email"));
 			            u.setRuolo(rs.getString("ruolo"));
+			            u.setId(rs.getInt("id"));
 			            return u;
 				}
 			}

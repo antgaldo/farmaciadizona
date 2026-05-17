@@ -2,11 +2,16 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
 import dao.interfaceDao.VendeDao;
+import model.FarmacieBean;
+import model.ProdottiBean;
 import model.VendeBean;
 
 public class VendeDaoImp implements VendeDao {
@@ -16,6 +21,7 @@ public class VendeDaoImp implements VendeDao {
 		this.ds=ds;
 	}
 	
+	@Override
 	public void doSave(VendeBean vendebean) throws SQLException{
 		String insertsql= "INSERT INTO vende (farmacia_id,prodotto_id,prezzo,quantita_disponibile) values(?,?,?,?)";
 		try(Connection connection = ds.getConnection();

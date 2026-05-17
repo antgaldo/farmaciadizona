@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,17 +8,13 @@
 </head>
 <body>
 <h1>Amministratore</h1>
-<c:if test="${not empty error}">
-    <p>${error}</p>
-</c:if>
-<h2>Cerca prodotto</h2>
-<form action="/farmaciadizona/admin" method="POST">
-	<input type="hidden" name="action" value="searchprodotto">
-	<label>nome</label>
-	<input id="nome" type="text" name="nome" placeholder="nome">
-	<input type="submit" value="submit">
-</form>
-${prodottoTrovato.nome}
+<c:forEach var="p" items="${prodotti}">
+    ${p.nomeProdotto}
+    ${p.descrizione}
+    ${p.prezzo}
+    ${p.quantita}
+    <br>
+</c:forEach>
 <h2>Inserisci prodotto</h2>
 <form action="/farmaciadizona/admin" method="POST">
 	<input type="hidden" name="action" value="addprodotto">

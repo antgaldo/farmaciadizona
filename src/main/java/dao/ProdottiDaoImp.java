@@ -9,7 +9,8 @@ import javax.sql.DataSource;
 import dao.interfaceDao.ProdottiDao;
 import model.ProdottiBean;
 import model.UsersBean;
-
+import java.util.List;
+import java.util.ArrayList;
 
 public class ProdottiDaoImp implements ProdottiDao{
 	
@@ -35,17 +36,6 @@ public class ProdottiDaoImp implements ProdottiDao{
 	}
 	
 	@Override
-	public boolean checkProdotto(ProdottiBean prodotto) throws SQLException{
-		String selectSQL= "SELECT * FROM prodotti WHERE nome= ?" ;
-		try(Connection connection = ds.getConnection();
-			PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)){
-			preparedStatement.setString(1, prodotto.getNome());
-			ResultSet rs = preparedStatement.executeQuery();
-			return rs.next();
-		}
-	}
-	
-	@Override
 	public ProdottiBean getProdotto(ProdottiBean prodotto) throws SQLException{
 		String selectSQL= "SELECT * FROM prodotti WHERE nome=?" ;
 		try(Connection connection = ds.getConnection();
@@ -56,9 +46,27 @@ public class ProdottiDaoImp implements ProdottiDao{
 				ProdottiBean p= new ProdottiBean();
 				p.setNome(rs.getString("nome"));
 				p.setDescrizione(rs.getString("descrizione"));
+				p.setId(rs.getInt("id"));
 				return p;
 			};
 		}
 		return null;
+	}
+	
+	@Override
+	public List<ProdottiBean> getAll() throws SQLException{
+		List<ProdottiBean> lista= new ArrayList<ProdottiBean>();
+		String selectSQL= "SELECT * FROM prodotti";
+		try(Connection connection = ds.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)){
+			ResultSet rs = preparedStatement.executeQuery();
+			 while(rs.next()) {
+	            ProdottiBean prodotto = new ProdottiBean();
+	            prodotto.setId(rs.getInt("id"));
+	            prodotto.setNome(rs.getString("nome"));
+	            lista.add(prodotto);
+		    }
+		}
+		return lista;
 	}
 }
