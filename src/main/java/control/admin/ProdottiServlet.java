@@ -26,8 +26,8 @@ import model.viewbean.VendeDettaglioBean;
 /**
  * Servlet implementation class AdminDashboard
  */
-@WebServlet("/admin/*")
-public class AdminServlet extends HttpServlet {
+@WebServlet("/admin/prodotti")
+public class ProdottiServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ProdottiDao prodottiDao;
 	private VendeDao vendeDao;
@@ -47,7 +47,7 @@ public class AdminServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminServlet() {
+    public ProdottiServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -60,13 +60,14 @@ public class AdminServlet extends HttpServlet {
 		try {
 			List<VendeDettaglioBean> prodotti = vendeDettaglioDao.getProdottiFarmacia((Integer) request.getSession().getAttribute("idFarmacia"));
 			request.setAttribute("prodotti", prodotti);
-			System.out.println(prodotti);
 		} catch(SQLException e) {
 			throw new ServletException(e);
 		}
-	    RequestDispatcher dispatcher =
-	        request.getRequestDispatcher("/WEB-INF/views/admin/Admin.jsp");
-	    dispatcher.forward(request, response);
+		request.setAttribute("contentPage","/WEB-INF/views/admin/prodotti.jsp");
+	    request.setAttribute("title", "Programmi");
+        request.getRequestDispatcher(
+                "/WEB-INF/views/admin/homapanel.jsp"
+            ).forward(request, response);
 	}
 
 	/**

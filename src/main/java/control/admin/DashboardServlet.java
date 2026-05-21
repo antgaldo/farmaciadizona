@@ -1,7 +1,6 @@
-package control;
+package control.admin;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,16 +8,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet implementation class Home
+ * Servlet implementation class AdminServlet
  */
-@WebServlet("/app/*")
-public class HomeServlet extends HttpServlet {
+@WebServlet("/admin/dashboard")
+public class DashboardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HomeServlet() {
+    public DashboardServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,8 +27,12 @@ public class HomeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/views/home.jsp");
-		dispatcher.forward(request, response);
+    	request.setAttribute("contentPage","/WEB-INF/views/admin/dashboard.jsp");
+	    request.setAttribute("title", "Programmi");
+	    request.setAttribute("page", "dashboard");
+        request.getRequestDispatcher(
+                "/WEB-INF/views/admin/homapanel.jsp"
+            ).forward(request, response);
 	}
 
 	/**

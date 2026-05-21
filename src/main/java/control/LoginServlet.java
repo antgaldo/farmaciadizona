@@ -51,7 +51,7 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/views/Login.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/views/login.jsp");
 		dispatcher.forward(request,response);
 	}
 
@@ -63,7 +63,7 @@ public class LoginServlet extends HttpServlet {
 		 try {
 			 UsersBean user= checkUser(request);
 			 if(user != null) {
-				 response.sendRedirect(request.getContextPath() +"/admin/" + user.getId() + "/dashboard");
+				 response.sendRedirect(request.getContextPath() +"/admin/dashboard");
 			 }
 	    } catch (SQLException e) {
 	        throw new ServletException(e);
