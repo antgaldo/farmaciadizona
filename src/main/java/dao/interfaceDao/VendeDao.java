@@ -8,4 +8,5 @@ import model.FarmacieBean;
 
 public interface VendeDao {
 	public void doSave(VendeBean vende) throws SQLException;
+	public void delete(int idFarmacia, int idProdotto) throws SQLException;
 }

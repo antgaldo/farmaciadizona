@@ -15,11 +15,6 @@
 		<div class="main-panel w-100">
 			<div class="content-wrapper">
 				<div class="row">
-					<div class="col-12">
-						<span class="d-flex align-items-center purchase-popup">
-							<a class="btn ml-auto btn-gradient-success btn-fw" href="/admin/addprogramma">Aggiungi programma</a>
-						</span>
-					</div>
 					<div class="col-lg-12 grid-margin stretch-card">
 						<div class="card">
 							<div class="card-body p-4">

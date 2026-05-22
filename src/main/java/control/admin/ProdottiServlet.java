@@ -60,14 +60,14 @@ public class ProdottiServlet extends HttpServlet {
 		try {
 			List<VendeDettaglioBean> prodotti = vendeDettaglioDao.getProdottiFarmacia((Integer) request.getSession().getAttribute("idFarmacia"));
 			request.setAttribute("prodotti", prodotti);
+			request.setAttribute("contentPage","/WEB-INF/views/admin/prodotti.jsp");
+		    request.setAttribute("title", "Programmi");
+	        request.getRequestDispatcher(
+	                "/WEB-INF/views/admin/homapanel.jsp"
+	            ).forward(request, response);
 		} catch(SQLException e) {
 			throw new ServletException(e);
 		}
-		request.setAttribute("contentPage","/WEB-INF/views/admin/prodotti.jsp");
-	    request.setAttribute("title", "Programmi");
-        request.getRequestDispatcher(
-                "/WEB-INF/views/admin/homapanel.jsp"
-            ).forward(request, response);
 	}
 
 	/**
@@ -81,19 +81,31 @@ public class ProdottiServlet extends HttpServlet {
 			 	case "addprodotto":
 			 		ProdottiBean prodotto= insertProdotto(request);
 			 	    request.getSession().setAttribute("success", "Prodotto inserito");
-			 	    response.sendRedirect(request.getContextPath() + "/admin");
-			 	break;
+			 	    response.sendRedirect(request.getContextPath() + "/admin/prodotti");
+			 	return;
+			 	case "deletevendeprodotto":
+			 		deleteVendeProdotto(request,Integer.parseInt(request.getParameter("idProdotto")));
+			 		response.sendRedirect(request.getContextPath() + "/admin/prodotti");
+			 	return;
 			 	/*case "searchprodotto":
 			 		request.setAttribute("prodottoTrovato", searchProdotto(request));
 			 	break;*/
 	            default:
 	                response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+	                return;
 			 }
-			 return;
-		      //doGet(request, response);
+		     //doGet(request, response);
 		    } catch (SQLException e) {
 		      throw new ServletException(e);
 		    }
+	}
+	
+	private void deleteVendeProdotto(HttpServletRequest request, int id) throws SQLException{
+		Integer idProdotto = id;
+		Integer idFarmacia= (Integer)request.getSession().getAttribute("idFarmacia");
+		if(idProdotto != null && idFarmacia != null) {
+			vendeDao.delete(idFarmacia,idProdotto);
+		}
 	}
 	
 	private ProdottiBean insertProdotto(HttpServletRequest request) throws SQLException{

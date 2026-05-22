@@ -6,4 +6,5 @@ import java.sql.SQLException;
 
 public interface VendeDettaglioDao {
 	public List<VendeDettaglioBean> getProdottiFarmacia(int idfarmacia) throws SQLException;
+	public int getCountProdotti(int idfarmacia) throws SQLException;
 }

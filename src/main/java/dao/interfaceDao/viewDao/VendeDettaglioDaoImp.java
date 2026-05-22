@@ -28,6 +28,7 @@ public class VendeDettaglioDaoImp implements VendeDettaglioDao {
 				ResultSet rs = preparedStatement.executeQuery();
 				while(rs.next()) {
 					VendeDettaglioBean v= new VendeDettaglioBean();
+					v.setIdProdotto(rs.getInt("prodotto_id"));
 					v.setNomeProdotto(rs.getString("p.nome"));
 					v.setDescrizione(rs.getString("descrizione"));
 					v.setPrezzo(rs.getInt("prezzo"));
@@ -36,5 +37,18 @@ public class VendeDettaglioDaoImp implements VendeDettaglioDao {
 				};
 		}
 		return vende;
+	}
+	
+	@Override
+	public int getCountProdotti(int idfarmacia) throws SQLException{
+		String getSQL="SELECT COUNT(prodotto_id) AS totale FROM vende WHERE farmacia_id=?";
+		try(Connection connection = ds.getConnection();PreparedStatement preparedStatement=connection.prepareStatement(getSQL)){
+			preparedStatement.setInt(1, idfarmacia);
+			ResultSet rs= preparedStatement.executeQuery();
+			if(rs.next()) {
+				return rs.getInt("total");
+			}
+		}
+		return 0;
 	}
 }

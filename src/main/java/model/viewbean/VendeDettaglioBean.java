@@ -1,12 +1,17 @@
 package model.viewbean;
 
 public class VendeDettaglioBean {
+	int idProdotto;
     String nomeProdotto;
     String descrizione;
     int prezzo;
     int quantita;
     
     public VendeDettaglioBean() {}
+    
+    public void setIdProdotto(int idProdotto) {
+    	this.idProdotto=idProdotto;
+    }
     
     public void setNomeProdotto(String nomeProdotto) {
     	this.nomeProdotto=nomeProdotto;
@@ -24,6 +29,10 @@ public class VendeDettaglioBean {
     	this.quantita=quantita;
     }
     
+    public int getIdProdotto() {
+    	return idProdotto;
+    }
+    
     public String getNomeProdotto() {
     	return nomeProdotto;
     }
@@ -38,5 +47,9 @@ public class VendeDettaglioBean {
     
     public int getQuantita() {
     	return quantita;
+    }
+    
+    public String toString() {
+    	return this.getNomeProdotto() + this.getDescrizione();
     }
 }

@@ -33,4 +33,15 @@ public class VendeDaoImp implements VendeDao {
 				preparedStatement.executeUpdate();
 			}
 	}
+	
+	@Override
+	public void delete(int idFarmacia, int idProdotto) throws SQLException{
+		String deletesql= "DELETE FROM vende WHERE farmacia_id=? AND prodotto_id=?";
+		try(Connection connection = ds.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(deletesql)){
+				preparedStatement.setInt(1, idFarmacia);
+				preparedStatement.setInt(2, idProdotto);
+				preparedStatement.executeUpdate();
+		}
+	}
 }
