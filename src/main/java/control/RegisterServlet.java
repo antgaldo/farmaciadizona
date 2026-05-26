@@ -112,6 +112,9 @@ public class RegisterServlet extends HttpServlet {
 		PasswordUtil encryptpass= new PasswordUtil();
 		int cap= Integer.parseInt(request.getParameter("cap"));
 		String nomeFarmacia= request.getParameter("nomeFarmacia");
+		String lat= request.getParameter("lat");
+		String lon= request.getParameter("lon");
+		String indirizzo= request.getParameter("indirizzo");
 		FarmacieBean farmacia= new FarmacieBean();
 		GestisceBean gestisce= new GestisceBean();
 		user.setNome(nome);
@@ -122,6 +125,9 @@ public class RegisterServlet extends HttpServlet {
 		farmacia.setCap(cap);
 		farmacia.setActive(false);
 		farmacia.setNome(nomeFarmacia);
+		farmacia.setLat(lat);
+		farmacia.setLon(lon);
+		farmacia.setIndirizzo(indirizzo);
 		if(usersDao.getUser(user)==null) {
 			int idFarmacia= farmacieDao.doSave(farmacia);
 			if(idFarmacia != 0) {

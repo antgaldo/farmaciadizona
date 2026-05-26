@@ -21,12 +21,15 @@ public class FarmacieDaoImp implements FarmacieDao{
 	
 	@Override
 	public int doSave(FarmacieBean farmacie) throws SQLException{
-		String insertSql= "INSERT INTO farmacie (cap,active,nome) VALUES(?,?,?)";
+		String insertSql= "INSERT INTO farmacie (cap,active,nome,indirizzo,lat,lon) VALUES(?,?,?,?,?,?)";
 		try(Connection connection = ds.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(insertSql,Statement.RETURN_GENERATED_KEYS)){
 				preparedStatement.setInt(1, farmacie.getCap());
 				preparedStatement.setBoolean(2, farmacie.getActive());
 				preparedStatement.setString(3, farmacie.getNome());
+				preparedStatement.setString(4, farmacie.getIndirizzo());
+				preparedStatement.setString(5, farmacie.getLat());
+				preparedStatement.setString(6, farmacie.getLon());
 				preparedStatement.executeUpdate();
 				try (ResultSet rs= preparedStatement.getGeneratedKeys()){
 		            if(rs.next()) {
