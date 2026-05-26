@@ -7,6 +7,8 @@ import java.sql.Statement;
 
 import dao.interfaceDao.FarmacieDao;
 import model.FarmacieBean;
+import model.dto.FarmaciaProdottoDTO;
+
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 
@@ -33,5 +35,30 @@ public class FarmacieDaoImp implements FarmacieDao{
 		        }
 			}
 		return 0;
+	}
+	
+	@Override
+	public FarmaciaProdottoDTO getFarmaciePerProdottoECap(int farmacia_cap,String prodotto_nome) throws SQLException{
+		String selectSQL = "SELECT  farmacie.nome AS farmacia_nome, farmacie.cap, vende.prezzo,vende.quantita_disponibile,prodotti.nome AS prodotto_nome FROM farmacie "
+				+ "JOIN vende ON farmacie.id=vende.farmacia_id "
+				+ "JOIN prodotti ON prodotti.id=vende.prodotto_id "
+				+ "WHERE prodotti.nome=? AND farmacie.cap=?";
+		try(Connection connection = ds.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)){
+			preparedStatement.setString(1, prodotto_nome);
+			preparedStatement.setInt(2, farmacia_cap);
+			preparedStatement.executeQuery();
+			ResultSet rs= preparedStatement.getResultSet();
+			if(rs.next()) {
+				FarmaciaProdottoDTO result= new FarmaciaProdottoDTO();
+				result.setCap(rs.getInt("cap"));
+				result.setPrezzo(rs.getInt("prezzo"));
+				result.setQuantita(rs.getInt("quantita_disponibile"));
+				result.setProdottoNome(rs.getString("prodotto_nome"));
+				result.setFarmaciaNome(rs.getString("farmacia_nome"));
+				return result;
+			}
+		}
+		return null;
 	}
 }

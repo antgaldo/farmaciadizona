@@ -16,7 +16,7 @@ public class AuthFilter extends HttpFilter{
 	protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 		throws IOException, ServletException {	
 		    String path = request.getRequestURI().substring(request.getContextPath().length());
-		    boolean isStaticResource = path.startsWith("/css/") || path.startsWith("/js/");
+		    boolean isStaticResource = path.startsWith("/css/") || path.startsWith("/js/") || path.startsWith("img");
 		    // Se l'URL non è protetto, lascia passare
 		    if (!path.startsWith("/admin/") && !path.startsWith("/common/") || isStaticResource) {
 		    		chain.doFilter(request, response);
