@@ -8,6 +8,7 @@ public class ProdottiBean implements Serializable{
 	private int id;
 	private String nome;
 	private String descrizione;
+	private String categoria;
 	
 	public ProdottiBean() {}
 	
@@ -16,6 +17,10 @@ public class ProdottiBean implements Serializable{
 	}
 	public String getNome() {
 		return nome;
+	}
+	
+	public String getCategoria() {
+		return categoria;
 	}
 	
 	public String getDescrizione() {
@@ -31,6 +36,10 @@ public class ProdottiBean implements Serializable{
 	
 	public void setDescrizione(String descrizione) {
 		this.descrizione=descrizione;
+	}
+	
+	public void setCategoria(String categoria) {
+		this.categoria=categoria;
 	}
 	
 	@Override

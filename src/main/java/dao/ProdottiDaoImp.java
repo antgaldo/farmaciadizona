@@ -20,11 +20,12 @@ public class ProdottiDaoImp implements ProdottiDao{
 	}
 	@Override
 	public int doSave(ProdottiBean prodotti) throws SQLException{
-		String insertSQL= "INSERT INTO " + "prodotti " + "(nome,descrizione) " + "VALUES(?,?)";
+		String insertSQL= "INSERT INTO " + "prodotti " + "(nome,descrizione,categoria) " + "VALUES(?,?,?)";
 		try(Connection connection = ds.getConnection();
 			PreparedStatement preparedStatement = connection.prepareStatement(insertSQL,Statement.RETURN_GENERATED_KEYS)){
 			preparedStatement.setString(1, prodotti.getNome());
 			preparedStatement.setString(2, prodotti.getDescrizione());
+			preparedStatement.setString(3, prodotti.getCategoria());
 			preparedStatement.executeUpdate();
 			try(ResultSet rs = preparedStatement.getGeneratedKeys()) {
 	            if(rs.next()) {
@@ -46,6 +47,7 @@ public class ProdottiDaoImp implements ProdottiDao{
 				ProdottiBean p= new ProdottiBean();
 				p.setNome(rs.getString("nome"));
 				p.setDescrizione(rs.getString("descrizione"));
+				p.setCategoria(rs.getString("categoria"));
 				p.setId(rs.getInt("id"));
 				return p;
 			};

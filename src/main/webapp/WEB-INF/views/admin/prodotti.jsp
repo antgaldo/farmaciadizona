@@ -31,6 +31,10 @@
 						<label>quantita</label>
 						<input id="quantita" type="int" class="form-control" name="quantita" placeholder="quantita">
 					  </div>
+					  <div class="mb-3">
+						<label>categoria</label>
+						<input id="categoria" type="text" class="form-control" name="categoria" placeholder="categoria">
+					  </div>
 					  <button type="submit" value="submit" class="btn btn-primary">Save changes</button>
 					</form>
 			      </div>
@@ -49,6 +53,7 @@
 			      <th scope="col">descrizione</th>
 			      <th scope="col">prezzo</th>
 			      <th scope="col">quantità</th>
+			      <th scope="col">categoria</th>
 			      <th scope="col">azioni</th>
 			    </tr>
 			  </thead>
@@ -59,6 +64,7 @@
 					<td>${p.descrizione}</td>
 					<td>${p.prezzo}</td>
 					<td>${p.quantita}</td>
+					<td>${p.categoria}</td>
 					<td><i class="bi bi-pencil-square me-1" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal1"></i>
 						<i class="bi bi-trash" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2"></i>
 					</td>

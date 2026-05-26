@@ -9,6 +9,7 @@ public class VendeBean implements Serializable{
 	private int prodotto_id;
 	private double prezzo;
 	private int quantita;
+	private boolean active;
 	
 	public VendeBean() {}
 	
@@ -27,6 +28,10 @@ public class VendeBean implements Serializable{
 		this.quantita=quantita;
 	}
 	
+	public void setActive(boolean active) {
+		this.active=active;
+	}
+	
 	public int getFarmaciaId() {
 		return farmacia_id;
 	}
@@ -39,6 +44,10 @@ public class VendeBean implements Serializable{
 	}
 	public int getQuantita() {
 		return quantita;
+	}
+	
+	public boolean getActive() {
+		return active;
 	}
 	
 	public String toString() {

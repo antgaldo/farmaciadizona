@@ -45,4 +45,8 @@ public class FarmaciaProdottoDTO {
 	public void setQuantita(int quantita) {
 		this.quantita=quantita;
 	}
+	
+	public String toString() {
+		return prodotto_nome + farmacia_nome;
+	}
 }

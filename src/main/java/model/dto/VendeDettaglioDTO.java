@@ -1,16 +1,21 @@
-package model.viewbean;
+package model.dto;
 
-public class VendeDettaglioBean {
+public class VendeDettaglioDTO {
 	int idProdotto;
     String nomeProdotto;
     String descrizione;
     int prezzo;
     int quantita;
+    String categoria;
     
-    public VendeDettaglioBean() {}
+    public VendeDettaglioDTO() {}
     
     public void setIdProdotto(int idProdotto) {
     	this.idProdotto=idProdotto;
+    }
+    
+    public void setCategoria(String categoria) {
+    	this.categoria=categoria;
     }
     
     public void setNomeProdotto(String nomeProdotto) {
@@ -35,6 +40,10 @@ public class VendeDettaglioBean {
     
     public String getNomeProdotto() {
     	return nomeProdotto;
+    }
+    
+    public String getCategoria() {
+    	return categoria;
     }
     
     public String getDescrizione() {

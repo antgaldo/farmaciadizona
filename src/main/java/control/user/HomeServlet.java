@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -57,8 +58,7 @@ public class HomeServlet extends HttpServlet {
 		String farmaco= request.getParameter("farmaco");
 		int cap= Integer.parseInt(request.getParameter("cap"));
 		try {
-			FarmaciaProdottoDTO result= farmacieDao.getFarmaciePerProdottoECap(cap,farmaco);
-			System.out.println(result);
+			List<FarmaciaProdottoDTO> result= farmacieDao.getFarmaciePerProdottoECap(cap,farmaco);
 			request.setAttribute("listaFarmacie", result);
 			//IL FORWARD per cambiare pagina (mantenendo la stessa richiesta attiva)
 			request.getRequestDispatcher("/searchfarmaco").forward(request, response);

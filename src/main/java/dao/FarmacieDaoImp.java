@@ -1,6 +1,8 @@
 package dao;
 
 import java.sql.Connection;
+import java.util.List;
+import java.util.ArrayList;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -41,27 +43,28 @@ public class FarmacieDaoImp implements FarmacieDao{
 	}
 	
 	@Override
-	public FarmaciaProdottoDTO getFarmaciePerProdottoECap(int farmacia_cap,String prodotto_nome) throws SQLException{
+	public List<FarmaciaProdottoDTO> getFarmaciePerProdottoECap(int farmacia_cap,String prodotto_nome) throws SQLException{
 		String selectSQL = "SELECT  farmacie.nome AS farmacia_nome, farmacie.cap, vende.prezzo,vende.quantita_disponibile,prodotti.nome AS prodotto_nome FROM farmacie "
 				+ "JOIN vende ON farmacie.id=vende.farmacia_id "
 				+ "JOIN prodotti ON prodotti.id=vende.prodotto_id "
 				+ "WHERE prodotti.nome=? AND farmacie.cap=?";
+		List<FarmaciaProdottoDTO> resultlist= new ArrayList<>();
 		try(Connection connection = ds.getConnection();
 			PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)){
 			preparedStatement.setString(1, prodotto_nome);
 			preparedStatement.setInt(2, farmacia_cap);
 			preparedStatement.executeQuery();
 			ResultSet rs= preparedStatement.getResultSet();
-			if(rs.next()) {
+			while(rs.next()) {
 				FarmaciaProdottoDTO result= new FarmaciaProdottoDTO();
 				result.setCap(rs.getInt("cap"));
 				result.setPrezzo(rs.getInt("prezzo"));
 				result.setQuantita(rs.getInt("quantita_disponibile"));
 				result.setProdottoNome(rs.getString("prodotto_nome"));
 				result.setFarmaciaNome(rs.getString("farmacia_nome"));
-				return result;
+				resultlist.add(result);
 			}
 		}
-		return null;
+		return resultlist;
 	}
 }

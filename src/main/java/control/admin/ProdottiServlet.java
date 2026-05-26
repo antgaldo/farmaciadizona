@@ -19,9 +19,7 @@ import dao.ProdottiDaoImp;
 import model.VendeBean;
 import dao.interfaceDao.VendeDao;
 import dao.VendeDaoImp;
-import dao.interfaceDao.viewInterfaceDao.VendeDettaglioDao;
-import dao.interfaceDao.viewDao.VendeDettaglioDaoImp;
-import model.viewbean.VendeDettaglioBean;
+import model.dto.VendeDettaglioDTO;
 
 /**
  * Servlet implementation class AdminDashboard
@@ -31,7 +29,6 @@ public class ProdottiServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ProdottiDao prodottiDao;
 	private VendeDao vendeDao;
-	private VendeDettaglioDao vendeDettaglioDao;
 	 @Override
 	    public void init(ServletConfig servletConfig) throws ServletException{
 	    	super.init(servletConfig);
@@ -41,7 +38,6 @@ public class ProdottiServlet extends HttpServlet {
 	    	}
 	    	prodottiDao= new ProdottiDaoImp(ds);
 	    	vendeDao=new VendeDaoImp(ds);
-	    	vendeDettaglioDao= new VendeDettaglioDaoImp(ds);
 	    }
 	 
     /**
@@ -58,7 +54,7 @@ public class ProdottiServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try {
-			List<VendeDettaglioBean> prodotti = vendeDettaglioDao.getProdottiFarmacia((Integer) request.getSession().getAttribute("idFarmacia"));
+			List<VendeDettaglioDTO> prodotti = vendeDao.getProdottiFarmacia((Integer) request.getSession().getAttribute("idFarmacia"));
 			request.setAttribute("prodotti", prodotti);
 			request.setAttribute("contentPage","/WEB-INF/views/admin/prodotti.jsp");
 		    request.setAttribute("title", "Programmi");
@@ -115,12 +111,14 @@ public class ProdottiServlet extends HttpServlet {
 		VendeBean vende= new VendeBean();
 		int prezzo = Integer.parseInt(request.getParameter("prezzo"));
 		int quantita = Integer.parseInt(request.getParameter("quantita"));
-		
+		String categoria= request.getParameter("categoria");
 		vende.setFarmaciaId((Integer)request.getSession().getAttribute("idFarmacia"));
 		vende.setPrezzo(prezzo);
 		vende.setQuantita(quantita);
+		vende.setActive(true);
 		prodotto.setNome(nome);
 		prodotto.setDescrizione(descrizione);
+		prodotto.setCategoria(categoria);
 		//verifica se il prodotto è gia inserito
 		ProdottiBean existprodotto= prodottiDao.getProdotto(prodotto);
 		if(existprodotto!=null) {
