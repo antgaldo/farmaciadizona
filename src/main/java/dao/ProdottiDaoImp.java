@@ -36,12 +36,13 @@ public class ProdottiDaoImp implements ProdottiDao{
 		return 0;
 	}
 	
+	
 	@Override
-	public ProdottiBean getProdotto(ProdottiBean prodotto) throws SQLException{
+	public ProdottiBean getProdotto(String nome) throws SQLException{
 		String selectSQL= "SELECT * FROM prodotti WHERE nome=?" ;
 		try(Connection connection = ds.getConnection();
 			PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)){
-			preparedStatement.setString(1, prodotto.getNome());
+			preparedStatement.setString(1, nome);
 			ResultSet rs = preparedStatement.executeQuery();
 			if(rs.next()) {
 				ProdottiBean p= new ProdottiBean();
@@ -53,6 +54,22 @@ public class ProdottiDaoImp implements ProdottiDao{
 			};
 		}
 		return null;
+	}
+	
+	@Override
+	public List<String> getNameProdotto(String nome) throws SQLException{
+		String selectSQL= "SELECT prodotti.nome FROM prodotti WHERE nome LIKE ?" ;
+		List<String> lista= new ArrayList<>();
+		try(Connection connection = ds.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)){
+			preparedStatement.setString(1, nome);
+			ResultSet rs = preparedStatement.executeQuery();
+			while(rs.next()) {
+				String nomeprodotto= rs.getString("nome");
+				lista.add(nomeprodotto);
+			};
+		}
+		return lista;
 	}
 	
 	@Override

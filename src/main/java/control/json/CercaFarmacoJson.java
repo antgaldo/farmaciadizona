@@ -1,57 +1,66 @@
-package control.user;
+package control.json;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.sql.DataSource;
-
+import java.util.List;
 import dao.FarmacieDaoImp;
-import model.dto.FarmaciaProdottoDTO;
 import dao.ProdottiDaoImp;
-import model.ProdottiBean;
+import dao.interfaceDao.ProdottiDao;
+
 
 /**
- * Servlet implementation class Home
+ * Servlet implementation class CercaFarmacoJson
  */
-@WebServlet("/app/*")
-public class HomeServlet extends HttpServlet {
+@WebServlet("/CercaFarmacoJson")
+public class CercaFarmacoJson extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private FarmacieDaoImp farmacieDao;
-    private ProdottiDaoImp prodottoDao;
-    
-	 @Override
+    private ProdottiDao prodottiDao;
+
+	@Override
     public void init(ServletConfig servletConfig) throws ServletException{
     	super.init(servletConfig);
     	DataSource ds= (DataSource) getServletContext().getAttribute("DataSource");
     	if(ds == null) {
     		throw new ServletException("DataSource non disponibile nel contesto");
     	}
-    	farmacieDao= new FarmacieDaoImp(ds);
-    	prodottoDao= new ProdottiDaoImp(ds);
+    	prodottiDao= new ProdottiDaoImp(ds);
     }
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HomeServlet() {
+    public CercaFarmacoJson() {
         super();
         // TODO Auto-generated constructor stub
     }
 
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    	String nomeprodotto = request.getParameter("q");
+    	if(nomeprodotto!=null) {
+    		try {
+    			List<String> result= prodottiDao.getNameProdotto(nomeprodotto);
+    			response.setContentType("application/json");
+    			response.setCharacterEncoding("UTF-8");
+    			String json = "[\"" + String.join("\",\"", result) + "\"]";
+    			response.getWriter().write(json); 
+    		} catch (SQLException e) {
+    	        throw new ServletException(e);
+    	    }	
+    	}
+    }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/views/home.jsp");
-		dispatcher.forward(request, response);
+		processRequest(request,response);
 	}
 
 	/**
@@ -59,17 +68,7 @@ public class HomeServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String farmaco= request.getParameter("farmaco");
-		int cap= Integer.parseInt(request.getParameter("cap"));
-		try {
-			List<FarmaciaProdottoDTO> result= farmacieDao.getFarmaciePerProdottoECap(cap,farmaco);
-			ProdottiBean prodotto= prodottoDao.getProdotto(farmaco);
-			request.setAttribute("listaFarmacie", result);
-			request.setAttribute("farmaco",prodotto);
-			request.getRequestDispatcher("/searchfarmaco").forward(request, response);
-		} catch (SQLException e) {
-	        throw new ServletException(e);
-	    }		
+		doGet(request, response);
 	}
 
 }

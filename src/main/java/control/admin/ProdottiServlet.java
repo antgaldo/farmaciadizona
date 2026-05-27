@@ -120,7 +120,7 @@ public class ProdottiServlet extends HttpServlet {
 		prodotto.setDescrizione(descrizione);
 		prodotto.setCategoria(categoria);
 		//verifica se il prodotto è gia inserito
-		ProdottiBean existprodotto= prodottiDao.getProdotto(prodotto);
+		ProdottiBean existprodotto= prodottiDao.getProdotto(prodotto.getNome());
 		if(existprodotto!=null) {
 			//se inserito prendi l'id
 			vende.setProdottoId(existprodotto.getId());
