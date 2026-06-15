@@ -13,7 +13,7 @@
 			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			      </div>
 			      <div class="modal-body">
-			        <form action="/farmaciadizona/admin/prodotti" method="POST">
+			        <form action="/farmaciadizona/admin/prodotti" method="POST" enctype="multipart/form-data">
 			          <input type="hidden" name="action" value="addprodotto">
 					  <div class="mb-3">
 					    <label class="form-label">Nome</label>
@@ -30,6 +30,10 @@
 					  <div class="mb-3">
 						<label>quantita</label>
 						<input id="quantita" type="int" class="form-control" name="quantita" placeholder="quantita">
+					  </div>
+					  <div class="mb-3">
+						<label>immagine</label>
+						<input type="file" id="img" name="img" id="img" class="form-control" accept="image/*"/>
 					  </div>
 					  <div class="mb-3">
 						<label>categoria</label>
@@ -54,6 +58,7 @@
 			      <th scope="col">prezzo</th>
 			      <th scope="col">quantità</th>
 			      <th scope="col">categoria</th>
+			      <th scope="col">immagine</th>
 			      <th scope="col">azioni</th>
 			    </tr>
 			  </thead>
@@ -65,6 +70,7 @@
 					<td>${p.prezzo}</td>
 					<td>${p.quantita}</td>
 					<td>${p.categoria}</td>
+					<td><img width="60" height="60" src="${pageContext.request.contextPath}/uploads/${p.pathImg}"></td>
 					<td><i class="bi bi-pencil-square me-1" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal1"></i>
 						<i class="bi bi-trash" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2"></i>
 					</td>

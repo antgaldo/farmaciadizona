@@ -9,6 +9,8 @@ import javax.sql.DataSource;
 import dao.interfaceDao.ProdottiDao;
 import model.ProdottiBean;
 import model.UsersBean;
+import model.ImgBean;
+import model.dto.ProdottoDettaglioDTO;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -36,6 +38,26 @@ public class ProdottiDaoImp implements ProdottiDao{
 		return 0;
 	}
 	
+	
+	@Override
+	public ProdottoDettaglioDTO getProdottoDTO(String nome) throws SQLException{
+		String selectSQL= "SELECT * FROM prodotti JOIN img i ON prodotti.id=i.prodotto_id WHERE nome=?" ;
+		try(Connection connection = ds.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)){
+			preparedStatement.setString(1, nome);
+			ResultSet rs = preparedStatement.executeQuery();
+			if(rs.next()) {
+				ProdottoDettaglioDTO p= new ProdottoDettaglioDTO();
+				p.setNome(rs.getString("nome"));
+				p.setDescrizione(rs.getString("descrizione"));
+				p.setCategoria(rs.getString("categoria"));
+				p.setId(rs.getInt("id"));
+				p.setPath(rs.getString("path"));
+				return p;
+			};
+		}
+		return null;
+	}
 	
 	@Override
 	public ProdottiBean getProdotto(String nome) throws SQLException{

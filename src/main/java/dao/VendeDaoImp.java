@@ -49,7 +49,12 @@ public class VendeDaoImp implements VendeDao {
 	}
 	@Override
 	public List<VendeDettaglioDTO> getProdottiFarmacia(int idfarmacia) throws SQLException{
-		String selectSQL= "SELECT v.farmacia_id,v.prodotto_id,v.prezzo,v.quantita_disponibile,p.nome,p.descrizione,p.categoria FROM vende v JOIN farmacie f ON v.farmacia_id=f.id JOIN prodotti p ON v.prodotto_id = p.id WHERE f.id=?";
+		String selectSQL= "SELECT v.farmacia_id,v.prodotto_id,v.prezzo,v.quantita_disponibile,p.nome,p.descrizione,p.categoria,i.path "
+				+ "FROM vende v "
+				+ "JOIN farmacie f ON v.farmacia_id=f.id "
+				+ "JOIN prodotti p ON v.prodotto_id = p.id "
+				+ "JOIN img i ON v.prodotto_id=i.prodotto_id "
+				+ "WHERE f.id=?";
 		List<VendeDettaglioDTO> vende= new ArrayList<VendeDettaglioDTO>();
 		try(Connection connection = ds.getConnection();
 				PreparedStatement preparedStatement= connection.prepareStatement(selectSQL)){
@@ -63,6 +68,7 @@ public class VendeDaoImp implements VendeDao {
 					v.setPrezzo(rs.getInt("prezzo"));
 					v.setQuantita(rs.getInt("quantita_disponibile"));
 					v.setCategoria(rs.getString("categoria"));
+					v.setPathImg(rs.getString("path"));
 					vende.add(v);
 				};
 		}
@@ -76,7 +82,7 @@ public class VendeDaoImp implements VendeDao {
 			preparedStatement.setInt(1, idfarmacia);
 			ResultSet rs= preparedStatement.executeQuery();
 			if(rs.next()) {
-				return rs.getInt("total");
+				return rs.getInt("totale");
 			}
 		}
 		return 0;

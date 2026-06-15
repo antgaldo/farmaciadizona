@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 import dao.FarmacieDaoImp;
 import model.dto.FarmaciaProdottoDTO;
 import dao.ProdottiDaoImp;
-import model.ProdottiBean;
+import model.dto.ProdottoDettaglioDTO;
 
 /**
  * Servlet implementation class Home
@@ -63,7 +63,7 @@ public class HomeServlet extends HttpServlet {
 		int cap= Integer.parseInt(request.getParameter("cap"));
 		try {
 			List<FarmaciaProdottoDTO> result= farmacieDao.getFarmaciePerProdottoECap(cap,farmaco);
-			ProdottiBean prodotto= prodottoDao.getProdotto(farmaco);
+			ProdottoDettaglioDTO prodotto= prodottoDao.getProdottoDTO(farmaco);
 			request.setAttribute("listaFarmacie", result);
 			request.setAttribute("farmaco",prodotto);
 			request.getRequestDispatcher("/searchfarmaco").forward(request, response);

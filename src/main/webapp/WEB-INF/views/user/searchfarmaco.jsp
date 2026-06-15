@@ -39,7 +39,7 @@
 		<div class="card mb-3" >
 		  <div class="row g-0">
 		    <div class="col-md-2 border-right">
-		      <img src="${pageContext.request.contextPath}/img/oki.jpg" class="img-fluid rounded-start" alt="...">
+		      <img src="${pageContext.request.contextPath}/uploads/${farmaco.path}" class="img-fluid rounded-start" alt="...">
 		    </div>
 		    <div class="col-md-10">
 		      <div class="card-body">

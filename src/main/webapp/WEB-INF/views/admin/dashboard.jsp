@@ -16,11 +16,11 @@
 	<div class="card mb-3 col ms-2 p-5 ">
 	  <div class="row g-0">
 	    <div class="col-md-2">
-	      <h1 class="card-body bottom-50 end-50">12</h1>
+	      <h1 class="card-body bottom-50 end-50">${nprodotti}</h1>
 	    </div>
 	    <div class="col-md-10">
 	      <div class="card-body">
-	        <h5 class="card-title">Card title</h5>
+	        <h5 class="card-title">Prodotti attivi</h5>
 	        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
 	        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
 	      </div>

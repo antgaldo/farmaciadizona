@@ -7,6 +7,7 @@ public class VendeDettaglioDTO {
     int prezzo;
     int quantita;
     String categoria;
+    String pathimg;
     
     public VendeDettaglioDTO() {}
     
@@ -32,6 +33,12 @@ public class VendeDettaglioDTO {
     
     public void setQuantita(int quantita) {
     	this.quantita=quantita;
+    }
+    public void setPathImg(String pathimg) {
+    	this.pathimg=pathimg;
+    }
+    public String getPathImg() {
+    	return pathimg;
     }
     
     public int getIdProdotto() {
