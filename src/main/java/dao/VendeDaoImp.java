@@ -87,4 +87,18 @@ public class VendeDaoImp implements VendeDao {
 		}
 		return 0;
 	}
+	@Override
+	public int getPrezzo(int idFarmacia, int idProdotto) throws SQLException{
+		String getSQL= "SELECT prezzo FROM vende WHERE farmacia_id=? AND prodotto_id=?";
+		try(Connection connection= ds.getConnection();
+				PreparedStatement preparedStatement= connection.prepareStatement(getSQL)){
+			preparedStatement.setInt(1, idFarmacia);
+			preparedStatement.setInt(2, idProdotto);
+			ResultSet rs= preparedStatement.executeQuery();
+			if(rs.next()) {
+				return rs.getInt("prezzo");
+			}
+		}
+		return 0;
+	}
 }

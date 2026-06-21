@@ -12,4 +12,5 @@ public interface VendeDao {
 	public void delete(int idFarmacia, int idProdotto) throws SQLException;
 	public List<VendeDettaglioDTO> getProdottiFarmacia(int idfarmacia) throws SQLException;
 	public int getCountProdotti(int idfarmacia) throws SQLException;
+	public int getPrezzo(int idFarmacia, int idProdotto) throws SQLException;
 }

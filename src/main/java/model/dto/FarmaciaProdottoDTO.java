@@ -3,6 +3,7 @@ package model.dto;
 public class FarmaciaProdottoDTO {
 	private String prodotto_nome;
 	private String farmacia_nome;
+	private int idFarmacia;
 	private int cap;
 	private int prezzo;
 	private int quantita;
@@ -14,6 +15,9 @@ public class FarmaciaProdottoDTO {
 
 	public String getProdottoNome() {
 		return prodotto_nome;
+	}
+	public int getIdFarmacia() {
+		return idFarmacia;
 	}
 	
 	public String getLat() {
@@ -45,6 +49,9 @@ public class FarmaciaProdottoDTO {
 	}
 	public void setLat(String lat) {
 		this.lat=lat;
+	}
+	public void setIdFarmacia(int idFarmacia) {
+		this.idFarmacia = idFarmacia;
 	}
 	public void setLon(String lon) {
 		this.lon=lon;

@@ -15,6 +15,10 @@
 .navbar{
 	background-color:white;
 }
+.container-fluid {
+    padding-right: calc(var(--bs-gutter-x) * 1.5);
+    padding-left: calc(var(--bs-gutter-x) * 1.5);
+}
 .rounded-start {
     max-height: 200px;
 }
@@ -61,3 +65,13 @@
 .col-md-2.border-right {
     border-right: 2px dashed #d2d2d2;
 }
+
+/*
+button.btn.btn-outline-dark.circle {
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    border: 1px solid #d2d2d2;
+    padding: 0px;
+}
+*/

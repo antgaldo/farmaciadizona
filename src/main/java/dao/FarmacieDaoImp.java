@@ -44,7 +44,7 @@ public class FarmacieDaoImp implements FarmacieDao{
 	
 	@Override
 	public List<FarmaciaProdottoDTO> getFarmaciePerProdottoECap(int farmacia_cap,String prodotto_nome) throws SQLException{
-		String selectSQL = "SELECT farmacie.nome AS farmacia_nome,farmacie.indirizzo,farmacie.lat,farmacie.lon, farmacie.cap, vende.prezzo,vende.quantita_disponibile,prodotti.nome AS prodotto_nome "
+		String selectSQL = "SELECT farmacie.nome AS farmacia_nome,farmacie.indirizzo,farmacie.lat,farmacie.lon, farmacie.cap,vende.farmacia_id, vende.prezzo,vende.quantita_disponibile,prodotti.nome AS prodotto_nome "
 				+ "FROM farmacie "
 				+ "JOIN vende ON farmacie.id=vende.farmacia_id "
 				+ "JOIN prodotti ON prodotti.id=vende.prodotto_id "
@@ -61,6 +61,7 @@ public class FarmacieDaoImp implements FarmacieDao{
 				result.setCap(rs.getInt("cap"));
 				result.setPrezzo(rs.getInt("prezzo"));
 				result.setQuantita(rs.getInt("quantita_disponibile"));
+				result.setIdFarmacia(rs.getInt("farmacia_id"));
 				result.setProdottoNome(rs.getString("prodotto_nome"));
 				result.setFarmaciaNome(rs.getString("farmacia_nome"));
 				result.setIndirizzo(rs.getString("indirizzo"));

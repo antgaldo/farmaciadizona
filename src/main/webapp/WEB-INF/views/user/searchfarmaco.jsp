@@ -64,7 +64,32 @@
 		      <div class="card-body">
 		        <h5 class="card-title">${f.farmaciaNome}</h5>
 		        <p class="card-text">${f.indirizzo}</p>
-		        <p class="card-text"><a href="#" class="btn btn-outline-success">Prenota</a></p>
+		        <p class="card-text" class="container text-center">
+		          <div class="row justify-content-between">
+				    <div class="col-auto me-auto">
+				      Quantità : 
+				     <button type="button" id="decrement" class="btn btn-outline-dark circle me-1" 
+			       	 	onclick="decrementQuantit(this)">
+						-
+					 </button>
+					 <span id="quantita-valore">1</span>
+					 <button type="button" id="increment" class="btn btn-outline-dark circle ms-1"
+					 	data-quantita="${f.quantita}"
+			       	 	onclick="incrementQuantit(this)">
+						+
+					 </button>
+				    </div>
+				    <div class="col-auto">
+				     <button type="button" class="btn btn-outline-success" 
+			       	 	data-nome="${farmaco.nome}" 
+			       	 	data-idprodotto="${farmaco.id}" 
+			       	 	data-prezzo="${f.prezzo}"
+			       	 	data-idfarmacia="${f.idFarmacia}"
+			       	 	onclick="putInCart(this)">
+						Aggiungi al carrello
+					 </button>
+				    </div>
+				  </div>
 		      </div>
 		    </div>
 		    <div class="col-md-2 bord-left">
@@ -141,6 +166,90 @@
   } else {
       map.setView([41.9028, 12.4964], 6); 
   }
+</script>
+<script>
+function putInCart(a){
+	let idProdotto = a.getAttribute("data-idprodotto");
+	let nomeFarmaco = a.getAttribute("data-nome");
+	let quantitaFarmaco= parseInt(document.getElementById("quantita-valore").innerText);
+	let prezzoFarmaco = a.getAttribute("data-prezzo");
+	let idFarmacia = a.getAttribute("data-idfarmacia");
+	
+	let farmaco = {
+	    idProdotto: idProdotto,
+	    nome: nomeFarmaco,
+	    quantita: quantitaFarmaco,
+	    prezzo: prezzoFarmaco,
+	    idFarmacia: idFarmacia,
+	};
+	putAjaxFarmaco('cartservlet',"POST",farmaco,handleCart);
+}
+function putAjaxFarmaco(url,method,farmaco,hFunction){
+	var request = new XMLHttpRequest();
+	if(request){
+		request.onreadystatechange = function(){
+			if(this.readyState==4){
+				if(this.status==200){
+					hFunction(this);
+				} else {
+					alert("Il server ha risposto con errore: " + this.status);
+				}
+			}
+		}
+		setTimeout(function(){
+			if(request.readyState < 4){
+				request.abort();
+			}
+		},15000);
+		if(method.toLowerCase()=="post"){
+			request.open("POST", url);
+		    // 1. Diciamo a Tomcat che tipo di dati stiamo inviando
+		    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		    // 2. Impacchettiamo i dati nel formato chiave=valore
+		    let data = "idProdotto=" + encodeURIComponent(farmaco.idProdotto) + 
+	           "&nome=" + encodeURIComponent(farmaco.nome) + 
+	           "&quantita=" + encodeURIComponent(farmaco.quantita) + 
+	           "&idFarmacia=" + encodeURIComponent(farmaco.idFarmacia) + 
+	           "&prezzo=" + encodeURIComponent(farmaco.prezzo);
+		    // 3. Spediamo i dati NEL body della POST (non null!)
+		    request.send(data);
+		}
+	}
+}
+function handleCart(request){
+    var response = JSON.parse(request.responseText);
+    console.log(response);
+    document.getElementById("showCart").innerHTML = response.map(farmaco => 
+    	"<div class='list-group-item'>" + farmaco.nome + farmaco.quantita +  "</div>"
+	).join("");
+    
+    let elemento = document.getElementById("navbarToggle");
+    if(elemento) {
+        elemento.classList.remove("d-none");
+    } else {
+        console.error("ERRORE: Non trovo nessun elemento con id='navbarToggle' nella pagina!");
+    }
+}
+</script>
+<script>
+	let element= document.getElementById("decrement");
+	let valore= document.getElementById("quantita-valore");
+
+	function incrementQuantit(a){
+		let quantitaFarmaco = a.getAttribute("data-quantita");
+		let quantitaAttuale = parseInt(valore.innerText);
+		if(quantitaAttuale < quantitaFarmaco){
+		    let nuovaQuantita = quantitaAttuale + 1;
+		    valore.innerText= nuovaQuantita;
+		}
+	}
+	function decrementQuantit(a){
+		let quantitaAttuale = parseInt(valore.innerText);
+	    if (quantitaAttuale > 1) {
+	    	let nuovaQuantita = quantitaAttuale - 1;
+	    	valore.innerText= nuovaQuantita;
+	    }
+	}
 </script>
 </body>
 </html>
