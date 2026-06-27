@@ -53,6 +53,7 @@ public class ProdottiServlet extends HttpServlet {
 	    	imgDao= new ImgDaoImp(ds);
 			// Crea la cartella uploads
 			String uploadPath = getServletContext().getRealPath(File.separator + UPLOAD_DIR);
+			//System.out.println(uploadPath);
 			File uploadDir = new File(uploadPath);
 			if (!uploadDir.exists())
 				uploadDir.mkdir();

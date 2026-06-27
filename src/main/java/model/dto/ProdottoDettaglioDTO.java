@@ -47,4 +47,8 @@ public class ProdottoDettaglioDTO {
 	public void setPath(String path) {
 		this.path=path;
 	}
+	
+	public String toString(){
+		return nome;
+	}
 }

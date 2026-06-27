@@ -27,9 +27,7 @@
               Carrello
             </a>
             <ul class="dropdown-menu show">
-              <div id="showCart" class="autocomplete-item p-2">
-		            ${prodotto}
-		      </div>
+              <div id="showCart" class="autocomplete-item p-2"></div>
             </ul>
           </li>
         </ul>
@@ -37,3 +35,4 @@
     </div>
   </div>
 </nav>
+<script src="${pageContext.request.contextPath}/js/cart.js"></script>

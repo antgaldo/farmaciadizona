@@ -14,9 +14,11 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import dao.GestisceDaoImp;
+import dao.ProdottiDaoImp;
 import dao.UsersDaoImp;
 import dao.FarmacieDaoImp;
 import model.dto.FarmaciaProdottoDTO;
+import model.dto.ProdottoDettaglioDTO;
 
 /**
  * Servlet implementation class SearchFarmaco
@@ -24,6 +26,8 @@ import model.dto.FarmaciaProdottoDTO;
 @WebServlet("/searchfarmaco")
 public class SearchFarmaco extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+    private FarmacieDaoImp farmacieDao;
+    private ProdottiDaoImp prodottoDao;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -31,14 +35,34 @@ public class SearchFarmaco extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    public void init(ServletConfig servletConfig) throws ServletException{
+    	super.init(servletConfig);
+    	DataSource ds= (DataSource) getServletContext().getAttribute("DataSource");
+    	if(ds == null) {
+    		throw new ServletException("DataSource non disponibile nel contesto");
+    	}
+    	farmacieDao= new FarmacieDaoImp(ds);
+    	prodottoDao= new ProdottiDaoImp(ds);
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		List<FarmaciaProdottoDTO> lista = (List<FarmaciaProdottoDTO>) request.getAttribute("listaFarmacie");
-		request.setAttribute("lista", lista);
+		String farmaco= request.getParameter("farmaco");
+		int cap= Integer.parseInt(request.getParameter("cap"));
+		
+		try {
+			List<FarmaciaProdottoDTO> lista= farmacieDao.getFarmaciePerProdottoECap(cap,farmaco);
+			ProdottoDettaglioDTO prodotto= prodottoDao.getProdottoDTO(farmaco);
+			request.setAttribute("lista", lista);
+			request.setAttribute("prodotto", prodotto);
+		} catch(SQLException e) {
+			System.out.println(e);
+		}
+
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/views/user/searchfarmaco.jsp");
 		dispatcher.forward(request, response);
 	}

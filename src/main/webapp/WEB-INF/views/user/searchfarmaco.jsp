@@ -39,12 +39,12 @@
 		<div class="card mb-3" >
 		  <div class="row g-0">
 		    <div class="col-md-2 border-right">
-		      <img src="${pageContext.request.contextPath}/uploads/${farmaco.path}" class="img-fluid rounded-start" alt="...">
+		      <img src="${pageContext.request.contextPath}/uploads/${prodotto.path}" class="img-fluid rounded-start" alt="...">
 		    </div>
 		    <div class="col-md-10">
 		      <div class="card-body">
-		        <h5 class="card-title">${farmaco.nome}<span class="badge text-bg-secondary ms-2">${farmaco.categoria}</span></h5>
-		        <p class="card-text">${farmaco.descrizione}</p>
+		        <h5 class="card-title">${prodotto.nome}<span class="badge text-bg-secondary ms-2">${prodotto.categoria}</span></h5>
+		        <p class="card-text">${prodotto.descrizione}</p>
 		        <p class="card-text"><small class="text-body-secondary">Guarda il foglietto illustrativo</small></p>
 		      </div>
 		    </div>
@@ -81,8 +81,8 @@
 				    </div>
 				    <div class="col-auto">
 				     <button type="button" class="btn btn-outline-success" 
-			       	 	data-nome="${farmaco.nome}" 
-			       	 	data-idprodotto="${farmaco.id}" 
+			       	 	data-nome="${prodotto.nome}" 
+			       	 	data-idprodotto="${prodotto.id}" 
 			       	 	data-prezzo="${f.prezzo}"
 			       	 	data-idfarmacia="${f.idFarmacia}"
 			       	 	onclick="putInCart(this)">
@@ -130,7 +130,7 @@
 </section>
 <script>
    const listaMappa = [
-    <c:forEach var="f" items="${listaFarmacie}" varStatus="status">
+    <c:forEach var="f" items="${lista}" varStatus="status">
       {
         farmaciaNome: "${f.farmaciaNome}",
         indirizzo: "${f.indirizzo}",
