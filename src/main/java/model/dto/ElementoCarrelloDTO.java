@@ -6,13 +6,15 @@ public class ElementoCarrelloDTO {
 	private String nome;
 	private int quantita;
 	private double prezzo;
+	private String path;
 	
-	public ElementoCarrelloDTO(int idProdotto,int idFarmacia, String nome, int quantita,double prezzo) {
+	public ElementoCarrelloDTO(int idProdotto,int idFarmacia, String nome, int quantita,double prezzo,String path) {
 		this.idProdotto=idProdotto;
 		this.idFarmacia=idFarmacia;
 		this.nome=nome;
 		this.quantita=quantita;
 		this.prezzo=prezzo;
+		this.path=path;
 	}
 	
 	public int getIdProdotto() {
@@ -30,10 +32,17 @@ public class ElementoCarrelloDTO {
 	public void setQuantita(int quantita) {
 		this.quantita=quantita;
 	}
+	public void setPath(String path) {
+		this.path=path;
+	}
 	public void setPrezzo(double prezzo) {
 		this.prezzo=prezzo;
 	}
 	public double getPrezzo() {
 		return prezzo;
 	}
+	public String getPath() {
+		return path;
+	}
+	
 }

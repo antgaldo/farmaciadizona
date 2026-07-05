@@ -23,19 +23,22 @@ import dao.ProdottiDaoImp;
 import dao.VendeDaoImp;
 import dao.interfaceDao.VendeDao;
 import dao.VendeDaoImp;
+import dao.interfaceDao.ImgDao;
+import util.ConvertCartJson;
 
 /**
  * Servlet implementation class CartServlet
  */
-@WebServlet("/cartservlet")
-public class CartServlet extends HttpServlet {
+@WebServlet("/addcartservlet")
+public class AddToCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private VendeDao vendeDao;
+	private ImgDao imgDao;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CartServlet() {
+    public AddToCartServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -47,6 +50,7 @@ public class CartServlet extends HttpServlet {
     		throw new ServletException("DataSource non disponibile nel contesto");
     	}
     	vendeDao=new VendeDaoImp(ds);
+    	imgDao=new ImgDaoImp(ds);
     }
     
 	/**
@@ -64,7 +68,7 @@ public class CartServlet extends HttpServlet {
 
 	    response.setContentType("application/json");
 	    response.setCharacterEncoding("UTF-8");
-	    response.getWriter().write(convertiCarrelloInJson(carrello));
+	    response.getWriter().write(ConvertCartJson.convertCartJson(carrello));
 	}
 
 	/**
@@ -82,7 +86,7 @@ public class CartServlet extends HttpServlet {
 	    try {
 	    	int checkprezzo= vendeDao.getPrezzo(Integer.parseInt(idFarmacia),Integer.parseInt(idProdotto));
 	    	 if(checkprezzo==Integer.parseInt(prezzo)) {
-	 		    
+	 	    	String pathImage= imgDao.getImageFromIdProdotto(Integer.parseInt(idProdotto));
 	 		    List<ElementoCarrelloDTO> carrello = (List<ElementoCarrelloDTO>) request.getSession().getAttribute("cart");
 	 		    
 	 		    if(carrello == null) {
@@ -101,7 +105,7 @@ public class CartServlet extends HttpServlet {
 	 		   }
 	 		   if(!prodottoGiaPresente) {
 	 			   	double prezzoTot1= Double.parseDouble(prezzo) * Integer.parseInt(quantita);
-		 		    ElementoCarrelloDTO nuovoProdotto = new ElementoCarrelloDTO(Integer.parseInt(idProdotto),Integer.parseInt(idFarmacia), nome, Integer.parseInt(quantita), prezzoTot1);
+		 		    ElementoCarrelloDTO nuovoProdotto = new ElementoCarrelloDTO(Integer.parseInt(idProdotto),Integer.parseInt(idFarmacia), nome, Integer.parseInt(quantita), prezzoTot1,pathImage);
 		 		    carrello.add(nuovoProdotto);
 	 		   }
 	 		    
@@ -109,39 +113,11 @@ public class CartServlet extends HttpServlet {
 	 			
 	 			response.setContentType("application/json");
 	 			response.setCharacterEncoding("UTF-8");
-	 			response.getWriter().write(convertiCarrelloInJson(carrello));
+	 			response.getWriter().write(ConvertCartJson.convertCartJson(carrello));
 	 	    } 
 	    }catch(SQLException e) {
 			throw new ServletException(e);
 		}
-	}
-	
-	private String convertiCarrelloInJson(List<ElementoCarrelloDTO> carrello) {
-	    if (carrello == null || carrello.isEmpty()) {
-	        return "[]";
-	    }
-
-	    StringBuilder json = new StringBuilder();
-	    json.append("[");
-
-	    for (int i = 0; i < carrello.size(); i++) {
-	        ElementoCarrelloDTO item = carrello.get(i);
-	        String nome = item.getNome().replace("\"", "\\\"");
-
-	        json.append("{");
-	        json.append("\"idProdotto\":\"").append(item.getIdProdotto()).append("\",");
-	        json.append("\"nome\":\"").append(nome).append("\",");
-	        json.append("\"quantita\":").append(item.getQuantita()).append(",");
-	        json.append("\"prezzoTot\":").append(item.getPrezzo());
-	        json.append("}");
-
-	        if (i < carrello.size() - 1) {
-	            json.append(",");
-	        }
-	    }
-
-	    json.append("]"); 
-	    return json.toString();
 	}
 
 }

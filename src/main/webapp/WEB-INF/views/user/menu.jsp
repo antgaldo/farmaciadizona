@@ -5,7 +5,7 @@
     <button class="navbar-toggler position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none" id="navbarToggle">
-	    	99+
+	    	
 	   		<span class="visually-hidden">unread messages</span>
 	 	 </span>
     </button>
@@ -23,10 +23,10 @@
             <a class="nav-link" href="#">Link</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle">
-              Carrello
+            <a class="nav-link dropdown">
+              <i class="bi bi-basket"></i> Carrello
             </a>
-            <ul class="dropdown-menu show">
+            <ul class="dropdown-menu">
               <div id="showCart" class="autocomplete-item p-2"></div>
             </ul>
           </li>

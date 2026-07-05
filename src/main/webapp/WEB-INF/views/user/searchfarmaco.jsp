@@ -21,7 +21,7 @@
 <%@ include file="/WEB-INF/views/user/menu.jsp" %>
 <section class="mt-120">
 	<div class="container-fluid">
-	<div class="col-md-12 d-flex align-items-center gap-3 mb-3">
+	<div class="col-md-12 d-flex align-items-center gap-3 my-5">
    		 <h3 class="mb-0 text-nowrap">Prodotto cercato</h3>
 	    <form class="d-flex flex-grow-1" role="search" method="POST">
 	        <div class="position-relative">
@@ -36,7 +36,7 @@
 	    </form>
 	</div>
 	<div class="col-md-12 prodotto">
-		<div class="card mb-3" >
+		<div class="card my-5" >
 		  <div class="row g-0">
 		    <div class="col-md-2 border-right">
 		      <img src="${pageContext.request.contextPath}/uploads/${prodotto.path}" class="img-fluid rounded-start" alt="...">
@@ -129,7 +129,7 @@
 	</div>
 </section>
 <script>
-   const listaMappa = [
+const listaMappa = [
     <c:forEach var="f" items="${lista}" varStatus="status">
       {
         farmaciaNome: "${f.farmaciaNome}",
@@ -166,70 +166,6 @@
   } else {
       map.setView([41.9028, 12.4964], 6); 
   }
-</script>
-<script>
-function putInCart(a){
-	let idProdotto = a.getAttribute("data-idprodotto");
-	let nomeFarmaco = a.getAttribute("data-nome");
-	let quantitaFarmaco= parseInt(document.getElementById("quantita-valore").innerText);
-	let prezzoFarmaco = a.getAttribute("data-prezzo");
-	let idFarmacia = a.getAttribute("data-idfarmacia");
-	
-	let farmaco = {
-	    idProdotto: idProdotto,
-	    nome: nomeFarmaco,
-	    quantita: quantitaFarmaco,
-	    prezzo: prezzoFarmaco,
-	    idFarmacia: idFarmacia,
-	};
-	putAjaxFarmaco('cartservlet',"POST",farmaco,handleCart);
-}
-function putAjaxFarmaco(url,method,farmaco,hFunction){
-	var request = new XMLHttpRequest();
-	if(request){
-		request.onreadystatechange = function(){
-			if(this.readyState==4){
-				if(this.status==200){
-					hFunction(this);
-				} else {
-					alert("Il server ha risposto con errore: " + this.status);
-				}
-			}
-		}
-		setTimeout(function(){
-			if(request.readyState < 4){
-				request.abort();
-			}
-		},15000);
-		if(method.toLowerCase()=="post"){
-			request.open("POST", url);
-		    // 1. Diciamo a Tomcat che tipo di dati stiamo inviando
-		    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-		    // 2. Impacchettiamo i dati nel formato chiave=valore
-		    let data = "idProdotto=" + encodeURIComponent(farmaco.idProdotto) + 
-	           "&nome=" + encodeURIComponent(farmaco.nome) + 
-	           "&quantita=" + encodeURIComponent(farmaco.quantita) + 
-	           "&idFarmacia=" + encodeURIComponent(farmaco.idFarmacia) + 
-	           "&prezzo=" + encodeURIComponent(farmaco.prezzo);
-		    // 3. Spediamo i dati NEL body della POST (non null!)
-		    request.send(data);
-		}
-	}
-}
-function handleCart(request){
-    var response = JSON.parse(request.responseText);
-    console.log(response);
-    document.getElementById("showCart").innerHTML = response.map(farmaco => 
-    	"<div class='list-group-item'>" + farmaco.nome + farmaco.quantita +  "</div>"
-	).join("");
-    
-    let elemento = document.getElementById("navbarToggle");
-    if(elemento) {
-        elemento.classList.remove("d-none");
-    } else {
-        console.error("ERRORE: Non trovo nessun elemento con id='navbarToggle' nella pagina!");
-    }
-}
 </script>
 <script>
 	let element= document.getElementById("decrement");
