@@ -59,7 +59,9 @@
 	    <c:forEach var="f" items="${lista}">
 	    
 	    <div class="card mb-3 col">
-		  <div class="row g-0">
+		  <div class="row g-0 opacityhover" 
+		  	onmouseenter="evidenziaMarcatore('${f.idFarmacia}')" 
+		  	onmouseleave="ripristinaMarcatore('${f.idFarmacia}')">
 		    <div class="col-md-10">
 		      <div class="card-body">
 		        <h5 class="card-title">${f.farmaciaNome}</h5>
@@ -119,53 +121,26 @@
 		    </div>
 		  </div>
 		</div>
-		
 		</c:forEach>
 	    </div>
 	    <div class="col-md-6">
-	    	<div id="map"></div>
+	    	<div id="map" data-locations='[
+	    		<c:forEach var="f" items="${lista}" varStatus="status">
+	    		  {
+	    		  	"id": ${f.idFarmacia},
+			        "farmaciaNome": "<c:out value="${f.farmaciaNome}"/>",
+			        "indirizzo": "<c:out value="${f.indirizzo}"/>",
+			        "lat": ${f.lat},
+			        "lon": ${f.lon}
+			      }${!status.last ? "," : ""}
+			    </c:forEach>
+	    	]'></div>
 	    </div>
 	  </div>
 	</div>
 </section>
 <script>
-const listaMappa = [
-    <c:forEach var="f" items="${lista}" varStatus="status">
-      {
-        farmaciaNome: "${f.farmaciaNome}",
-        indirizzo: "${f.indirizzo}",
-        lat: "${f.lat}",
-        lon: "${f.lon}",
-      }${!status.last ? ',' : ''}
-    </c:forEach>
-  ];
-  const map = L.map('map').setView([listaMappa[0].lat, listaMappa[0].lon], 9.5)
-  L.maplibreGL({
-    style: 'https://tiles.openfreemap.org/styles/liberty',
-  }).addTo(map);
-  
-  const markerGroup = L.featureGroup().addTo(map);
-  var myIcon = L.divIcon({
-	  html: '<i class="bi bi-geo-alt-fill text-success fs-2"></i>',
-      className: 'bg-transparent', 
-      iconSize: [30, 30],
-      iconAnchor: [15, 30], 
-      popupAnchor: [0, -30]
-	});
-  listaMappa.forEach(f => {
-      L.marker([parseFloat(f.lat), parseFloat(f.lon)], {icon: myIcon}).addTo(map);
-      const marker = L.marker([parseFloat(f.lat), parseFloat(f.lon)], {icon: myIcon})
-      .bindPopup('<b>' + f.farmaciaNome + '</b><br>' + f.indirizzo);
-	  marker.addTo(markerGroup);
-   });
-  if (listaMappa.length > 0) {
-      map.fitBounds(markerGroup.getBounds(), {
-          padding: [50, 50], 
-          maxZoom: 15        
-      });
-  } else {
-      map.setView([41.9028, 12.4964], 6); 
-  }
+
 </script>
 <script>
 	
@@ -191,5 +166,7 @@ const listaMappa = [
 	    }
 	}
 </script>
+<script src="${pageContext.request.contextPath}/js/cart.js"></script>
+<script src="${pageContext.request.contextPath}/js/map.js"></script>
 </body>
 </html>

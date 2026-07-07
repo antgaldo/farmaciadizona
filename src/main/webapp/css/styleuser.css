@@ -65,6 +65,9 @@
 .col-md-2.border-right {
     border-right: 2px dashed #d2d2d2;
 }
+.opacityhover:hover{
+	background-color: #5e5e5e1c;
+}
 
 /*
 button.btn.btn-outline-dark.circle {

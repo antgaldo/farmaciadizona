@@ -35,4 +35,3 @@
     </div>
   </div>
 </nav>
-<script src="${pageContext.request.contextPath}/js/cart.js"></script>
