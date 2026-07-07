@@ -83,8 +83,8 @@ public class AddToCartServlet extends HttpServlet {
 	    HttpSession session = request.getSession();
 	    
 	    try {
-	    	int checkprezzo= magazzinoDao.getPrezzo(Integer.parseInt(idFarmacia),Integer.parseInt(idProdotto));
-	    	 if(checkprezzo==Integer.parseInt(prezzo)) {
+	    	double checkprezzo= magazzinoDao.getPrezzo(Integer.parseInt(idFarmacia),Integer.parseInt(idProdotto));
+	    	 if(checkprezzo==Double.parseDouble(prezzo)) {
 	 	    	String pathImage= imgDao.getImageFromIdProdotto(Integer.parseInt(idProdotto));
 	 		    List<ElementoCarrelloDTO> carrello = (List<ElementoCarrelloDTO>) request.getSession().getAttribute("cart");
 	 		    

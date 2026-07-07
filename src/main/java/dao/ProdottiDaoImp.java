@@ -41,10 +41,10 @@ public class ProdottiDaoImp implements ProdottiDao{
 	
 	@Override
 	public ProdottoDettaglioDTO getProdottoDTO(String nome) throws SQLException{
-		String selectSQL= "SELECT * FROM prodotti JOIN img i ON prodotti.id=i.prodotto_id WHERE nome=?" ;
+		String selectSQL= "SELECT * FROM prodotti JOIN img i ON prodotti.id=i.prodotto_id WHERE nome LIKE ?" ;
 		try(Connection connection = ds.getConnection();
 			PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)){
-			preparedStatement.setString(1, nome);
+			preparedStatement.setString(1, "%"+nome+"%");
 			ResultSet rs = preparedStatement.executeQuery();
 			if(rs.next()) {
 				ProdottoDettaglioDTO p= new ProdottoDettaglioDTO();
@@ -84,7 +84,7 @@ public class ProdottiDaoImp implements ProdottiDao{
 		List<String> lista= new ArrayList<>();
 		try(Connection connection = ds.getConnection();
 			PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)){
-			preparedStatement.setString(1, nome);
+			preparedStatement.setString(1, "%"+nome+"%");
 			ResultSet rs = preparedStatement.executeQuery();
 			while(rs.next()) {
 				String nomeprodotto= rs.getString("nome");

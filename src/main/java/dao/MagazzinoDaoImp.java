@@ -24,7 +24,7 @@ public class MagazzinoDaoImp implements MagazzinoDao {
 	
 	@Override
 	public void doSave(MagazzinoBean magazzinobean) throws SQLException{
-		String insertsql= "INSERT INTO vende (farmacia_id,prodotto_id,prezzo,quantita_disponibile,active) values(?,?,?,?,?)";
+		String insertsql= "INSERT INTO magazzino (farmacia_id,prodotto_id,prezzo,quantita_disponibile,active) values(?,?,?,?,?)";
 		try(Connection connection = ds.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(insertsql)){
 				preparedStatement.setInt(1, magazzinobean.getFarmaciaId());
@@ -38,7 +38,7 @@ public class MagazzinoDaoImp implements MagazzinoDao {
 	
 	@Override
 	public void delete(int idFarmacia, int idProdotto) throws SQLException{
-		String deletesql= "DELETE FROM vende WHERE farmacia_id=? AND prodotto_id=?";
+		String deletesql= "DELETE FROM magazzino WHERE farmacia_id=? AND prodotto_id=?";
 		try(Connection connection = ds.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(deletesql)){
 				preparedStatement.setInt(1, idFarmacia);
@@ -49,12 +49,12 @@ public class MagazzinoDaoImp implements MagazzinoDao {
 	@Override
 	public List<MagazzinoDettaglioDTO> getProdottiFarmacia(int idfarmacia) throws SQLException{
 		String selectSQL= "SELECT v.farmacia_id,v.prodotto_id,v.prezzo,v.quantita_disponibile,p.nome,p.descrizione,p.categoria,i.path "
-				+ "FROM vende v "
+				+ "FROM magazzino v "
 				+ "JOIN farmacie f ON v.farmacia_id=f.id "
 				+ "JOIN prodotti p ON v.prodotto_id = p.id "
 				+ "JOIN img i ON v.prodotto_id=i.prodotto_id "
 				+ "WHERE f.id=?";
-		List<MagazzinoDettaglioDTO> vende= new ArrayList<MagazzinoDettaglioDTO>();
+		List<MagazzinoDettaglioDTO> magazzino= new ArrayList<MagazzinoDettaglioDTO>();
 		try(Connection connection = ds.getConnection();
 				PreparedStatement preparedStatement= connection.prepareStatement(selectSQL)){
 				preparedStatement.setInt(1, idfarmacia);
@@ -68,15 +68,15 @@ public class MagazzinoDaoImp implements MagazzinoDao {
 					v.setQuantita(rs.getInt("quantita_disponibile"));
 					v.setCategoria(rs.getString("categoria"));
 					v.setPathImg(rs.getString("path"));
-					vende.add(v);
+					magazzino.add(v);
 				};
 		}
-		return vende;
+		return magazzino;
 	}
 	
 	@Override
 	public int getCountProdotti(int idfarmacia) throws SQLException{
-		String getSQL="SELECT COUNT(prodotto_id) AS totale FROM vende WHERE farmacia_id=?";
+		String getSQL="SELECT COUNT(prodotto_id) AS totale FROM magazzino WHERE farmacia_id=?";
 		try(Connection connection = ds.getConnection();PreparedStatement preparedStatement=connection.prepareStatement(getSQL)){
 			preparedStatement.setInt(1, idfarmacia);
 			ResultSet rs= preparedStatement.executeQuery();
@@ -87,15 +87,15 @@ public class MagazzinoDaoImp implements MagazzinoDao {
 		return 0;
 	}
 	@Override
-	public int getPrezzo(int idFarmacia, int idProdotto) throws SQLException{
-		String getSQL= "SELECT prezzo FROM vende WHERE farmacia_id=? AND prodotto_id=?";
+	public double getPrezzo(int idFarmacia, int idProdotto) throws SQLException{
+		String getSQL= "SELECT prezzo FROM magazzino WHERE farmacia_id=? AND prodotto_id=?";
 		try(Connection connection= ds.getConnection();
 				PreparedStatement preparedStatement= connection.prepareStatement(getSQL)){
 			preparedStatement.setInt(1, idFarmacia);
 			preparedStatement.setInt(2, idProdotto);
 			ResultSet rs= preparedStatement.executeQuery();
 			if(rs.next()) {
-				return rs.getInt("prezzo");
+				return rs.getDouble("prezzo");
 			}
 		}
 		return 0;

@@ -5,7 +5,7 @@ public class FarmaciaProdottoDTO {
 	private String farmacia_nome;
 	private int idFarmacia;
 	private int cap;
-	private int prezzo;
+	private double prezzo;
 	private int quantita;
 	private String indirizzo;
 	private String lat;
@@ -36,7 +36,7 @@ public class FarmaciaProdottoDTO {
 		return cap;
 	}
 	
-	public int getPrezzo() {
+	public double getPrezzo() {
 		return prezzo;
 	}
 	
@@ -66,7 +66,7 @@ public class FarmaciaProdottoDTO {
 	public void setCap(int cap) {
 		this.cap=cap;
 	}
-	public void setPrezzo(int prezzo) {
+	public void setPrezzo(double prezzo) {
 		this.prezzo=prezzo;
 	}
 	public void setQuantita(int quantita) {

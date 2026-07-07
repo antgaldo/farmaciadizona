@@ -17,10 +17,10 @@ window.onload= function(){
 //funzione per l'inserimento dei prodotti 
 function putInCart(a){
 	let idProdotto = a.getAttribute("data-idprodotto");
-	let nomeFarmaco = a.getAttribute("data-nome");
-	let quantitaFarmaco= parseInt(document.getElementById("quantita-valore").innerText);
-	let prezzoFarmaco = a.getAttribute("data-prezzo");
 	let idFarmacia = a.getAttribute("data-idfarmacia");
+	let nomeFarmaco = a.getAttribute("data-nome");
+	let quantitaFarmaco= parseInt(document.getElementById("quantita-valore-"+ idFarmacia).innerText);
+	let prezzoFarmaco = a.getAttribute("data-prezzo");
 	
 	let farmaco = {
 	    idProdotto: idProdotto,

@@ -4,7 +4,7 @@ public class MagazzinoDettaglioDTO {
 	int idProdotto;
     String nomeProdotto;
     String descrizione;
-    int prezzo;
+    double prezzo;
     int quantita;
     String categoria;
     String pathimg;
@@ -27,7 +27,7 @@ public class MagazzinoDettaglioDTO {
     	this.descrizione=descrizione;
     }
     
-    public void setPrezzo(int prezzo) {
+    public void setPrezzo(double prezzo) {
     	this.prezzo=prezzo;
     }
     
@@ -57,7 +57,7 @@ public class MagazzinoDettaglioDTO {
     	return descrizione;
     }
     
-    public int getPrezzo() {
+    public double getPrezzo() {
     	return prezzo;
     }
     

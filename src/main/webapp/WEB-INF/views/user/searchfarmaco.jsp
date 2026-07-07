@@ -63,17 +63,17 @@
 		    <div class="col-md-10">
 		      <div class="card-body">
 		        <h5 class="card-title">${f.farmaciaNome}</h5>
-		        <p class="card-text">${f.indirizzo}</p>
+		        <p class="card-text"><i class="bi bi-compass"></i> ${f.indirizzo}</p>
 		        <p class="card-text" class="container text-center">
 		          <div class="row justify-content-between">
 				    <div class="col-auto me-auto">
 				      Quantità : 
-				     <button type="button" id="decrement" class="btn btn-outline-dark circle me-1" 
+				     <button type="button" id="decrement-${f.idFarmacia}" data-idfarmacia="${f.idFarmacia}" class="btn btn-outline-dark circle me-1" 
 			       	 	onclick="decrementQuantit(this)">
 						-
 					 </button>
-					 <span id="quantita-valore">1</span>
-					 <button type="button" id="increment" class="btn btn-outline-dark circle ms-1"
+					 <span id="quantita-valore-${f.idFarmacia}">1</span>
+					 <button type="button" id="increment-${f.idFarmacia}" data-idfarmacia="${f.idFarmacia}" class="btn btn-outline-dark circle ms-1"
 					 	data-quantita="${f.quantita}"
 			       	 	onclick="incrementQuantit(this)">
 						+
@@ -94,9 +94,9 @@
 		    </div>
 		    <div class="col-md-2 bord-left">
 		      <div class="card-body">
-		      	<h1>
+		      	<h2>
 		      		<i class="bi bi-currency-euro"></i>${f.prezzo}
-		      	</h1>
+		      	</h2>
 		      	<c:choose>
 				    <c:when test="${f.quantita == 0}">
 				        <span class="badge text-bg-danger">Terminate</span>
@@ -168,18 +168,22 @@ const listaMappa = [
   }
 </script>
 <script>
-	let element= document.getElementById("decrement");
-	let valore= document.getElementById("quantita-valore");
-
+	
 	function incrementQuantit(a){
-		let quantitaFarmaco = a.getAttribute("data-quantita");
+		let idFarmacia = a.getAttribute("data-idfarmacia").trim();
+		let valore = document.getElementById("quantita-valore-" + idFarmacia); 
+		let quantitaFarmaco = a.getAttribute('data-quantita');
 		let quantitaAttuale = parseInt(valore.innerText);
+		console.log(quantitaFarmaco);
 		if(quantitaAttuale < quantitaFarmaco){
 		    let nuovaQuantita = quantitaAttuale + 1;
 		    valore.innerText= nuovaQuantita;
 		}
 	}
 	function decrementQuantit(a){
+		let idFarmacia = a.getAttribute("data-idfarmacia").trim();
+		let element= document.getElementById('decrement-'+idFarmacia);
+		let valore = document.getElementById("quantita-valore-" + idFarmacia); 
 		let quantitaAttuale = parseInt(valore.innerText);
 	    if (quantitaAttuale > 1) {
 	    	let nuovaQuantita = quantitaAttuale - 1;
