@@ -9,30 +9,29 @@ import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
-import dao.interfaceDao.VendeDao;
-import model.dto.VendeDettaglioDTO;
+import dao.interfaceDao.MagazzinoDao;
+import model.dto.MagazzinoDettaglioDTO;
 import model.FarmacieBean;
 import model.ProdottiBean;
-import model.VendeBean;
-import model.dto.VendeDettaglioDTO;
+import model.MagazzinoBean;
 
-public class VendeDaoImp implements VendeDao {
+public class MagazzinoDaoImp implements MagazzinoDao {
 	
 	private DataSource ds;
-	public VendeDaoImp(DataSource ds) {
+	public MagazzinoDaoImp(DataSource ds) {
 		this.ds=ds;
 	}
 	
 	@Override
-	public void doSave(VendeBean vendebean) throws SQLException{
+	public void doSave(MagazzinoBean magazzinobean) throws SQLException{
 		String insertsql= "INSERT INTO vende (farmacia_id,prodotto_id,prezzo,quantita_disponibile,active) values(?,?,?,?,?)";
 		try(Connection connection = ds.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(insertsql)){
-				preparedStatement.setInt(1, vendebean.getFarmaciaId());
-				preparedStatement.setInt(2, vendebean.getProdottoId());
-				preparedStatement.setDouble(3, vendebean.getPrezzo());
-				preparedStatement.setInt(4, vendebean.getQuantita());
-				preparedStatement.setBoolean(5, vendebean.getActive());
+				preparedStatement.setInt(1, magazzinobean.getFarmaciaId());
+				preparedStatement.setInt(2, magazzinobean.getProdottoId());
+				preparedStatement.setDouble(3, magazzinobean.getPrezzo());
+				preparedStatement.setInt(4, magazzinobean.getQuantita());
+				preparedStatement.setBoolean(5, magazzinobean.getActive());
 				preparedStatement.executeUpdate();
 			}
 	}
@@ -48,20 +47,20 @@ public class VendeDaoImp implements VendeDao {
 		}
 	}
 	@Override
-	public List<VendeDettaglioDTO> getProdottiFarmacia(int idfarmacia) throws SQLException{
+	public List<MagazzinoDettaglioDTO> getProdottiFarmacia(int idfarmacia) throws SQLException{
 		String selectSQL= "SELECT v.farmacia_id,v.prodotto_id,v.prezzo,v.quantita_disponibile,p.nome,p.descrizione,p.categoria,i.path "
 				+ "FROM vende v "
 				+ "JOIN farmacie f ON v.farmacia_id=f.id "
 				+ "JOIN prodotti p ON v.prodotto_id = p.id "
 				+ "JOIN img i ON v.prodotto_id=i.prodotto_id "
 				+ "WHERE f.id=?";
-		List<VendeDettaglioDTO> vende= new ArrayList<VendeDettaglioDTO>();
+		List<MagazzinoDettaglioDTO> vende= new ArrayList<MagazzinoDettaglioDTO>();
 		try(Connection connection = ds.getConnection();
 				PreparedStatement preparedStatement= connection.prepareStatement(selectSQL)){
 				preparedStatement.setInt(1, idfarmacia);
 				ResultSet rs = preparedStatement.executeQuery();
 				while(rs.next()) {
-					VendeDettaglioDTO v= new VendeDettaglioDTO();
+					MagazzinoDettaglioDTO v= new MagazzinoDettaglioDTO();
 					v.setIdProdotto(rs.getInt("prodotto_id"));
 					v.setNomeProdotto(rs.getString("p.nome"));
 					v.setDescrizione(rs.getString("descrizione"));

@@ -11,9 +11,9 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
-import dao.interfaceDao.VendeDao;
+import dao.interfaceDao.MagazzinoDao;
 import dao.ProdottiDaoImp;
-import dao.VendeDaoImp;
+import dao.MagazzinoDaoImp;
 
 /**
  * Servlet implementation class AdminServlet
@@ -21,7 +21,7 @@ import dao.VendeDaoImp;
 @WebServlet("/admin/dashboard")
 public class DashboardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private VendeDao vendeDao;
+	private MagazzinoDao magazzinoDao;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -38,7 +38,7 @@ public class DashboardServlet extends HttpServlet {
 	    	if(ds == null) {
 	    		throw new ServletException("DataSource non disponibile nel contesto");
 	    	}
-	    	vendeDao=new VendeDaoImp(ds);
+	    	magazzinoDao=new MagazzinoDaoImp(ds);
 	    }
 
 	/**
@@ -50,7 +50,7 @@ public class DashboardServlet extends HttpServlet {
 		System.out.println(idFarmacia);
 		if(idFarmacia != 0) {
 			try {
-				int count = vendeDao.getCountProdotti(idFarmacia);
+				int count = magazzinoDao.getCountProdotti(idFarmacia);
 				request.setAttribute("nprodotti", count);
 			} catch (SQLException e) {
 		        throw new ServletException(e);

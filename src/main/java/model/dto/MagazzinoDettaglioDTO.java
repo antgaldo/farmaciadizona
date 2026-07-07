@@ -1,6 +1,6 @@
 package model.dto;
 
-public class VendeDettaglioDTO {
+public class MagazzinoDettaglioDTO {
 	int idProdotto;
     String nomeProdotto;
     String descrizione;
@@ -9,7 +9,7 @@ public class VendeDettaglioDTO {
     String categoria;
     String pathimg;
     
-    public VendeDettaglioDTO() {}
+    public MagazzinoDettaglioDTO() {}
     
     public void setIdProdotto(int idProdotto) {
     	this.idProdotto=idProdotto;

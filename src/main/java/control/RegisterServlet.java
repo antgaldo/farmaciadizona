@@ -132,7 +132,7 @@ public class RegisterServlet extends HttpServlet {
 			int idFarmacia= farmacieDao.doSave(farmacia);
 			if(idFarmacia != 0) {
 				int idUser= usersDao.doSave(user);
-				gestisce.setFarmacieId(idFarmacia);
+				gestisce.setFarmaciaId(idFarmacia);
 				gestisce.setUserId(idUser);
 				gestisceDao.doSave(gestisce);
 			}

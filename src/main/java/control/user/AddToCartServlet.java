@@ -20,9 +20,8 @@ import java.util.ArrayList;
 
 import dao.ImgDaoImp;
 import dao.ProdottiDaoImp;
-import dao.VendeDaoImp;
-import dao.interfaceDao.VendeDao;
-import dao.VendeDaoImp;
+import dao.MagazzinoDaoImp;
+import dao.interfaceDao.MagazzinoDao;
 import dao.interfaceDao.ImgDao;
 import util.ConvertCartJson;
 
@@ -32,7 +31,7 @@ import util.ConvertCartJson;
 @WebServlet("/addcartservlet")
 public class AddToCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private VendeDao vendeDao;
+	private MagazzinoDao magazzinoDao;
 	private ImgDao imgDao;
        
     /**
@@ -49,7 +48,7 @@ public class AddToCartServlet extends HttpServlet {
     	if(ds == null) {
     		throw new ServletException("DataSource non disponibile nel contesto");
     	}
-    	vendeDao=new VendeDaoImp(ds);
+    	magazzinoDao=new MagazzinoDaoImp(ds);
     	imgDao=new ImgDaoImp(ds);
     }
     
@@ -84,7 +83,7 @@ public class AddToCartServlet extends HttpServlet {
 	    HttpSession session = request.getSession();
 	    
 	    try {
-	    	int checkprezzo= vendeDao.getPrezzo(Integer.parseInt(idFarmacia),Integer.parseInt(idProdotto));
+	    	int checkprezzo= magazzinoDao.getPrezzo(Integer.parseInt(idFarmacia),Integer.parseInt(idProdotto));
 	    	 if(checkprezzo==Integer.parseInt(prezzo)) {
 	 	    	String pathImage= imgDao.getImageFromIdProdotto(Integer.parseInt(idProdotto));
 	 		    List<ElementoCarrelloDTO> carrello = (List<ElementoCarrelloDTO>) request.getSession().getAttribute("cart");

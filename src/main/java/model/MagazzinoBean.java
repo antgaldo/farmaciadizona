@@ -2,7 +2,7 @@ package model;
 
 import java.io.Serializable;
 
-public class VendeBean implements Serializable{
+public class MagazzinoBean implements Serializable{
 	private static final long serialVersionUID= 1L;
 	
 	private int farmacia_id;
@@ -11,7 +11,7 @@ public class VendeBean implements Serializable{
 	private int quantita;
 	private boolean active;
 	
-	public VendeBean() {}
+	public MagazzinoBean() {}
 	
 	public void setFarmaciaId(int farmacia_id) {
 		this.farmacia_id=farmacia_id;

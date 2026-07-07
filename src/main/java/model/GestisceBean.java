@@ -2,7 +2,7 @@ package model;
 
 public class GestisceBean {
 	private int user_id;
-	private int farmacie_id;
+	private int farmacia_id;
 	
 	public GestisceBean() {}
 	
@@ -10,15 +10,15 @@ public class GestisceBean {
 		this.user_id=user_id;
 	}
 	
-	public void setFarmacieId(int farmacie_id) {
-		this.farmacie_id=farmacie_id;
+	public void setFarmaciaId(int farmacia_id) {
+		this.farmacia_id=farmacia_id;
 	}
 	
 	public int getUserId() {
 		return user_id;
 	}
 	
-	public int getFarmacieId() {
-		return farmacie_id;
+	public int getFarmaciaId() {
+		return farmacia_id;
 	}
 }

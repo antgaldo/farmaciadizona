@@ -21,7 +21,7 @@ public class GestisceDaoImp implements GestisceDao{
 		String insertSql= "INSERT INTO gestisce (user_id,farmacie_id) VALUES(?,?)";
 		try (Connection connection= ds.getConnection();
 			PreparedStatement preparedStatement = connection.prepareStatement(insertSql)){
-			preparedStatement.setInt(1, gestisce.getFarmacieId());
+			preparedStatement.setInt(1, gestisce.getFarmaciaId());
 			preparedStatement.setInt(2, gestisce.getUserId());
 			preparedStatement.executeUpdate();
 		}

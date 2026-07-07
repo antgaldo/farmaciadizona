@@ -19,10 +19,10 @@ import dao.UsersDaoImp;
 import model.ProdottiBean;
 import dao.interfaceDao.ProdottiDao;
 import dao.ProdottiDaoImp;
-import model.VendeBean;
-import dao.interfaceDao.VendeDao;
-import dao.VendeDaoImp;
-import model.dto.VendeDettaglioDTO;
+import model.MagazzinoBean;
+import dao.interfaceDao.MagazzinoDao;
+import dao.MagazzinoDaoImp;
+import model.dto.MagazzinoDettaglioDTO;
 import dao.interfaceDao.ImgDao;
 import dao.ImgDaoImp;
 import model.ImgBean;
@@ -39,7 +39,7 @@ public class ProdottiServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String UPLOAD_DIR = "uploads";
 	private ProdottiDao prodottiDao;
-	private VendeDao vendeDao;
+	private MagazzinoDao magazzinoDao;
 	private ImgDao imgDao;
 	 @Override
 	    public void init(ServletConfig servletConfig) throws ServletException{
@@ -49,7 +49,7 @@ public class ProdottiServlet extends HttpServlet {
 	    		throw new ServletException("DataSource non disponibile nel contesto");
 	    	}
 	    	prodottiDao= new ProdottiDaoImp(ds);
-	    	vendeDao=new VendeDaoImp(ds);
+	    	magazzinoDao=new MagazzinoDaoImp(ds);
 	    	imgDao= new ImgDaoImp(ds);
 			// Crea la cartella uploads
 			String uploadPath = getServletContext().getRealPath(File.separator + UPLOAD_DIR);
@@ -73,7 +73,7 @@ public class ProdottiServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try {
-			List<VendeDettaglioDTO> prodotti = vendeDao.getProdottiFarmacia((Integer) request.getSession().getAttribute("idFarmacia"));
+			List<MagazzinoDettaglioDTO> prodotti = magazzinoDao.getProdottiFarmacia((Integer) request.getSession().getAttribute("idFarmacia"));
 			request.setAttribute("prodotti", prodotti);
 			request.setAttribute("contentPage","/WEB-INF/views/admin/prodotti.jsp");
 		    request.setAttribute("title", "Programmi");
@@ -119,7 +119,7 @@ public class ProdottiServlet extends HttpServlet {
 		Integer idProdotto = id;
 		Integer idFarmacia= (Integer)request.getSession().getAttribute("idFarmacia");
 		if(idProdotto != null && idFarmacia != null) {
-			vendeDao.delete(idFarmacia,idProdotto);
+			magazzinoDao.delete(idFarmacia,idProdotto);
 		}
 	}
 	
@@ -141,9 +141,9 @@ public class ProdottiServlet extends HttpServlet {
 			//altrimenti aggiugilo e prendi l'id
 			prodotto_id = prodottiDao.doSave(prodotto);
 		}
-		//crea e aggiungi vende
-		VendeBean vende= insertVende(request,prodotto_id);
-		vendeDao.doSave(vende);
+		//crea e aggiungi magazzino
+		MagazzinoBean magazzino= insertMagazzino(request,prodotto_id);
+		magazzinoDao.doSave(magazzino);
 		//crea e aggiungi img
 		try {
 			ImgBean img = insertImg(request,prodotto_id);
@@ -157,16 +157,16 @@ public class ProdottiServlet extends HttpServlet {
 		return prodotto;
 	}
 	
-	private VendeBean insertVende(HttpServletRequest request,int prodotto_id){
-		VendeBean vende= new VendeBean();
+	private MagazzinoBean insertMagazzino(HttpServletRequest request,int prodotto_id){
+		MagazzinoBean magazzino= new MagazzinoBean();
 		int prezzo = Integer.parseInt(request.getParameter("prezzo"));
 		int quantita = Integer.parseInt(request.getParameter("quantita"));
-		vende.setFarmaciaId((Integer)request.getSession().getAttribute("idFarmacia"));
-		vende.setPrezzo(prezzo);
-		vende.setQuantita(quantita);
-		vende.setActive(true);
-		vende.setProdottoId(prodotto_id);
-		return vende;
+		magazzino.setFarmaciaId((Integer)request.getSession().getAttribute("idFarmacia"));
+		magazzino.setPrezzo(prezzo);
+		magazzino.setQuantita(quantita);
+		magazzino.setActive(true);
+		magazzino.setProdottoId(prodotto_id);
+		return magazzino;
 	}
 	
 	private ImgBean insertImg(HttpServletRequest request,int prodotto_id) throws SQLException, ServletException, IOException{
