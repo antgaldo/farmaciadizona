@@ -41,8 +41,12 @@ public class CercaFarmacoJson extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-    	String nomeprodotto = request.getParameter("q");
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String nomeprodotto = request.getParameter("q");
     	if(nomeprodotto!=null) {
     		try {
     			List<String> result= prodottiDao.getNameProdotto(nomeprodotto);
@@ -54,13 +58,6 @@ public class CercaFarmacoJson extends HttpServlet {
     	        throw new ServletException(e);
     	    }	
     	}
-    }
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		processRequest(request,response);
 	}
 
 	/**

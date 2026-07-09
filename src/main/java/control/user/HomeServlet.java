@@ -38,11 +38,6 @@ public class HomeServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String farmaco= request.getParameter("farmaco");
-		int cap= Integer.parseInt(request.getParameter("cap"));
-		if(farmaco!=null && cap!=0) {
-			response.sendRedirect(request.getContextPath() + "/searchfarmaco?farmaco="+farmaco+"&cap="+cap);	
-		}
 	}
 
 }

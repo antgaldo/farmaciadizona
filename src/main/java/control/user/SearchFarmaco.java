@@ -53,14 +53,15 @@ public class SearchFarmaco extends HttpServlet {
 		// TODO Auto-generated method stub
 		String farmaco= request.getParameter("farmaco");
 		int cap= Integer.parseInt(request.getParameter("cap"));
-		
-		try {
-			List<FarmaciaProdottoDTO> lista= farmacieDao.getFarmaciePerProdottoECap(cap,farmaco);
-			ProdottoDettaglioDTO prodotto= prodottoDao.getProdottoDTO(farmaco);
-			request.setAttribute("lista", lista);
-			request.setAttribute("prodotto", prodotto);
-		} catch(SQLException e) {
-			System.out.println(e);
+		if(farmaco!=null && cap!=0) {
+			try {
+				List<FarmaciaProdottoDTO> lista= farmacieDao.getFarmaciePerProdottoECap(cap,farmaco);
+				ProdottoDettaglioDTO prodotto= prodottoDao.getProdottoDTO(farmaco);
+				request.setAttribute("lista", lista);
+				request.setAttribute("prodotto", prodotto);
+			} catch(SQLException e) {
+				System.out.println(e);
+			}
 		}
 
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/views/user/searchfarmaco.jsp");
