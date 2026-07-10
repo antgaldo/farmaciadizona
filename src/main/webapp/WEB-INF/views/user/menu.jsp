@@ -11,16 +11,15 @@
     </button>
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link active" aria-current="page" href="#">
+            <i class="bi bi-person"></i>
+             Account</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown">
@@ -28,6 +27,12 @@
             </a>
             <ul class="dropdown-menu">
               <div id="showCart" class="autocomplete-item p-2"></div>
+              	<form id="cartForm" action="checkout" method="POST">
+				    <input type="hidden" name="datiCart" id="datiCart">
+                    <button type="submit" class="btn btn-outline-success">
+						Checkout
+					</button>
+				</form>
             </ul>
           </li>
         </ul>

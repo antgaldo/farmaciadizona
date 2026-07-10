@@ -16,11 +16,13 @@ public class ConvertCartJson {
 	    for (int i = 0; i < carrello.size(); i++) {
 	        ElementoCarrelloDTO item = carrello.get(i);
 	        String nome = item.getNome().replace("\"", "\\\"");
+	        String nomeFarmacia = item.getNomeFarmacia().replace("\"", "\\\"");
 	        String path = item.getPath() != null ? item.getPath().replace("\\", "\\\\").replace("\"", "\\\"") : "";
 
 	        json.append("{");
 	        json.append("\"idProdotto\":\"").append(item.getIdProdotto()).append("\",");
 	        json.append("\"nome\":\"").append(nome).append("\",");
+	        json.append("\"nomeFarmacia\":\"").append(nomeFarmacia).append("\",");
 	        json.append("\"quantita\":").append(item.getQuantita()).append(",");
 	        json.append("\"path\":\"").append(path).append("\",");
 	        json.append("\"prezzoTot\":").append(item.getPrezzo());

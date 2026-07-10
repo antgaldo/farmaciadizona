@@ -28,7 +28,6 @@
    //catturo l'evento per cambio opacità marcatore
    function evidenziaMarcatore(idFarmacia) {
       const marcatore = mappaMarcatori[idFarmacia]; 
-	  console.log(marcatore);
       if (marcatore) {
          marcatore.setOpacity(1.0); 
          //marcatore.bringToFront();  

@@ -19,6 +19,7 @@ function putInCart(a){
 	let idProdotto = a.getAttribute("data-idprodotto");
 	let idFarmacia = a.getAttribute("data-idfarmacia");
 	let nomeFarmaco = a.getAttribute("data-nome");
+	let nomeFarmacia = a.getAttribute("data-nomefarmacia");
 	let quantitaFarmaco= parseInt(document.getElementById("quantita-valore-"+ idFarmacia).innerText);
 	let prezzoFarmaco = a.getAttribute("data-prezzo");
 	
@@ -28,6 +29,7 @@ function putInCart(a){
 	    quantita: quantitaFarmaco,
 	    prezzo: prezzoFarmaco,
 	    idFarmacia: idFarmacia,
+		nomeFarmacia: nomeFarmacia,
 	};
 	AjaxFarmaco('addcartservlet',"POST",farmaco,handleCart);
 }
@@ -58,6 +60,7 @@ function AjaxFarmaco(url,method,farmaco,hFunction){
 	           "&nome=" + encodeURIComponent(farmaco.nome) + 
 	           "&quantita=" + encodeURIComponent(farmaco.quantita) + 
 	           "&idFarmacia=" + encodeURIComponent(farmaco.idFarmacia) + 
+			   "&nomeFarmacia=" + encodeURIComponent(farmaco.nomeFarmacia) + 
 	           "&prezzo=" + encodeURIComponent(farmaco.prezzo);
 		    request.send(data);
 		}
@@ -76,22 +79,28 @@ function deleteFarmaco(idProdotto) {
 function handleCart(request){
     let response = JSON.parse(request.responseText);
     let totcart= response.length;
+	daticarrello=response;
 	let contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf('/', 2));
 	document.getElementById('showCart').innerHTML = response.map(farmaco => `
-	    <div class="row p-2">
-	        <div class="col">
-	            <img class="img-thumbnail" src="${contextPath}/uploads/${farmaco.path}" alt="${farmaco.nome}">
-	        </div>
-	        <div class="col text-capitalize text-center">
-	            ${farmaco.nome}
-	        </div>
-	        <div class="col text-center">
-	            ${farmaco.quantita}
-	        </div>
-	        <div class="col text-center">
-	            <i class="bi bi-trash3" onclick="deleteFarmaco(${farmaco.idProdotto})"></i>
-	        </div>
-	    </div>
+		<div class="boxcart">
+			<div class="col text-capitalize textFarmacia">
+			    ${farmaco.nomeFarmacia}
+			</div>
+		    <div class="row p-2 boxdatacart align-items-center">
+		        <div class="col">
+		            <img class="img-thumbnail" src="${contextPath}/uploads/${farmaco.path}" alt="${farmaco.nome}">
+		        </div>
+		        <div class="col text-capitalize text-center">
+		            ${farmaco.nome}
+		        </div>
+		        <div class="col text-center">
+		            ${farmaco.quantita}x
+		        </div>
+		        <div class="col text-center">
+		            <i class="bi bi-trash3" onclick="deleteFarmaco(${farmaco.idProdotto})"></i>
+		        </div>
+		    </div>
+		</div>
 	`).join('');
 	
     let elemento = document.getElementById("navbarToggle");

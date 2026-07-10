@@ -95,6 +95,7 @@
 			       	 	data-idprodotto="${prodotto.id}" 
 			       	 	data-prezzo="${f.prezzo}"
 			       	 	data-idfarmacia="${f.idFarmacia}"
+			       	 	data-nomefarmacia="${f.farmaciaNome}"
 			       	 	onclick="putInCart(this)">
 						Aggiungi al carrello
 					 </button>
@@ -156,7 +157,6 @@
 		let valore = document.getElementById("quantita-valore-" + idFarmacia); 
 		let quantitaFarmaco = a.getAttribute('data-quantita');
 		let quantitaAttuale = parseInt(valore.innerText);
-		console.log(quantitaFarmaco);
 		if(quantitaAttuale < quantitaFarmaco){
 		    let nuovaQuantita = quantitaAttuale + 1;
 		    valore.innerText= nuovaQuantita;

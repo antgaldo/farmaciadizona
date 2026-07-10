@@ -79,11 +79,12 @@ public class AddToCartServlet extends HttpServlet {
 	    String quantita = request.getParameter("quantita");
 	    String prezzo = request.getParameter("prezzo");
 	    String idFarmacia = request.getParameter("idFarmacia");
+	    String nomeFarmacia = request.getParameter("nomeFarmacia");
 	    
 	    HttpSession session = request.getSession();
 	    
 	    try {
-	    	double checkprezzo= magazzinoDao.getPrezzo(Integer.parseInt(idFarmacia),Integer.parseInt(idProdotto));
+	    	 double checkprezzo= magazzinoDao.getPrezzo(Integer.parseInt(idFarmacia),Integer.parseInt(idProdotto));
 	    	 if(checkprezzo==Double.parseDouble(prezzo)) {
 	 	    	String pathImage= imgDao.getImageFromIdProdotto(Integer.parseInt(idProdotto));
 	 		    List<ElementoCarrelloDTO> carrello = (List<ElementoCarrelloDTO>) request.getSession().getAttribute("cart");
@@ -104,7 +105,7 @@ public class AddToCartServlet extends HttpServlet {
 	 		   }
 	 		   if(!prodottoGiaPresente) {
 	 			   	double prezzoTot1= Double.parseDouble(prezzo) * Integer.parseInt(quantita);
-		 		    ElementoCarrelloDTO nuovoProdotto = new ElementoCarrelloDTO(Integer.parseInt(idProdotto),Integer.parseInt(idFarmacia), nome, Integer.parseInt(quantita), prezzoTot1,pathImage);
+		 		    ElementoCarrelloDTO nuovoProdotto = new ElementoCarrelloDTO(Integer.parseInt(idProdotto),Integer.parseInt(idFarmacia),nomeFarmacia, nome, Integer.parseInt(quantita), prezzoTot1,pathImage);
 		 		    carrello.add(nuovoProdotto);
 	 		   }
 	 		    

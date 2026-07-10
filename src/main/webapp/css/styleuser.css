@@ -51,6 +51,9 @@
 .displayblock{
 	display:block;
 }
+.dnone{
+	display:none;
+}
 .custom-card {
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 20px;
@@ -73,8 +76,58 @@
 	padding-top: 1.5rem;
     padding-bottom: 1.5rem;
 }
+.ricerca:last-child{
+	border:none;
+}
+.bnone{
+	border:none;
+}
 .card.noborder {
     border: none;
+}
+.img-thumbnail{
+	border:none;
+}
+.dropdown-menu.show{
+	border:none;
+}
+.boxcart{
+	border-bottom: 1px dashed #696969;
+    padding: 4px 0;
+}
+.boxcart:last-child{
+	border:none;
+}
+.textFarmacia{
+	font-weight: 700;
+    font-size: 14px;
+}
+.boxdatacart{
+	font-size: smaller;
+}
+.col:first-child{
+	padding-left:0;
+}
+h3 {
+    font-size: 1.4em;
+    font-weight: 900;
+    color: #212529;
+}
+.imagecenter{
+	text-align:center;
+}
+.width70 {
+    width: 70px;
+}
+.table{
+	vertical-align: middle;
+}
+tr:last-child{
+	border: white;
+}
+.textTotale {
+    font-weight: bold;
+    font-size: 1.2em;
 }
 /*
 button.btn.btn-outline-dark.circle {
