@@ -1,27 +1,24 @@
-package control.user;
+package control;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.dto.ElementoCarrelloDTO;
-
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
 
 /**
- * Servlet implementation class CheckoutServlet
+ * Servlet implementation class logout
  */
-@WebServlet("/checkout")
-public class CheckoutServlet extends HttpServlet {
+@WebServlet("/logout")
+public class logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CheckoutServlet() {
+    public logout() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,8 +28,12 @@ public class CheckoutServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/views/user/checkout.jsp");
-		dispatcher.forward(request, response);
+		HttpSession session = request.getSession(false);
+        
+        if (session != null) {
+            session.invalidate();
+        }
+        response.sendRedirect("app");
 	}
 
 	/**
@@ -40,17 +41,6 @@ public class CheckoutServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//da fare tutti i controlli
-		List<ElementoCarrelloDTO> carrello = (List<ElementoCarrelloDTO>) request.getSession().getAttribute("cart");
-		double totale=0;
-		int quantitaTotale=0;
-		for(ElementoCarrelloDTO farmaco : carrello) {
-			totale+= farmaco.getPrezzo();
-			quantitaTotale+= farmaco.getQuantita();
-		}
-		request.getSession().setAttribute("targetURL", "checkout");
-		request.getSession().setAttribute("totale", totale);
-		request.getSession().setAttribute("quantitaTotale", quantitaTotale);
 		doGet(request, response);
 	}
 

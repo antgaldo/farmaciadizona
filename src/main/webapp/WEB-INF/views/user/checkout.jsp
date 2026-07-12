@@ -48,8 +48,12 @@
 				  <div class="row g-0">
 				  	<div class="col-md-12">
 					    <div class="card-body">
-
-							  <div class="col-12">
+					    	  <% if (session.getAttribute("userid") == null) { %>
+								  <div class="col-12">Fai 
+								  	<a href="login">login</a> per continuare o 
+								  	<a href="register">registrati</a></div>
+								  <div class="col-12">
+							  <% } %>
 							  
 							    <div class="form-check">
 							      <input class="form-check-input" type="radio" id="gridCheck" value="infarmacia" name="choise">

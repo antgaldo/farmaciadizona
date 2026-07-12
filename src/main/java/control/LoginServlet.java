@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.UsersBean;
 import util.PasswordUtil;
 import dao.interfaceDao.UsersDao;
@@ -63,7 +64,17 @@ public class LoginServlet extends HttpServlet {
 		 try {
 			 UsersBean user= checkUser(request);
 			 if(user != null) {
-				 response.sendRedirect(request.getContextPath() +"/admin/dashboard");
+				 if(user.getRuolo().equals("ADMIN")) {
+					 response.sendRedirect(request.getContextPath() +"/admin/dashboard");
+				 }
+				 if(user.getRuolo().equals("USER")) {
+					 HttpSession session = request.getSession(false);
+					 if(session.getAttribute("targetURL").equals("checkout")){
+						 response.sendRedirect(request.getContextPath() +"/checkout");
+					 } else {
+						 response.sendRedirect(request.getContextPath() +"/app"); 
+					 }
+				 }
 			 }
 	    } catch (SQLException e) {
 	        throw new ServletException(e);
@@ -81,6 +92,7 @@ public class LoginServlet extends HttpServlet {
 		if(usercheck !=null) {
 			request.getSession().setAttribute("role", usercheck.getRuolo());
 			request.getSession().setAttribute("userid", usercheck.getId());
+			request.getSession().setAttribute("usernome", usercheck.getNome());
 			if(usercheck.getRuolo().equals("ADMIN")) {
 				int idFarmacia= gestisceDao.getGestisce(usercheck);
 				request.getSession().setAttribute("idFarmacia", idFarmacia);

@@ -18,7 +18,7 @@ public class GestisceDaoImp implements GestisceDao{
 	}
 	
 	public void doSave(GestisceBean gestisce) throws SQLException {
-		String insertSql= "INSERT INTO gestisce (user_id,farmacie_id) VALUES(?,?)";
+		String insertSql= "INSERT INTO gestisce (user_id,farmacia_id) VALUES(?,?)";
 		try (Connection connection= ds.getConnection();
 			PreparedStatement preparedStatement = connection.prepareStatement(insertSql)){
 			preparedStatement.setInt(1, gestisce.getFarmaciaId());
@@ -28,13 +28,13 @@ public class GestisceDaoImp implements GestisceDao{
 	}
 	
 	public int getGestisce(UsersBean user) throws SQLException{
-		String getSQL= "SELECT farmacie_id FROM gestisce WHERE user_id=?";
+		String getSQL= "SELECT farmacia_id FROM gestisce WHERE user_id=?";
 		try(Connection connection=ds.getConnection();
 			PreparedStatement preparedStatement = connection.prepareStatement(getSQL)){
 			preparedStatement.setInt(1,user.getId());
 			ResultSet rs = preparedStatement.executeQuery();
 			if(rs.next()) {
-				int id= rs.getInt("farmacie_id");
+				int id= rs.getInt("farmacia_id");
 				return id;
 			}
 		};

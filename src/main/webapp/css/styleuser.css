@@ -12,8 +12,13 @@
     align-items: center;
 }
 
-.navbar{
-	background-color:white;
+.navbaruser{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+    height: 110px;
 }
 .container-fluid {
     padding-right: calc(var(--bs-gutter-x) * 1.5);
@@ -128,6 +133,9 @@ tr:last-child{
 .textTotale {
     font-weight: bold;
     font-size: 1.2em;
+}
+.ml-auto{
+	margin-left: auto;
 }
 /*
 button.btn.btn-outline-dark.circle {

@@ -1,7 +1,11 @@
 
 <nav class="navbar bg-body-tertiary fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img class="width200" src="${pageContext.request.contextPath}/img/logo.png"/></a>
+    <a class="navbar-brand" href="app"><img class="width200" src="${pageContext.request.contextPath}/img/logo.png"/></a>
+	    <% if (session.getAttribute("userid") != null) { %>
+	    	<div class="ml-auto me-2"><%= session.getAttribute("usernome") %></div>
+	    	<div class="me-2"><a href="${pageContext.request.contextPath}/logout">logout</a></div>
+	    <%}%>
     <button class="navbar-toggler position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none" id="navbarToggle">
@@ -28,7 +32,6 @@
             <ul class="dropdown-menu">
               <div id="showCart" class="autocomplete-item p-2"></div>
               	<form id="cartForm" action="checkout" method="POST">
-				    <input type="hidden" name="datiCart" id="datiCart">
                     <button type="submit" class="btn btn-outline-success">
 						Checkout
 					</button>

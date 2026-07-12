@@ -15,7 +15,7 @@ public class AuthFilter extends HttpFilter{
 	@Override
 	protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 		throws IOException, ServletException {	
-		    String path = request.getRequestURI().substring(request.getContextPath().length());
+			String path = request.getRequestURI().substring(request.getContextPath().length());
 		    boolean isStaticResource = path.startsWith("/css/") || path.startsWith("/js/") || path.startsWith("img");
 		    // Se l'URL non è protetto, lascia passare
 		    if (!path.startsWith("/admin/") && !path.startsWith("/common/") || isStaticResource) {
@@ -29,11 +29,17 @@ public class AuthFilter extends HttpFilter{
 		    // Controllo autenticazione e autorizzazione
 		    boolean autorizzato = false;
 		    //controlla se l'id in sessione è uguale all'id del path
-		    if (role != null && userid != null && role.equals("ADMIN")) {
-		    		if (path.startsWith("/admin/")) {
-		            autorizzato = true;
+		    if (role != null && userid != null) {
+		        if (path.startsWith("/admin/")) {
+		            // Solo l'admin accede ai path /admin/
+		            if (role.equals("ADMIN")) {
+		                autorizzato = true;
+		            }
 		        } else if (path.startsWith("/common/")) {
-		            autorizzato = role.equals("ADMIN") || role.equals("USER");
+		            // Entrambi accedono a /common/
+		            if (role.equals("ADMIN") || role.equals("USER")) {
+		                autorizzato = true;
+		            }
 		        }
 		    }
 		    if (autorizzato) {

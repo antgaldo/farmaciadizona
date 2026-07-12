@@ -34,7 +34,7 @@ function putInCart(a){
 	AjaxFarmaco('addcartservlet',"POST",farmaco,handleCart);
 }
 
-//funzione per la chiamata ajax 
+//chiamata ajax 
 function AjaxFarmaco(url,method,farmaco,hFunction){
 	var request = new XMLHttpRequest();
 	if(request){
