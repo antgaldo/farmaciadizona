@@ -9,7 +9,7 @@
 	    <span class="badge text-bg-success rounded-pill"><i class="bi bi-capsule"></i></span>
 	  </li>
 	  <li class="list-group-item d-flex justify-content-between align-items-center">
-	    <div class="mediasidebar">Prenotazioni</div>
+	    <div class="mediasidebar"><a href="${pageContext.request.contextPath}/admin/prenotazioni">Prenotazioni</a></div>
 	    <span class="badge text-bg-success rounded-pill"><i class="bi bi-shop"></i></span>
 	  </li>
 	  <li class="list-group-item d-flex justify-content-between align-items-center">
