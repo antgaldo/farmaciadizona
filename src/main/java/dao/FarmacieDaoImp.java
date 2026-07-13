@@ -61,7 +61,7 @@ public class FarmacieDaoImp implements FarmacieDao{
 			while(rs.next()) {
 				FarmaciaProdottoDTO result= new FarmaciaProdottoDTO();
 				result.setCap(rs.getInt("cap"));
-				result.setPrezzo(rs.getDouble("prezzo"));
+				result.setPrezzo(rs.getBigDecimal("prezzo"));
 				result.setQuantita(rs.getInt("quantita_disponibile"));
 				result.setIdFarmacia(rs.getInt("farmacia_id"));
 				result.setProdottoNome(rs.getString("prodotto_nome"));

@@ -13,4 +13,5 @@ public interface MagazzinoDao {
 	public List<MagazzinoDettaglioDTO> getProdottiFarmacia(int idfarmacia) throws SQLException;
 	public int getCountProdotti(int idfarmacia) throws SQLException;
 	public double getPrezzo(int idFarmacia, int idProdotto) throws SQLException;
+	public MagazzinoBean getProdottoFarmacia(int idFarmacia, int idProdotto) throws SQLException;
 }

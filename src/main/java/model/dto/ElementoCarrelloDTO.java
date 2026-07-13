@@ -1,4 +1,5 @@
 package model.dto;
+import java.math.BigDecimal;
 
 public class ElementoCarrelloDTO {
 	private int idProdotto;
@@ -6,10 +7,10 @@ public class ElementoCarrelloDTO {
 	private String nome;
 	private String nomeFarmacia;
 	private int quantita;
-	private double prezzo;
+	private BigDecimal prezzo;
 	private String path;
 	
-	public ElementoCarrelloDTO(int idProdotto,int idFarmacia,String nomeFarmacia, String nome, int quantita,double prezzo,String path) {
+	public ElementoCarrelloDTO(int idProdotto,int idFarmacia,String nomeFarmacia, String nome, int quantita,BigDecimal prezzo,String path) {
 		this.idProdotto=idProdotto;
 		this.idFarmacia=idFarmacia;
 		this.nome=nome;
@@ -40,10 +41,10 @@ public class ElementoCarrelloDTO {
 	public void setPath(String path) {
 		this.path=path;
 	}
-	public void setPrezzo(double prezzo) {
+	public void setPrezzo(BigDecimal prezzo) {
 		this.prezzo=prezzo;
 	}
-	public double getPrezzo() {
+	public BigDecimal getPrezzo() {
 		return prezzo;
 	}
 	public void setNomeFarmacia(String nomeFarmacia) {

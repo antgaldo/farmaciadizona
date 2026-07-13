@@ -14,6 +14,8 @@ import java.sql.SQLException;
 
 import model.dto.ElementoCarrelloDTO;
 import java.util.List;
+import java.math.RoundingMode;
+import java.math.BigDecimal;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
@@ -85,7 +87,10 @@ public class AddToCartServlet extends HttpServlet {
 	    
 	    try {
 	    	 double checkprezzo= magazzinoDao.getPrezzo(Integer.parseInt(idFarmacia),Integer.parseInt(idProdotto));
-	    	 if(checkprezzo==Double.parseDouble(prezzo)) {
+	         BigDecimal prezzoInMagazzino = BigDecimal.valueOf(checkprezzo).setScale(2, RoundingMode.HALF_UP);
+	         BigDecimal prezzoRichiesta = BigDecimal.valueOf(Double.parseDouble(prezzo)).setScale(2, RoundingMode.HALF_UP);
+			 BigDecimal quantitaBigDecimal = BigDecimal.valueOf(Integer.parseInt(quantita));
+	    	 if(prezzoInMagazzino.compareTo(prezzoRichiesta) == 0) {
 	 	    	String pathImage= imgDao.getImageFromIdProdotto(Integer.parseInt(idProdotto));
 	 		    List<ElementoCarrelloDTO> carrello = (List<ElementoCarrelloDTO>) request.getSession().getAttribute("cart");
 	 		    
@@ -98,13 +103,13 @@ public class AddToCartServlet extends HttpServlet {
 	 			   if(item.getIdProdotto()== Integer.parseInt(idProdotto) && item.getIdFarmacia()== Integer.parseInt(idFarmacia)) {
 	 				   prodottoGiaPresente= true;
 	 				   item.setQuantita(Integer.parseInt(quantita));
-	 				   double prezzoTot= Double.parseDouble(prezzo) * Integer.parseInt(quantita);
+	 				   BigDecimal prezzoTot= prezzoRichiesta.multiply(quantitaBigDecimal);
 	 				   item.setPrezzo(prezzoTot);
 	 				   break;
 	 			   }
 	 		   }
 	 		   if(!prodottoGiaPresente) {
-	 			   	double prezzoTot1= Double.parseDouble(prezzo) * Integer.parseInt(quantita);
+	 			   	BigDecimal prezzoTot1= prezzoRichiesta.multiply(quantitaBigDecimal);
 		 		    ElementoCarrelloDTO nuovoProdotto = new ElementoCarrelloDTO(Integer.parseInt(idProdotto),Integer.parseInt(idFarmacia),nomeFarmacia, nome, Integer.parseInt(quantita), prezzoTot1,pathImage);
 		 		    carrello.add(nuovoProdotto);
 	 		   }

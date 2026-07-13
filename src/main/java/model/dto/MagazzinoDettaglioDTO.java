@@ -1,10 +1,11 @@
 package model.dto;
+import java.math.BigDecimal;
 
 public class MagazzinoDettaglioDTO {
 	int idProdotto;
     String nomeProdotto;
     String descrizione;
-    double prezzo;
+    BigDecimal prezzo;
     int quantita;
     String categoria;
     String pathimg;
@@ -27,7 +28,7 @@ public class MagazzinoDettaglioDTO {
     	this.descrizione=descrizione;
     }
     
-    public void setPrezzo(double prezzo) {
+    public void setPrezzo(BigDecimal prezzo) {
     	this.prezzo=prezzo;
     }
     
@@ -57,7 +58,7 @@ public class MagazzinoDettaglioDTO {
     	return descrizione;
     }
     
-    public double getPrezzo() {
+    public BigDecimal getPrezzo() {
     	return prezzo;
     }
     

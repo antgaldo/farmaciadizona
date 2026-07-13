@@ -29,7 +29,7 @@ public class MagazzinoDaoImp implements MagazzinoDao {
 				PreparedStatement preparedStatement = connection.prepareStatement(insertsql)){
 				preparedStatement.setInt(1, magazzinobean.getFarmaciaId());
 				preparedStatement.setInt(2, magazzinobean.getProdottoId());
-				preparedStatement.setDouble(3, magazzinobean.getPrezzo());
+				preparedStatement.setBigDecimal(3, magazzinobean.getPrezzo());
 				preparedStatement.setInt(4, magazzinobean.getQuantita());
 				preparedStatement.setBoolean(5, magazzinobean.getActive());
 				preparedStatement.executeUpdate();
@@ -64,7 +64,7 @@ public class MagazzinoDaoImp implements MagazzinoDao {
 					v.setIdProdotto(rs.getInt("prodotto_id"));
 					v.setNomeProdotto(rs.getString("p.nome"));
 					v.setDescrizione(rs.getString("descrizione"));
-					v.setPrezzo(rs.getInt("prezzo"));
+					v.setPrezzo(rs.getBigDecimal("prezzo"));
 					v.setQuantita(rs.getInt("quantita_disponibile"));
 					v.setCategoria(rs.getString("categoria"));
 					v.setPathImg(rs.getString("path"));
@@ -72,6 +72,24 @@ public class MagazzinoDaoImp implements MagazzinoDao {
 				};
 		}
 		return magazzino;
+	}
+	
+	@Override
+	public MagazzinoBean getProdottoFarmacia(int idFarmacia, int idProdotto) throws SQLException{
+		String selectSQL="SELECT * FROM magazzino WHERE farmacia_id=? AND prodotto_id=?";
+		try(Connection connection= ds.getConnection();
+				PreparedStatement preparedStatement=connection.prepareStatement(selectSQL)){
+			preparedStatement.setInt(1, idFarmacia);
+			preparedStatement.setInt(2, idProdotto);
+			ResultSet rs= preparedStatement.executeQuery();
+			while(rs.next()) {
+				MagazzinoBean magazzino= new MagazzinoBean();
+				magazzino.setPrezzo(rs.getBigDecimal("prezzo"));
+				magazzino.setQuantita(rs.getInt("quantita_disponibile"));
+				return magazzino;
+			}
+		}
+		return null;
 	}
 	
 	@Override

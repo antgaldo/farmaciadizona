@@ -1,13 +1,15 @@
 package model;
+import java.math.BigDecimal;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
+
 
 public class OrdiniBean {
 	private int id_user;
 	private int id_farmacia;
 	private int id;
-	private Date data_acquisto;
-	private double totale;
+	private LocalDateTime data_acquisto;
+	private BigDecimal totale;
 	
 	public OrdiniBean() {}
 	
@@ -21,10 +23,10 @@ public class OrdiniBean {
 		this.id_user=id_user;
 	}
 	
-	public void setDataAcquisto(Date data_acquisto) {
+	public void setDataAcquisto(LocalDateTime data_acquisto) {
 		this.data_acquisto=data_acquisto;
 	}
-	public void setTotale(int totale) {
+	public void setTotale(BigDecimal totale) {
 		this.totale=totale;
 	}
 	public int getId() {
@@ -36,11 +38,11 @@ public class OrdiniBean {
 	public int getIdUser() {
 		return id_user;
 	}
-	public Date getDataAcquisto() {
+	public LocalDateTime getDataAcquisto() {
 		return data_acquisto;
 	}
 	
-	public double getTotale() {
+	public BigDecimal getTotale() {
 		return totale;
 	}
 }

@@ -1,4 +1,5 @@
 package model;
+import java.math.BigDecimal;
 
 import java.io.Serializable;
 
@@ -7,7 +8,7 @@ public class MagazzinoBean implements Serializable{
 	
 	private int farmacia_id;
 	private int prodotto_id;
-	private double prezzo;
+	private BigDecimal prezzo;
 	private int quantita;
 	private boolean active;
 	
@@ -20,7 +21,7 @@ public class MagazzinoBean implements Serializable{
 		this.prodotto_id=prodotto_id;
 	}
 	
-	public void setPrezzo(double prezzo) {
+	public void setPrezzo(BigDecimal prezzo) {
 		this.prezzo=prezzo;
 	}
 	
@@ -39,7 +40,7 @@ public class MagazzinoBean implements Serializable{
 		return prodotto_id;
 	}
 	
-	public double getPrezzo() {
+	public BigDecimal getPrezzo() {
 		return prezzo;
 	}
 	public int getQuantita() {

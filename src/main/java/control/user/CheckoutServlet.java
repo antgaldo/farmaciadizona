@@ -1,4 +1,5 @@
 package control.user;
+import java.math.BigDecimal;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -42,10 +43,10 @@ public class CheckoutServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//da fare tutti i controlli
 		List<ElementoCarrelloDTO> carrello = (List<ElementoCarrelloDTO>) request.getSession().getAttribute("cart");
-		double totale=0;
+		BigDecimal totale=BigDecimal.ZERO;
 		int quantitaTotale=0;
 		for(ElementoCarrelloDTO farmaco : carrello) {
-			totale+= farmaco.getPrezzo();
+			totale= totale.add(farmaco.getPrezzo());
 			quantitaTotale+= farmaco.getQuantita();
 		}
 		request.getSession().setAttribute("targetURL", "checkout");

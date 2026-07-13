@@ -1,11 +1,12 @@
 package model.dto;
+import java.math.BigDecimal;
 
 public class FarmaciaProdottoDTO {
 	private String prodotto_nome;
 	private String farmacia_nome;
 	private int idFarmacia;
 	private int cap;
-	private double prezzo;
+	private BigDecimal prezzo;
 	private int quantita;
 	private String indirizzo;
 	private String lat;
@@ -36,7 +37,7 @@ public class FarmaciaProdottoDTO {
 		return cap;
 	}
 	
-	public double getPrezzo() {
+	public BigDecimal getPrezzo() {
 		return prezzo;
 	}
 	
@@ -66,7 +67,7 @@ public class FarmaciaProdottoDTO {
 	public void setCap(int cap) {
 		this.cap=cap;
 	}
-	public void setPrezzo(double prezzo) {
+	public void setPrezzo(BigDecimal prezzo) {
 		this.prezzo=prezzo;
 	}
 	public void setQuantita(int quantita) {

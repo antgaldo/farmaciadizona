@@ -62,18 +62,14 @@
 							      </label>
 							    </div>
 							    
-							     <form class="row g-3 my-4 dnone" id="inFarmacia">
-								  <div class="col-md-6 m-0">
-								    <label for="inputEmail4" class="form-label">Email</label>
-								    <input type="email" class="form-control" id="inputEmail4">
-								  </div>
-								  <div class="col-md-6 m-0">
-								    <label for="inputPassword4" class="form-label">Password</label>
-								    <input type="password" class="form-control" id="inputPassword4">
-								  </div>
-
+							     <form class="row g-3 my-4 dnone" id="inFarmacia" action="order" method="POST">
+								  <input type="hidden" name="inFarmacia">
 								  <div class="col-12">
-								    <button type="submit" class="btn btn-primary">Conferma</button>
+								 	 <% if (session.getAttribute("userid") == null) { %>
+								   		<button type="submit" class="btn btn-primary" disabled>Conferma</button>
+								   	 <% } else { %>
+								   	 	<button type="submit" class="btn btn-primary">Conferma</button>
+								   	 <% } %>
 								  </div>
 								</form>
 								
@@ -123,7 +119,11 @@
 								    </div>
 								  </div>
 								  <div class="col-12">
-								    <button type="submit" class="btn btn-primary">Conferma</button>
+								     <% if (session.getAttribute("userid") == null) { %>
+								   		<button type="submit" class="btn btn-primary" disabled>Conferma</button>
+								   	 <% } else { %>
+								   	 	<button type="submit" class="btn btn-primary">Conferma</button>
+								   	 <% } %>
 								  </div>
 								</form>
 							    

@@ -1,4 +1,5 @@
 package control.admin;
+import java.math.BigDecimal;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletConfig;
@@ -159,7 +160,7 @@ public class ProdottiServlet extends HttpServlet {
 	
 	private MagazzinoBean insertMagazzino(HttpServletRequest request,int prodotto_id){
 		MagazzinoBean magazzino= new MagazzinoBean();
-		int prezzo = Integer.parseInt(request.getParameter("prezzo"));
+		BigDecimal prezzo = new BigDecimal(request.getParameter("prezzo"));
 		int quantita = Integer.parseInt(request.getParameter("quantita"));
 		magazzino.setFarmaciaId((Integer)request.getSession().getAttribute("idFarmacia"));
 		magazzino.setPrezzo(prezzo);
