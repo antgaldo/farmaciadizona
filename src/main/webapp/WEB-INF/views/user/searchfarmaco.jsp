@@ -25,12 +25,14 @@
 	<section class="ricerca">
 		<div class="edit-ricerca">
 	   		 <h3>Modifica ricerca</h3>
-		    <form class="form-home" role="search" method="GET" action="searchfarmaco">
-		        <div class="flex col-md-6">
+		    <form class="form-home" id="searchfarmaco" method="GET" action="searchfarmaco">
+		        <div class="flex col-md-6 pos-relative">
 		        	<input class="form-control" type="text" placeholder="Cap" name="cap" aria-label="Cap"/>
+		        	<div class="invalidinput displaynone">Il cap non è valido</div>
 		        </div>
 		         <div class="flex col-md-6 pos-relative">
 		            <input class="form-control" id="farmaco" type="text" placeholder="Cerca farmaco" name="farmaco" aria-label="Farmaco" oninput="isExistFarmaco()"/>
+		            <div class="invalidinput displaynone">Il campo del cap è vuoto</div>
 		            <div id="autocompleteFarmaco" class="autocomplete-results">
 				      <div id="risultatoProdotto" class="autocomplete-item p-2">
 				        ${prodotto}
@@ -180,5 +182,6 @@
 <script src="${pageContext.request.contextPath}/js/cart.js"></script>
 <script src="${pageContext.request.contextPath}/js/map.js"></script>
 <script src="${pageContext.request.contextPath}/js/listfarmaci.js"></script>
+<script src="${pageContext.request.contextPath}/js/checkform.js"></script>
 </body>
 </html>

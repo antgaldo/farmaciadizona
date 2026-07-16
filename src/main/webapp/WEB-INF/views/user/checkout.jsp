@@ -75,16 +75,30 @@
 								    </div>
 								    
 								    <form class="py-1 displaynone" id="formSpedizione">
+								      <fieldset>Spedizione</fieldset>
 									  <div class="col-md-10">
-									    <label for="inputAddress" class="form-label">Address</label>
+									    <label for="inputAddress" class="form-label">indirizzo</label>
 									    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
 									  </div>
 									  <div class="col-md-6">
-									    <label for="inputCity" class="form-label">City</label>
+									    <label for="inputCity" class="form-label">citta</label>
+									    <input type="text" class="form-control" id="inputCity">
+									  </div>
+									  <div class="col-md-2 mb-20">
+									    <label for="inputZip" class="form-label">cap</label>
+									    <input type="text" class="form-control" id="inputZip">
+									  </div>
+									  <fieldset>Pagamento</fieldset>
+									  <div class="col-md-10">
+									    <label for="inputAddress" class="form-label">numero di carta</label>
+									    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+									  </div>
+									  <div class="col-md-6">
+									    <label for="inputCity" class="form-label">scadenza</label>
 									    <input type="text" class="form-control" id="inputCity">
 									  </div>
 									  <div class="col-md-2">
-									    <label for="inputZip" class="form-label">Zip</label>
+									    <label for="inputZip" class="form-label">circuito</label>
 									    <input type="text" class="form-control" id="inputZip">
 									  </div>
 									  <div class="col-md-12 py-1">

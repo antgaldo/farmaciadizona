@@ -14,13 +14,14 @@
 		  <div class="card-body-home">
 		    <h5 class="card-title">Se hai passato un guaio, sei nel posto giusto !</h5>
 		    <p class="card-text">Inserisci il tuo cap ed il farmaco richiesto. Ti indirizzeremo alle farmacie di zona che ne hanno disponibilità</p>
-			<form class="form-home"  action="searchfarmaco" role="search" method="GET">
-			  <div class="flex col-md-6">
+			<form class="form-home" id="searchfarmaco"  action="searchfarmaco" role="search" method="GET">
+			  <div class="flex pos-relative col-md-6">
 			    <input class="form-control" type="text" placeholder="Cap" name="cap" aria-label="Cap"/>
+			    <div class="invalidinput displaynone">Il cap non è valido</div>
 			  </div>
 			  <div class="flex pos-relative col-md-6">
 			    <input class="form-control" id="farmaco" type="text" placeholder="Farmaco" name="farmaco" aria-label="Farmaco" oninput="isExistFarmaco()"/>
-			    
+			    <div class="invalidinput displaynone">Il campo del cap è vuoto</div>
 			    <div id="autocompleteFarmaco" class="autocomplete-results">
 			      <div id="risultatoProdotto" class="autocomplete-item p-2">
 			        ${prodotto}
@@ -34,5 +35,6 @@
 	</section>
 <script src="${pageContext.request.contextPath}/js/cart.js"></script>
 <script src="${pageContext.request.contextPath}/js/listfarmaci.js"></script>
+<script src="${pageContext.request.contextPath}/js/checkform.js"></script>
 </body>
 </html>
