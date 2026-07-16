@@ -104,12 +104,15 @@ function handleCart(request){
 	`).join('');
 	
     let elemento = document.getElementById("navbarToggle");
+	let bottonecheckout= document.getElementById("cartForm");
     if(totcart==0) {
 		document.getElementsByClassName("dropdown-menu")[0].classList.remove("show");
-        elemento.classList.add("d-none");
+        elemento.classList.add("displaynone");
+		bottonecheckout.classList.add("displaynone");
     } else {
-		elemento.classList.remove("d-none");
+		elemento.classList.remove("displaynone");
 		elemento.innerHTML = "<span>" + totcart + "</span>";
+		bottonecheckout.classList.remove("displaynone");
 		document.getElementsByClassName("dropdown-menu")[0].classList.add("show");
     }
 }

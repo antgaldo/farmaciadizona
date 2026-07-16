@@ -1,32 +1,30 @@
-<div class="row">
-	<div class="card mb-3 col p-5 border-0">
-	  <div class="row">
-	    <div class="col-md-6">
-	      <canvas id="myChart"></canvas>
-	    </div>
-	    <div class="col-md-6">
-	      <div class="card-body">
-	        <h5 class="card-title">Card title</h5>
-	        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-	        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	<div class="card mb-3 col ms-2 p-5 ">
-	  <div class="row g-0">
-	    <div class="col-md-2">
-	      <h1 class="card-body bottom-50 end-50">${nprodotti}</h1>
-	    </div>
-	    <div class="col-md-10">
-	      <div class="card-body">
-	        <h5 class="card-title">Prodotti attivi</h5>
-	        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-	        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-	      </div>
-	    </div>
-	  </div>
-	</div>
+<div class="dashboard-row">
+    <section class="dashboard-card chart-card">
+        <div class="chart-container">
+            <canvas id="myChart"></canvas>
+        </div>
+        <div class="card-content">
+            <h3>Card title</h3>
+            <p>
+                This is a wider card with supporting text below as a natural
+                lead-in to additional content. This content is a little bit longer.
+            </p>
+            <small>Last updated 3 mins ago</small>
+        </div>
+    </section>
+    <section class="dashboard-card stats-card">
+        <div class="stats-number">
+            ${nprodotti}
+        </div>
+        <div class="card-content">
+            <h3>Prodotti attivi</h3>
+            <p>
+                This is a wider card with supporting text below as a natural
+                lead-in to additional content. This content is a little bit longer.
+            </p>
+            <small>Last updated 3 mins ago</small>
+        </div>
+    </section>
 </div>
 <script>
 function initDashboardPage() {

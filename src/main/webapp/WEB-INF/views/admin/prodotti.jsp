@@ -71,8 +71,16 @@
 					<td>${p.quantita}</td>
 					<td>${p.categoria}</td>
 					<td><img width="60" height="60" src="${pageContext.request.contextPath}/uploads/${p.pathImg}"></td>
-					<td><i class="bi bi-pencil-square me-1" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal1"></i>
-						<i class="bi bi-trash" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2"></i>
+					<td>
+					    <i class="bi bi-pencil-square me-1"
+					       role="button"
+					       data-bs-toggle="modal"
+					       data-bs-target="#exampleModal1"></i>
+					
+					    <i class="bi bi-trash"
+					       role="button"
+					       data-bs-toggle="modal"
+					       data-bs-target="#exampleModal2"></i>
 					</td>
 						<!-- Modal -->
 						<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -1,4 +1,4 @@
-
+/*
 const sidebar = document.getElementById("apri");
 const mediasidebar= document.getElementsByClassName("mediasidebar");
 const listitem= document.getElementsByClassName("list-group-item");
@@ -26,3 +26,4 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
+*/

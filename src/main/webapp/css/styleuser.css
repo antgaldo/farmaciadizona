@@ -1,148 +1,716 @@
-.hero {
-    min-height: 600px;
-    max-height: 700px;
-    background-image: linear-gradient(rgba(0,0,0,0.4),
-                        rgba(0,0,0,0.4)),
-                        url("../img/background1.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+/*calcolo della larghezza compreso di padding e bordo per tutti*/
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  margin: 0;
 }
 
-.navbaruser{
-    position: fixed;
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+h3 {
+  font-size: 1.2em;
+  font-weight: 900;
+  color: #212529;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0;
+    margin-right: -0.75rem;
+    margin-left: -0.75rem;
+}
+.flex{
+	display:flex;
+}
+
+.col {
+  flex: 1 0 0%;
+}
+.ricerca {
+  border-bottom: 1px dashed #d2d2d2;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.ricerca:last-child { 
+	border: none; 
+}
+/* ==========================================================================
+   4. UTILITY DI SPAZIATURA (Margini e Padding)
+   ========================================================================== */
+.mb-3 {
+    margin-bottom: 1rem;
+}
+.p-1 { 
+	padding: 1rem; 
+}
+.py-1{
+	padding: 1rem 0;
+}
+.pr-1{
+	padding-right: 1rem; 
+}
+.ms-2 {
+    margin-left: 0.5rem;
+}
+.g-0 {
+  margin-right: 0;
+  margin-left: 0;
+  margin-top: 0;
+}
+.me-auto { 
+	margin-right: auto; 
+}
+.mt-130 { 
+	margin-top: 130px; 
+}
+.ms-2 { 
+	margin-left: 0.5rem;
+}
+.me-1 { 
+	margin-right: .25rem; 
+}
+.ms-1 {
+    margin-left: .25rem;
+}
+/* ==========================================================================
+   4. UTILITY DIMENSIONI
+   ========================================================================== */
+.col-md-12 {
+    width: 100%;
+}
+.col-md-2 {
+    width: 19%;
+}
+.col-md-10 {
+	width: 80%;
+}
+.col-md-6  { 
+	width: 50%;
+}
+.col-auto {
+  width: auto;
+}
+.width70 { 
+	width: 70px; 
+}
+.width200 { 
+	width: 200px; 
+}
+/* ==========================================================================
+   9. COMPONENTI: CARDS, IMMAGINI E BADGES
+   ========================================================================== */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.175);
+  border-radius: 0.375rem;
+}
+
+.card.noborder { 
+	border: none; 
+}
+.card-body { 
+	flex: 1 1 auto; 
+	padding: 1rem; 
+}
+.card-title { 
+	margin-bottom: 0.5rem; 
+	font-size: 1.25rem; 
+	font-weight: 500; 
+	line-height: 1.2; 
+}
+.card-text { 
+	margin-top: 0; 
+	margin-bottom: 1rem; 
+	color: #495057; 
+}
+.card-text:last-child { 
+	margin-bottom: 0; 
+}
+
+.imagecenter { text-align: center; }
+
+.img-thumbnail {
+  padding: 0.25rem;
+  background-color: #fff;
+  border: none;
+  border-radius: 0.375rem;
+  max-width: 100%;
+  height: auto;
+}
+.badge {
+  display: inline-block;
+  padding: 0.35em 0.65em;
+  font-size: 0.75em;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.375rem;
+}
+.text-bg-secondary { background-color: #6c757d; color: #fff; }
+.bg-danger { background-color: #dc3545 !important; }
+.text-bg-danger { background-color: #dc3545; color: #fff; }
+.text-bg-success { background-color: #198754; color: #fff; }
+.text-bg-warning { background-color: #ffc107; color: #000; }
+
+/* ==========================================================================
+   9. BOTTONI
+   ========================================================================== */
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  border-radius: 0.375rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+.btn-outline-success { 
+	color: #198754; 
+	border-color: #198754; 
+}
+.btn-outline-success:hover { 
+	color: #fff; 
+	background-color: #198754; 
+	border-color: #198754; 
+}
+.circle {
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.btn-outline-dark { 
+	color: #212529; 
+	border-color: #212529; 
+}
+.btn-outline-dark:hover { 
+	color: #fff; 
+	background-color: #212529; 
+	border-color: #212529; 
+}
+
+/* ==========================================================================
+   10. COMPONENTI: TABELLE E LISTE
+   ========================================================================== */
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #212529;
+  border-collapse: collapse;
+  vertical-align: middle;
+}
+
+.table th,
+.table td {
+  padding: 0.5rem;
+  border-bottom: 1px solid #dee2e6;
+  text-align: left;
+}
+
+.table-sm th,
+.table-sm td { padding: 0.25rem; }
+tr:last-child { border: white; }
+
+.list-group-item {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  color: #212529;
+  text-align: left;
+  background-color: #fff;
+  border: none;
+  border-bottom: 1px solid #f1f1f1;
+  cursor: pointer;
+}
+
+.list-group-item:last-child { border-bottom: none; }
+
+.list-group-item-action:hover, 
+.list-group-item-action:focus {
+  z-index: 1;
+  color: #1e2125;
+  text-decoration: none;
+  background-color: #f8f9fa;
+}
+
+/* ==========================================================================
+   5. UTILITY VISIVE E TESTO
+   ========================================================================== */
+.text-body-secondary { color: #6c757d; }
+
+
+/*menu*/
+.navbar {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 0.5rem 1rem;
+   background-color: #f8f9fa;
+   position: fixed;
+   top: 0;
+   right: 0;
+   left: 0;
+   z-index: 1030;
+   border-bottom: 7px solid #f28c73;
+   background-color: white !important;
+}
+.navbar-badge {
+    position: absolute;
+    top: 15px;
+    padding: 0.35em 0.65em;
+    background-color: #dc3545;
+    color: #fff;
+    font-size: 0.75em;
+    font-weight: 700;
+    text-align: center;
+    white-space: nowrap;
+    border-radius: 50rem;
+}
+.nav-link {
+    display: block;
+    padding: 0.5rem;
+    color: rgba(0, 0, 0, 0.55);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.dropdown-menu {
+    background-color: #fff;
+}
+.dropdown-menu.show { 
+	display: block;
+	border: none;
+	padding: 0.5rem 2rem; 
+}
+/*componente comune con searchfarmaco*/
+.container {
+  width: 100%;
+  padding-right: 2.25rem; /* calc(1.5rem * 1.5) */
+  padding-left: 2.25rem;  /* calc(1.5rem * 1.5) */
+  margin-right: auto;
+  margin-left: auto;
+  align-items: center;
+  justify-content: space-between;
+}
+.menu {
+   padding: 0.25rem 0.75rem;
+   font-size: 1.25rem;
+   background-color: transparent;
+   border: 1px solid rgba(0, 0, 0, 0.1);
+   border-radius: 0.375rem;
+   cursor: pointer;
+}
+.menu-icon {
+   display: inline-block;
+   width: 1.5em;
+   height: 1.5em;
+   vertical-align: middle;
+   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(0,0,0,0.55)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: 100%;
+}
+.offcanvas.show {
+    visibility: visible;
+    transform: none;
+}
+
+.offcanvas-end {
     top: 0;
     right: 0;
-    left: 0;
-    z-index: 1030;
-    height: 110px;
+    width: 400px;
+    border-left: 1px solid rgba(0, 0, 0, .2);
+    transform: translateX(100%);
 }
-.container-fluid {
-    padding-right: calc(var(--bs-gutter-x) * 1.5);
-    padding-left: calc(var(--bs-gutter-x) * 1.5);
+.offcanvas {
+    position: fixed;
+    bottom: 0;
+    z-index: 1045;
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    visibility: hidden;
+    background-color: #fff;
+    background-clip: padding-box;
+    outline: 0;
+    transition: transform 0.3s ease-in-out;
 }
-.rounded-start {
-    max-height: 200px;
+.offcanvas-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1rem 0 1rem;
 }
-.bg-body-tertiary {
-    border-bottom: 7px solid #f28c73;
-    background-color:white!important;
+.offcanvas-body {
+  flex-grow: 1;
+  padding: 0 1rem;
+  overflow-y: auto;
 }
-.custom-card {
-    background-color: rgba(255,255,255,0.9);
-    border: none;
-    border-radius: 20px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+.menu-panel {
+    padding-left: 0;
+    list-style: none;
+    padding-right: 1rem;
 }
-.width200{
-	width:200px;
+.hidden {
+    visibility: hidden;
 }
 
-#map {
-    height: 400px;
+/*sezione home */
+.hero {
+  min-height: 600px;
+  max-height: 700px;
+  background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url("../img/background1.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.mt-130{
-	margin-top:130px;
+.card-home {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+.card-body-home{
+  padding: 1rem;
+}
+.form-home{
+  gap: 12px;
+  align-items: center;
+  display: flex !important;
+}
+.flex-1 {
+    flex: 1 1 0% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+}
+.pos-relative{
+	position: relative;
 }
 .autocomplete-results {
-    z-index: 1000;
-    max-height: 220px;
-    overflow-y: auto;
-    display: none;
+   position: absolute;
+   display:none;
+   top: calc(100% + 0.25rem);
+   left: 0;
+   width: 100%;
+   background-color: #fff;
+   border: 1px solid #dee2e6;
+   border-radius: 0.375rem;
+   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+   z-index: 1050;
 }
 .displayblock{
 	display:block;
 }
-.dnone{
+.displaynone{
 	display:none;
 }
-.custom-card {
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 20px;
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
-.col-md-2.bord-left {
-    border-left: 1px solid #d2d2d2;
-}
-.col-md-6.prodotto{
-	padding-right: calc(var(--bs-gutter-x) * .5);
-    margin-top: var(--bs-gutter-y);
+/*pagina di ricerca*/
+
+.edit-ricerca{
+	display:flex;
+	width: 100%;
+    gap: 1rem;
+    align-items: center;
 }
 .col-md-2.border-right {
     border-right: 1px solid #d2d2d2;
 }
+.form-label {
+  margin-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  appearance: none;
+  border-radius: 0.375rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  box-sizing: border-box !important;
+  min-width: 0 !important; 
+}
+
+.form-control:focus {
+  color: #212529;
+  background-color: #fff;
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.form-control::placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+.wrapper-centratore {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.wrapper-centratore img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+img.img-fluid { 
+	height: 120px; 
+}
 .opacityhover:hover{
 	background-color: #5e5e5e1c;
 }
-.ricerca{
-	border-bottom: 1px dashed #d2d2d2;
-	padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
+.bord-left { 
+	border-left: 1px solid #d2d2d2; 
 }
-.ricerca:last-child{
-	border:none;
+#map { height: 400px; }
+
+
+
+
+
+
+
+/* ==========================================================================
+   4. UTILITY DI SPAZIATURA (Margini e Padding)
+   ========================================================================== */
+.mt-1 { margin-top: 0.25rem !important; }
+.mt-3 { margin-top: 1rem !important; }
+.my-4 { margin-top: 1.5rem !important; margin-bottom: 1.5rem !important; }
+
+.ms-1 { margin-left: .25rem; }
+.me-1 { margin-right: .25rem; }
+.me-2 { margin-right: 0.5rem !important; }
+.me-3 { margin-right: 1rem; }
+.ml-auto { margin-left: auto; }
+
+.p-2 { padding: 0.5rem !important; }
+.pe-3 { padding-right: 1rem !important; }
+
+
+/* ==========================================================================
+   6. COMPONENTI: NAVBAR E MENU
+   ========================================================================== */
+
+.nav-link:hover, 
+.nav-link.active {
+  color: rgba(0,0,0,0.9);
 }
-.bnone{
-	border:none;
+
+/* ==========================================================================
+   7. COMPONENTI: OFFCANVAS E DROPDOWN
+   ========================================================================== */
+.dropdown { position: relative; }
+
+.offcanvas-end {
+  top: 0;
+  right: 0;
+  width: 400px;
+  border-left: 1px solid rgba(0,0,0,.2);
+  transform: translateX(100%);
 }
-.card.noborder {
-    border: none;
+
+.offcanvas.show {
+  visibility: visible;
+  transform: none;
 }
-.img-thumbnail{
-	border:none;
+
+.offcanvas-title {
+  margin-bottom: 0;
+  line-height: 1.5;
+  font-size: 1.25rem;
 }
-.dropdown-menu.show{
-	border:none;
+
+
+/* ==========================================================================
+   8. COMPONENTI: FORM, INPUT E BOTTONI
+   ========================================================================== */
+
+.form-select {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 0.375rem;
+  appearance: none;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-.boxcart{
-	border-bottom: 1px dashed #696969;
-    padding: 4px 0;
+
+.form-select:focus {
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 }
-.boxcart:last-child{
-	border:none;
+
+.form-check {
+  display: block;
+  min-height: 1.5rem;
+  padding-left: 1.5em;
+  margin-bottom: 0.125rem;
 }
-.textFarmacia{
-	font-weight: 700;
-    font-size: 14px;
+
+.form-check-input {
+  float: left;
+  margin-left: -1.5em;
+  width: 1em;
+  height: 1em;
+  margin-top: 0.25em;
+  vertical-align: top;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border: 1px solid rgba(0,0,0,.25);
+  appearance: none;
 }
-.boxdatacart{
-	font-size: smaller;
+
+.form-check-input[type=radio] { border-radius: 50%; }
+.form-check-input[type=checkbox] { border-radius: 0.25em; }
+
+.form-check-input:checked {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
 }
-.col:first-child{
-	padding-left:0;
+
+.form-check-input[type=radio]:checked {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23fff'/%3e%3c/svg%3e");
 }
-h3 {
-    font-size: 1.4em;
-    font-weight: 900;
-    color: #212529;
+
+.form-check-input[type=checkbox]:checked {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
 }
-.imagecenter{
-	text-align:center;
+
+.form-check-label { cursor: pointer; }
+
+
+.btn, button { flex-shrink: 0 !important; }
+.btn:disabled, button:disabled { pointer-events: none; opacity: 0.65; }
+
+.btn-primary {
+  color: #fff;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
 }
-.width70 {
-    width: 70px;
+
+.btn-primary:hover:not(:disabled) {
+  color: #fff;
+  background-color: #0b5ed7;
+  border-color: #0a58ca;
 }
-.table{
-	vertical-align: middle;
+
+.btn-outline-success { color: #198754; border-color: #198754; }
+.btn-outline-success:hover { color: #fff; background-color: #198754; border-color: #198754; }
+
+
+.btn-close {
+  box-sizing: content-box;
+  width: 1em;
+  height: 1em;
+  padding: 0.25em 0.25em;
+  color: #000;
+  background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
+  border: 0;
+  border-radius: 0.375rem;
+  opacity: 0.5;
+  cursor: pointer;
 }
-tr:last-child{
-	border: white;
+.btn-close:hover { opacity: 0.75; }
+
+.rounded-start {
+  max-height: 200px;
+  border-top-left-radius: 0.375rem;
+  border-bottom-left-radius: 0.375rem;
 }
-.textTotale {
-    font-weight: bold;
-    font-size: 1.2em;
+
+/* Badges */
+
+.rounded-pill { border-radius: 50rem !important; }
+
+
+/* ==========================================================================
+   11. CLASSI CUSTOM (Hero, Mappa, Ricerca, Checkout)
+   ========================================================================== */
+
+.autocomplete-item { cursor: pointer; }
+.autocomplete-item:hover { background-color: #f8f9fa; }
+
+.col-md-6.prodotto {
+  padding-right: 0.75rem;
+  margin-top: 0;
 }
-.ml-auto{
-	margin-left: auto;
+
+.boxcart {
+  border-bottom: 1px dashed #696969;
+  padding: 4px 0;
 }
-/*
-button.btn.btn-outline-dark.circle {
-    border-radius: 50%;
-    height: 30px;
-    width: 30px;
-    border: 1px solid #d2d2d2;
-    padding: 0px;
+.boxcart:last-child { border: none; }
+
+.textFarmacia { 
+	font-weight: 700; font-size: 14px; 
 }
-*/
+.boxdatacart { font-size: smaller; }
+.textTotale { font-weight: bold; font-size: 1.2em; }
+

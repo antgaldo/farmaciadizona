@@ -10,6 +10,9 @@
 <body>
 
 <div class="container text-center">
+ <a class="navbar-brand" href="app">
+ 	<img class="width200" src="${pageContext.request.contextPath}/img/logo.png"/>
+ </a>
   <div class="row">
    <div class="col-md-6 offset-md-3">
    	<form action="login" method="POST">
