@@ -9,6 +9,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     offcanvas.addEventListener("hide.bs.offcanvas", () => {
-        menuButton.classList.remove("displaynone");
+        menuButton.classList.add("displaynone");
+    });
+
+    offcanvas.addEventListener("hidden.bs.offcanvas", () => {
+        setTimeout(() => {
+            menuButton.classList.remove("displaynone");
+        }, 300); // aumenta o diminuisci questo valore
     });
 });

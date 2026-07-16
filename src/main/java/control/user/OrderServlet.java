@@ -1,5 +1,6 @@
 package control.user;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -7,6 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.dto.ElementoCarrelloDTO;
+import model.dto.PrenotazioniDTO;
 import util.SelectorUtil;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +17,7 @@ import java.math.RoundingMode;
 import java.util.stream.Collectors;
 
 import dao.OrdiniDaoImp;
+import dao.PrenotazioniDaoImp;
 import dao.MagazzinoDaoImp;
 import model.MagazzinoBean;
 import model.OrdiniBean;
@@ -36,6 +39,7 @@ public class OrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MagazzinoDaoImp magazzinoDao;
 	private OrdiniDaoImp ordineDao;
+	private PrenotazioniDaoImp prenotazioniDao;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -53,6 +57,7 @@ public class OrderServlet extends HttpServlet {
     	}
     	magazzinoDao=new MagazzinoDaoImp(ds);
     	ordineDao= new OrdiniDaoImp(ds);
+    	prenotazioniDao= new PrenotazioniDaoImp(ds);
     }
 
 	/**
@@ -60,7 +65,15 @@ public class OrderServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		int userid= (int)request.getSession().getAttribute("userid");
+		try {
+			List<PrenotazioniDTO> ordini=  prenotazioniDao.getPrenotazioniByUser(userid);
+			request.setAttribute("ordini", ordini);
+		} catch(SQLException e) {
+			throw new ServletException(e);
+		}
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/views/user/ordini.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	/**

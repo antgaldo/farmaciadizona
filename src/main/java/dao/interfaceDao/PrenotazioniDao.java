@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface PrenotazioniDao {
 	public List<PrenotazioniDTO> getPrenotazioni(int farmacia_id) throws SQLException;
+	public List<PrenotazioniDTO> getPrenotazioniByUser(int user_id) throws SQLException;
 }

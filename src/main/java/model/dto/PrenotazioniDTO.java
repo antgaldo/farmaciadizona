@@ -12,12 +12,16 @@ public class PrenotazioniDTO {
 	private String nomeUtente;
 	private LocalDateTime dataAcquisto;
 	private BigDecimal totale;
+	private String nomeFarmacia;
     private List<OrdiniDettaglioBean> lista = new ArrayList<>(); 
 	
 	public PrenotazioniDTO() {}
 	
 	public void setDataAcquisto(LocalDateTime dataAcquisto) {
 		this.dataAcquisto=dataAcquisto;
+	}
+	public void setNomeFarmacia(String nomeFarmacia) {
+		this.nomeFarmacia=nomeFarmacia;
 	}
 	public void setOrdineId(int ordine_id) {
 		this.ordine_id=ordine_id;
@@ -44,7 +48,9 @@ public class PrenotazioniDTO {
 	public String getNomeUtente() {
 		return nomeUtente;
 	}
-	
+	public String getNomeFarmacia() {
+		return nomeFarmacia;
+	}
 	public List<OrdiniDettaglioBean> getListaOrdini(){
 		return lista;
 	}

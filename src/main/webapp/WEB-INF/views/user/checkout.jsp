@@ -16,7 +16,6 @@
 			<div class="flex">
 				<div class="col-md-6 pr-1">
 					<h3 class="mb-3">Riepilogo</h3>
-					
 					<table class="table table-sm">
 					  <tbody>
 					  <c:forEach var="c" items="${cart}">
@@ -96,12 +95,9 @@
 									   	 <% } %>
 									  </div>
 									</form>
-								    
 								  </div>
-
 						    </div>
 					    </div>
-					
 				</div>
 			</div>
 		</section>

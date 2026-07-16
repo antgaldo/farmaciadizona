@@ -713,4 +713,7 @@ img.img-fluid {
 }
 .boxdatacart { font-size: smaller; }
 .textTotale { font-weight: bold; font-size: 1.2em; }
+.textEnd {
+	text-align:end!important;
+}
 

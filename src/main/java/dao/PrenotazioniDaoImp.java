@@ -63,4 +63,42 @@ public class PrenotazioniDaoImp implements PrenotazioniDao{
 		}
 		return lista;
 	}
+	
+	public List<PrenotazioniDTO> getPrenotazioniByUser(int user_id) throws SQLException{
+		String selectSQL="SELECT ordini.id AS id_ordine, ordini.user_id,farmacie.nome,ordini.data_acquisto,ordini.totale, ordini_dettaglio.* "
+				+ " FROM ordini"
+				+ " JOIN ordini_dettaglio ON ordini.id=ordini_dettaglio.ordini_id"
+				+ " JOIN farmacie ON ordini.farmacia_id=farmacie.id"
+				+ " WHERE ordini.user_id=?";
+		List<PrenotazioniDTO> lista= new ArrayList();
+		try(Connection connection= ds.getConnection();
+				PreparedStatement preparedStatement= connection.prepareStatement(selectSQL)){
+			preparedStatement.setInt(1, user_id);
+			ResultSet rs = preparedStatement.executeQuery();
+			while(rs.next()) {
+				int idOrdine = rs.getInt("id_ordine");
+				PrenotazioniDTO ordineEsistente = null;
+	            for (PrenotazioniDTO o : lista) {
+	                if (o.getOrdineId() == idOrdine) {
+	                    ordineEsistente = o;
+	                    break;
+	                }
+	            }
+	            if(ordineEsistente==null) {
+	            	ordineEsistente = new PrenotazioniDTO();
+	            	ordineEsistente.setDataAcquisto(rs.getTimestamp("data_acquisto").toLocalDateTime());
+	            	ordineEsistente.setOrdineId(idOrdine);
+	            	ordineEsistente.setTotale(rs.getBigDecimal("totale"));
+	            	ordineEsistente.setNomeFarmacia(rs.getString("nome"));
+	            	lista.add(ordineEsistente);
+	            }
+	            OrdiniDettaglioBean ordineDettaglio = new OrdiniDettaglioBean();
+	            ordineDettaglio.setNomeProdotto(rs.getString("nome_prodotto"));
+	            ordineDettaglio.setQuantitaProdotto(rs.getInt("quantita_prodotto"));
+	            ordineDettaglio.setPrezzoProdotto(rs.getBigDecimal("prezzo_prodotto"));
+	            ordineEsistente.getListaOrdini().add(ordineDettaglio);
+			}
+		}
+		return lista;
+	}
 }

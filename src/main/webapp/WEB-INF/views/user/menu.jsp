@@ -21,9 +21,16 @@
       <div class="offcanvas-body">
         <ul class="menu-panel">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">
-            <i class="bi bi-person"></i>
-             Account</a>
+            <a class="nav-link active" aria-current="page" href="login">
+      	      <i class="bi bi-person"></i>
+       		  Account
+             </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="order">
+      	      <i class="bi bi-person"></i>
+       		  Ordini
+             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link active">
