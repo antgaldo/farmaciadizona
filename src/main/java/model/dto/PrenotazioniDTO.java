@@ -1,13 +1,16 @@
 package model.dto;
 
 import java.time.LocalDateTime;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import model.OrdiniDettaglioBean;
 import java.util.List;
 import java.util.ArrayList;
 
 
-public class PrenotazioniDTO {
+public class PrenotazioniDTO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 	private int ordine_id;
 	private String nomeUtente;
 	private LocalDateTime dataAcquisto;

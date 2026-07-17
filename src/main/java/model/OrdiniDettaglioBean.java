@@ -1,7 +1,10 @@
 package model;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class OrdiniDettaglioBean {
+public class OrdiniDettaglioBean implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 	private int id;
 	private int id_ordine;
 	private int prodotto_id;

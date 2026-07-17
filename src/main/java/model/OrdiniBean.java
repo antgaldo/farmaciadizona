@@ -1,10 +1,13 @@
 package model;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import java.time.LocalDateTime;
 
 
-public class OrdiniBean {
+public class OrdiniBean implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 	private int id_user;
 	private int id_farmacia;
 	private int id;

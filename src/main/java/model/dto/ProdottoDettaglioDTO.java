@@ -1,7 +1,10 @@
 package model.dto;
 
-public class ProdottoDettaglioDTO {
-	private static final long serialVersionUID= 1L;
+import java.io.Serializable;
+
+public class ProdottoDettaglioDTO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 	private int id;
 	private String nome;
 	private String descrizione;

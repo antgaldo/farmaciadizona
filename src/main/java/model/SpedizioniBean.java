@@ -1,6 +1,10 @@
 package model;
 
-public class SpedizioniBean {
+import java.io.Serializable;
+
+public class SpedizioniBean implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 	private int ordine_id;
 	private String indirizzo;
 	private String nome;

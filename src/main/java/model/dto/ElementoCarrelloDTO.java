@@ -1,7 +1,10 @@
 package model.dto;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class ElementoCarrelloDTO {
+public class ElementoCarrelloDTO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 	private int idProdotto;
 	private int idFarmacia;
 	private String nome;

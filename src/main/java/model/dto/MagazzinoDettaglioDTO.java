@@ -1,7 +1,10 @@
 package model.dto;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class MagazzinoDettaglioDTO {
+public class MagazzinoDettaglioDTO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 	int idProdotto;
     String nomeProdotto;
     String descrizione;

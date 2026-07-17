@@ -1,6 +1,10 @@
 package model;
 
-public class GestisceBean {
+import java.io.Serializable;
+
+public class GestisceBean implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 	private int user_id;
 	private int farmacia_id;
 	

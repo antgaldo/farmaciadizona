@@ -1,6 +1,10 @@
 package model;
 
-public class PagamentiBean {
+import java.io.Serializable;
+
+public class PagamentiBean implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 	private int ordine_id;
 	private String circuito;
 	private String numero;
