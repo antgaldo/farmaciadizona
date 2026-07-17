@@ -69,13 +69,18 @@ public class LoginServlet extends HttpServlet {
 				 }
 				 if(user.getRuolo().equals("USER")) {
 					 HttpSession session = request.getSession(false);
-					 if(session.getAttribute("targetURL").equals("checkout")){
-						 response.sendRedirect(request.getContextPath() +"/checkout");
-					 } else {
-						 response.sendRedirect(request.getContextPath() +"/app"); 
-					 }
+					 if ("checkout".equals(session.getAttribute("targetURL"))) {
+						    response.sendRedirect(request.getContextPath() + "/checkout");
+						} else {
+						    response.sendRedirect(request.getContextPath() + "/app");
+						}
 				 }
 			 }
+			 else {
+				    request.setAttribute("errore", "Email o password errati");
+				    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/login.jsp");
+				    dispatcher.forward(request, response);
+				}
 	    } catch (SQLException e) {
 	        throw new ServletException(e);
 	    }

@@ -84,7 +84,7 @@ body {
 }
 
 .bg-body-tertiary {
-    background-color: #f8f9fa;
+    background-color: #ffffff;
 }
 
 .fixed-top {
@@ -162,9 +162,7 @@ body {
     box-sizing: border-box;
 }
 
-/* ===========================
-   LISTA
-=========================== */
+/* lista*/
 
 .sidebar-list {
     list-style: none;
@@ -172,9 +170,7 @@ body {
     padding: 0;
 }
 
-/* ===========================
-   ELEMENTO MENU
-=========================== */
+/* elemento menu */
 
 .sidebar-item {
     display: flex;
@@ -526,6 +522,7 @@ body {
     padding: .75rem;
     border-bottom: 1px solid #dee2e6;
     text-align: left;
+    vertical-align: top;
 }
 
 

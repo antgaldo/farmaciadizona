@@ -27,28 +27,27 @@
 			    	  </thead>
 					  <tbody>
 					  <c:forEach var="o" items="${ordini}">
-					    <tr>
-					      <td class="text-capitalize textFarmacia">${o.nomeFarmacia}</td>
-					      <td class="text-capitalize textFarmacia">${o.ordineId}</td>
-					      <td>${o.dataAcquisto}</td>
+					    <tr class="alternacolore">
+					      <td class="text-capitalize textFarmacia bzero verticaltop">${o.nomeFarmacia}</td>
+					      <td class="text-capitalize textFarmacia bzero verticaltop">${o.ordineId}</td>
+					      <td class="bzero verticaltop">${o.dataAcquisto}</td>
 					      <td>
-		                    <table class="table table-sm table-borderless mb-0">
-		                        <tbody>
-		                            <c:forEach var="l" items="${o.listaOrdini}">
-		                                <tr>
-		                                    <td>${l.nomeProdotto}</td>
-		                                    <td>x${l.quantitaProdotto}</td>
-		                                    <td>&euro; ${l.prezzoProdotto}</td>
-		                                </tr>
-		                            </c:forEach>
-		                        </tbody>
-		                    </table>
-					      </td>
+						    <c:forEach var="l" items="${o.listaOrdini}">
+						        <div class="farmaco">
+						            <span>${l.nomeProdotto}</span>
+						            <span>x${l.quantitaProdotto}</span>
+						            <span>€ ${l.prezzoProdotto}</span>
+						        </div>
+						    </c:forEach>
+						
+						    <div class="farmaco totale">
+						        <span>Totale:</span>
+						        <span></span>
+						        <span>€ ${o.totale}</span>
+						    </div>
+						</td>
 					    </tr>
-					    <tr>
-					      <td colspan="3"></td>
-					      <td class="textEnd textTotale" colspan="4">Totale: € ${o.totale}</td>
-					    </tr>
+					   
 					   </c:forEach>
 					  </tbody>
 					</table>

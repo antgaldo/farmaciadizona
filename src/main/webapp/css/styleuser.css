@@ -746,6 +746,42 @@ fieldset {
     margin: 10px 0;
     color: white;
 }
+.alternacolore:nth-child(odd) {
+    background-color: #d6d5d5;
+}
+
+.alternacolore:nth-child(even) {
+    background-color: #ffffff;
+}
+.bzero{
+	border-bottom: none!important;
+}
+.farmaco {
+    display: flex;
+    width: 100%;
+}
+
+.farmaco span:first-child {
+    flex: 1;
+}
+
+.farmaco span:nth-child(2) {
+    width: 60px;
+    text-align: center;
+}
+
+.farmaco span:last-child {
+    width: 100px;
+    text-align: right;
+}
+
+.totale {
+    margin-top: 10px;
+    font-weight: bold;
+}
+.verticaltop {
+    vertical-align: top;
+}
 
 
 

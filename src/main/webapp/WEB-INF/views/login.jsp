@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Login</title>
 </head>
 <body>
 
@@ -24,6 +24,11 @@
 	    <label class="form-label">Password</label>
 	    <input type="password" class="form-control" name="password" placeholder="password">
 	  </div>
+	  <c:if test="${not empty errore}">
+		    <div class="alert alert-danger">
+		        ${errore}
+	      </div>
+	  </c:if>
 	  <button type="submit" class="btn btn-primary" value="submit">Submit</button>
 	</form>
    </div>
