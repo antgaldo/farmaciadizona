@@ -413,7 +413,7 @@ tr:last-child { border: white; }
 .form-home{
   gap: 12px;
   align-items: center;
-  display: flex !important;
+  display: flex;
 }
 .flex-1 {
     flex: 1 1 0% !important;
@@ -714,7 +714,12 @@ img.img-fluid {
 .textFarmacia { 
 	font-weight: 700; font-size: 14px; 
 }
-.boxdatacart { font-size: smaller; }
+.boxdatacart { 
+	font-size: smaller; 
+	align-items: center;
+    font-size: smaller;
+    text-align: center;
+}
 .textTotale { font-weight: bold; font-size: 1.2em; }
 .textEnd {
 	text-align:end!important;
@@ -740,4 +745,136 @@ fieldset {
     background-color: #f28c73;
     margin: 10px 0;
     color: white;
+}
+
+
+
+
+/* Mobile */
+@media (max-width: 600px) {
+    html {
+        font-size: 14px;
+    }
+	.form-home{
+		display:block;
+	}
+	.flex.pos-relative.col-md-6 {
+	    margin: 5px 0;
+        width: 100%;
+	}
+	.card-home{
+		margin: 5em;
+	}
+	.edit-ricerca{
+		display:block;
+	}
+	.mt-130 {
+	    margin-top: 100px;
+	}
+	.flex{
+		display:block;
+	}
+	
+	.col-md-6.pr-1 {
+	    width: 100%;
+	}
+	.col-md-6.mappa {
+	    width: 100%;
+	}
+	.card-text {
+    	margin-bottom: 0.5em;
+    }
+    .col-md-2.bord-left {
+    	width: 100%;
+    }
+    .boxprezzo{
+    	padding: 0 1rem 1rem 1rem;
+    	display: flex;
+    }
+    .col-auto {
+    	margin-top:12px;
+    }
+    .text-bg-success {
+	    margin-left: 10px;
+	    align-content: center;
+	    text-align: center;
+	    margin-left: 10px;
+        align-self: center;
+	}
+	.boxfarmacie{
+		width:100%;
+	}
+	.opacityhover:hover {
+	    background-color: #ffffff;
+	}
+	.container.flex {
+	    padding: 0;
+	    display: flex;
+	}
+}
+
+/* Tablet */
+@media (min-width: 601px) and (max-width: 1079px) {
+	.card-home{
+		margin: 5em;
+	}
+	.flex.pos-relative.col-md-6 {
+	    margin: 5px 0;
+        width: 100%;
+	}
+	.card-home{
+		margin: 5em;
+	}
+	.edit-ricerca{
+		display:block;
+	}
+	.mt-130 {
+	    margin-top: 100px;
+	}
+	.flex{
+		display:block;
+	}
+	
+	.col-md-6.pr-1 {
+	    width: 100%;
+	}
+	.col-md-6.mappa {
+	    width: 100%;
+	}
+	.card-text {
+    	margin-bottom: 0.5em;
+    }
+    .col-md-2.bord-left {
+    	width: 30%;
+    }
+    .col-auto {
+    	margin-top:12px;
+    }
+    .text-bg-success {
+	    margin-left: 10px;
+	    align-content: center;
+	    text-align: center;
+	    margin-left: 10px;
+        align-self: center;
+	}
+	.boxfarmacie{
+		width:70%;
+	}
+	.opacityhover:hover {
+	    background-color: #ffffff;
+	}
+	.container.flex {
+	    padding: 0;
+	    display: flex;
+	}
+	.flex.g-0 {
+	    display: flex;
+	}
+}
+
+/* Desktop */
+@media (min-width: 1080px) {
+	.boxprezzo {
+	    font-size: 0.8em;
+	}
 }

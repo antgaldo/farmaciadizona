@@ -37,7 +37,7 @@
 					  </tbody>
 					</table>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-6 pr-1">
 					<h3 class="mb-3">Pagamento</h3>
 
 					<div class="card">

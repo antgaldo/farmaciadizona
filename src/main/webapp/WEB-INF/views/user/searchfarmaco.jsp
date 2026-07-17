@@ -78,7 +78,7 @@
 		  <div class="flex g-0" 
 		  	onmouseenter="evidenziaMarcatore('${f.idFarmacia}')" 
 		  	onmouseleave="ripristinaMarcatore('${f.idFarmacia}')">
-		    <div class="col-md-10">
+		    <div class="col-md-10 boxfarmacie">
 		      <div class="card-body">
 		        <h5 class="card-title">${f.farmaciaNome}</h5>
 		        <p class="card-text"><i class="bi bi-compass"></i> ${f.indirizzo}</p>
@@ -111,7 +111,7 @@
 		      </div>
 		    </div>
 		    <div class="col-md-2 bord-left">
-		      <div class="card-body">
+		      <div class="card-body boxprezzo">
 		      	<h2>
 		      		<i class="bi bi-currency-euro"></i>${f.prezzo}
 		      	</h2>
@@ -139,7 +139,7 @@
 		</div>
 		</c:forEach>
 	    </div>
-	    <div class="col-md-6">
+	    <div class="col-md-6 mappa">
 	    	<div id="map" data-locations='[
 	    		<c:forEach var="f" items="${lista}" varStatus="status">
 	    		  {
