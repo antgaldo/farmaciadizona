@@ -57,7 +57,7 @@
 								    </div>
 								     <div class="col-md-12">
 									     <form class="py-1 displaynone" id="inFarmacia" action="order" method="POST">
-										  <input type="hidden" name="inFarmacia">
+										  <input type="hidden" name="inFarmacia" value="inFarmacia">
 										 	 <% if (session.getAttribute("userid") == null) { %>
 										   		<button type="submit" class="btn btn-outline-success" disabled>Conferma</button>
 										   	 <% } else { %>
@@ -74,15 +74,26 @@
 								      </label>
 								    </div>
 								    
-								    <form class="py-1 displaynone" id="formSpedizione">
+								    <form class="py-1 displaynone" id="formSpedizione" action="order" method="POST">
 								      <fieldset>Spedizione</fieldset>
+								      <input type="hidden" name="formSpedizione" value="formSpedizione">
+								      <div class="col-md-10 pos-relative">
+									    <label for="inputNome" class="form-label">Nome</label>
+									    <input type="text" name="nome" class="form-control" id="inputNome" placeholder="Nome">
+									    <div class="invalidinput displaynone">Nome non valido</div>
+									  </div>
+									  <div class="col-md-10 pos-relative">
+									    <label for="inputCognome" class="form-label">Cognome</label>
+									    <input type="text" name="cognome" class="form-control" id="inputCognome" placeholder="Cognome">
+									    <div class="invalidinput displaynone">Cognome non valido</div>
+									  </div>
 									  <div class="col-md-10 pos-relative">
 									    <label for="inputAddress" class="form-label">Indirizzo</label>
 									    <input type="text" name="indirizzo" class="form-control" id="inputAddress" placeholder="Indirizzo">
 									    <div class="invalidinput displaynone">Il campo indirizzo è vuoto</div>
 									  </div>
 									  <div class="col-md-6 pos-relative">
-									    <label for="inputCity" class="form-label">citta</label>
+									    <label for="inputCitta" class="form-label">citta</label>
 									    <input type="text" name="citta" class="form-control" id="inputCitta">
 									    <div class="invalidinput displaynone">Il campo citta è vuoto</div>
 									  </div>
@@ -103,8 +114,8 @@
 									    <div class="invalidinput displaynone">Scadenza non valida</div>
 									  </div>
 									  <div class="col-md-2 pos-relative">
-									    <label for="inputZip" class="form-label">Circuito</label>
-									    <select class="form-control" name="circuito">
+									    <label for="inputCircuito" class="form-label">Circuito</label>
+									    <select class="form-control" name="circuito" id="inputCircuito">
 									    	<option value="vista">visa</option>
 									    	<option value="mastercard">mastercard</option>
 									    </select>

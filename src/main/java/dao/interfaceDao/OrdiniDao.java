@@ -7,5 +7,5 @@ import java.util.List;
 
 
 public interface OrdiniDao {
-	public void doSave(OrdiniBean ordine,List<OrdiniDettaglioBean> ordiniDettaglio) throws SQLException;
+	public int doSave(OrdiniBean ordine,List<OrdiniDettaglioBean> ordiniDettaglio) throws SQLException;
 }

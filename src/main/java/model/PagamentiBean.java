@@ -3,7 +3,7 @@ package model;
 public class PagamentiBean {
 	private int ordine_id;
 	private String circuito;
-	private int numero;
+	private String numero;
 	private String scadenza;
 	
 	public PagamentiBean() {}
@@ -24,11 +24,11 @@ public class PagamentiBean {
 	    this.circuito = circuito;
 	}
 
-	public int getNumero() {
+	public String getNumero() {
 	    return numero;
 	}
 
-	public void setNumero(int numero) {
+	public void setNumero(String numero) {
 	    this.numero = numero;
 	}
 

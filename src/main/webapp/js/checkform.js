@@ -35,17 +35,33 @@ if (searchfarmaco) {
 
 //form checkout pagamento
 if(spedizionefarmaco){
+	
+	const inputNome= document.querySelector('input[name="nome"]');
+	const erroreNome = inputNome.parentElement.querySelector('.invalidinput');
+	const inputCognome= document.querySelector('input[name="cognome"]');
+	const erroreCognome = inputCognome.parentElement.querySelector('.invalidinput');
 	const indirizzoInput = document.querySelector('input[name="indirizzo"]');
 	const cittaInput = document.querySelector('input[name="citta"]');
 	const capInput = document.querySelector('input[name="cap"]');
 	const erroreIndirizzo = indirizzoInput.parentElement.querySelector('.invalidinput');
 	const erroreCitta = cittaInput.parentElement.querySelector('.invalidinput');
 	const erroreCap = capInput.parentElement.querySelector('.invalidinput');
+	
 	const inputCarta= document.querySelector('input[name="carta"]');
 	const erroreCarta = inputCarta.parentElement.querySelector('.invalidinput');
 	const inputScadenza= document.querySelector('input[name="scadenza"]');
 	const erroreScadenza = inputScadenza.parentElement.querySelector('.invalidinput');
 	spedizionefarmaco.addEventListener('submit', function(event){
+		if(inputNome.value.trim()===""){
+			event.preventDefault();
+			inputNome.classList.add("validation");
+			erroreNome.classList.remove("displaynone");
+		}
+		if(inputCognome.value.trim()===""){
+			event.preventDefault();
+			inputCognome.classList.add("validation");
+			erroreCognome.classList.remove("displaynone");
+		}
 		if(indirizzoInput.value.trim()===""){
 			event.preventDefault();
 			indirizzoInput.classList.add("validation");
@@ -61,12 +77,13 @@ if(spedizionefarmaco){
 			cittaInput.classList.add("validation");
 			erroreCitta.classList.remove("displaynone");
 		}
-		if(inputCarta.value.trim() < 12){
+		if(inputCarta.value.trim().length != 16){
 			event.preventDefault();
 			inputCarta.classList.add("validation");
 			erroreCarta.classList.remove("displaynone");
 		}
-		if(inputScadenza.value.trim() < 12){
+
+		if(inputScadenza.value.trim().length != 5){
 			event.preventDefault();
 			inputScadenza.classList.add("validation");
 			erroreScadenza.classList.remove("displaynone");

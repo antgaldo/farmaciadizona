@@ -5,7 +5,7 @@ public class SpedizioniBean {
 	private String indirizzo;
 	private String nome;
 	private String cognome;
-	private int cap;
+	private String cap;
 	private String citta;
 	
 	public SpedizioniBean() {}
@@ -42,11 +42,11 @@ public class SpedizioniBean {
 	    this.cognome = cognome;
 	}
 
-	public int getCap() {
+	public String getCap() {
 	    return cap;
 	}
 
-	public void setCap(int cap) {
+	public void setCap(String cap) {
 	    this.cap = cap;
 	}
 

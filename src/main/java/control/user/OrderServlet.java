@@ -22,6 +22,10 @@ import dao.MagazzinoDaoImp;
 import model.MagazzinoBean;
 import model.OrdiniBean;
 import model.OrdiniDettaglioBean;
+import model.PagamentiBean;
+import model.SpedizioniBean;
+import dao.PagamentiDaoImp;
+import dao.SpedizioniDaoImp;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -40,6 +44,8 @@ public class OrderServlet extends HttpServlet {
 	private MagazzinoDaoImp magazzinoDao;
 	private OrdiniDaoImp ordineDao;
 	private PrenotazioniDaoImp prenotazioniDao;
+	private PagamentiDaoImp pagamentiDao;
+	private SpedizioniDaoImp spedizioniDao;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -58,6 +64,9 @@ public class OrderServlet extends HttpServlet {
     	magazzinoDao=new MagazzinoDaoImp(ds);
     	ordineDao= new OrdiniDaoImp(ds);
     	prenotazioniDao= new PrenotazioniDaoImp(ds);
+    	pagamentiDao= new PagamentiDaoImp(ds);
+    	spedizioniDao = new SpedizioniDaoImp(ds);
+
     }
 
 	/**
@@ -81,20 +90,71 @@ public class OrderServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String actionorder= request.getParameter("inFarmacia");
-		int id_user= (int) request.getSession().getAttribute("userid");
+		String actionpayment = request.getParameter("formSpedizione");
+
+		int id_user = (int) request.getSession().getAttribute("userid");
+
+		List<Integer> listaordini = saveOrdine(request, id_user);
+
+		if ("formSpedizione".equals(actionpayment) && !listaordini.isEmpty()) {
+		    for (Integer ordineId : listaordini) {
+		        savePayment(request, ordineId);
+		        saveSpedizione(request, ordineId);
+		    }
+		}
+
+		request.getSession().removeAttribute("cart");
+		response.sendRedirect("confermaOrdine.jsp");
+	}
+	
+	private void savePayment(HttpServletRequest request,int ordine_id) throws ServletException, IOException {
+		PagamentiBean pagamento= new PagamentiBean();
+		String circuito= request.getParameter("circuito");
+		String numero= request.getParameter("carta");
+		String scadenza= request.getParameter("scadenza");
+		pagamento.setCircuito(circuito);
+		pagamento.setNumero(numero);
+		pagamento.setScadenza(scadenza);
+		pagamento.setOrdineId(ordine_id);
+		try {
+			pagamentiDao.doSave(pagamento);
+		} catch(SQLException e) {
+			throw new ServletException(e);
+		}
+		
+	}
+	private void saveSpedizione(HttpServletRequest request,int ordine_id) throws ServletException, IOException {
+		SpedizioniBean spedizione= new SpedizioniBean();
+		String indirizzo= request.getParameter("indirizzo");
+		String nome= request.getParameter("nome");
+		String cognome= request.getParameter("cognome");
+		String cap= request.getParameter("cap");
+		String citta= request.getParameter("citta");
+		spedizione.setOrdineId(ordine_id);
+		spedizione.setCap(cap);
+		spedizione.setIndirizzo(indirizzo);
+		spedizione.setCitta(citta);
+		spedizione.setCognome(cognome);
+		spedizione.setNome(nome);
+		try {
+			spedizioniDao.doSave(spedizione);
+		} catch(SQLException e) {
+			throw new ServletException(e);
+		}
+	}
+	private List<Integer> saveOrdine(HttpServletRequest request, int user_id) throws ServletException, IOException {
 		List<ElementoCarrelloDTO> carrello = (List<ElementoCarrelloDTO>) request.getSession().getAttribute("cart");
 		//Isoliamo gli id unici delle farmacie nel carrello
 		List<Integer> idFarmacieUniche = carrello.stream()
 			    .map(ElementoCarrelloDTO::getIdFarmacia)
 			    .distinct()
 			    .collect(Collectors.toList());
+		List<Integer> lista= new ArrayList<>();
 		for(Integer idFarmacia: idFarmacieUniche) {
 			//filtriamo i prodotti in base agli idFarmacie unici
 			List<ElementoCarrelloDTO> prodottiDiQuestaFarmacia = SelectorUtil.filtra(carrello, u -> u.getIdFarmacia() == idFarmacia);
-			if(actionorder !=null) {
 				OrdiniBean ordine = new OrdiniBean();
-				ordine.setIdUser(id_user);
+				ordine.setIdUser(user_id);
 				ordine.setIdFarmacia(idFarmacia);
 				ordine.setDataAcquisto(LocalDateTime.now());
 				BigDecimal totaleOrdineFarmacia = BigDecimal.ZERO;
@@ -127,15 +187,13 @@ public class OrderServlet extends HttpServlet {
 				if (!ordineDettaglioLista.isEmpty()) {
 		            ordine.setTotale(totaleOrdineFarmacia);
 		            try {
-		                ordineDao.doSave(ordine, ordineDettaglioLista);
+		               lista.add(ordineDao.doSave(ordine, ordineDettaglioLista));
 		            } catch (SQLException e) {
 		                throw new ServletException(e);
 		            }
 		        }
 			}
-		}
-	    request.getSession().removeAttribute("cart");
-	    response.sendRedirect("confermaOrdine.jsp");
+		return lista;
 	}
 
 }

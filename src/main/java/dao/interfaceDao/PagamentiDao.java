@@ -2,8 +2,8 @@ package dao.interfaceDao;
 
 import java.sql.SQLException;
 
-import model.SpedizioniBean;
+import model.PagamentiBean;
 
 public interface PagamentiDao {
-	public void doSave(SpedizioniBean spedizioni) throws SQLException;
+	public void doSave(PagamentiBean pagamento) throws SQLException;
 }
