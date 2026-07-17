@@ -6,5 +6,5 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface OrdiniDettaglioDao {
-	public void doSave(int ordine_id,List<OrdiniDettaglioBean> ordiniDettaglioBean,Connection connection) throws SQLException;
+	public void doSave(int ordine_id,int farmacia_id,List<OrdiniDettaglioBean> ordiniDettaglioBean,Connection connection) throws SQLException;
 }

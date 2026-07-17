@@ -20,18 +20,22 @@
       </div>
       <div class="offcanvas-body">
         <ul class="menu-panel">
+		<% if (session.getAttribute("userid") == null) { %>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="login">
       	      <i class="bi bi-person"></i>
        		  Account
              </a>
           </li>
+        <% } %>
+        <% if (session.getAttribute("userid") != null) { %>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="order">
       	      <i class="bi bi-person"></i>
        		  Ordini
              </a>
           </li>
+        <% } %>
           <li class="nav-item">
             <a class="nav-link active">
               <i class="bi bi-basket"></i> Carrello

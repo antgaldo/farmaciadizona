@@ -1,5 +1,6 @@
 package dao.interfaceDao;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -14,4 +15,5 @@ public interface MagazzinoDao {
 	public int getCountProdotti(int idfarmacia) throws SQLException;
 	public double getPrezzo(int idFarmacia, int idProdotto) throws SQLException;
 	public MagazzinoBean getProdottoFarmacia(int idFarmacia, int idProdotto) throws SQLException;
+	public void editQuantitaProdotto(int idFarmacia,int idProdotto,int quantita,Connection connection) throws SQLException;
 }

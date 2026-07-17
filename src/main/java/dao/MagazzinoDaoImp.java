@@ -118,4 +118,20 @@ public class MagazzinoDaoImp implements MagazzinoDao {
 		}
 		return 0;
 	}
+	public void editQuantitaProdotto(int idFarmacia,int idProdotto,int quantita,Connection connection) throws SQLException{
+		String uploadSql="UPDATE magazzino "
+				+ " SET quantita_disponibile=quantita_disponibile-? "
+				+ " WHERE farmacia_id=? AND prodotto_id=? AND quantita_disponibile >=?";
+		try(PreparedStatement preparedStatement= connection.prepareStatement(uploadSql)){
+			preparedStatement.setInt(1, quantita);
+			preparedStatement.setInt(2, idFarmacia);
+			preparedStatement.setInt(3, idProdotto);
+			preparedStatement.setInt(4, quantita);
+			int righeAggiornate = preparedStatement.executeUpdate();
+
+	        if (righeAggiornate == 0) {
+	            throw new SQLException("Prodotto non trovato nel magazzino.");
+	        }
+		}
+	}
 }

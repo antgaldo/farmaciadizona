@@ -38,9 +38,8 @@ public class OrdiniDaoImp implements OrdiniDao{
 				ResultSet rs= preparedStatement.getGeneratedKeys();
 	            if (rs.next()) {
 	            	ordine_id= rs.getInt(1);
-            		ordiniDettaglioDao.doSave(ordine_id,ordiniDettaglio,connection);
-	            	//ordineDettaglio.executeBatch();
-	            } else {
+            		ordiniDettaglioDao.doSave(ordine_id,ordine.getIdFarmacia(),ordiniDettaglio,connection);
+	            	} else {
 	                throw new SQLException("Impossibile generare l'ID dell'ordine.");
 	            }
 	            connection.commit();

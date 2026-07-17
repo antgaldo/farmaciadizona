@@ -11,10 +11,12 @@ import model.OrdiniDettaglioBean;
 
 public class OrdiniDettaglioDaoImp implements OrdiniDettaglioDao {
 	private DataSource ds;
+	private MagazzinoDaoImp magazzinoDao;
 	public OrdiniDettaglioDaoImp(DataSource ds) {
 		this.ds=ds;
+		magazzinoDao= new MagazzinoDaoImp(ds);
 	}
-	public void doSave(int ordine_id,List<OrdiniDettaglioBean> ordiniDettaglioBean,Connection connection) throws SQLException {
+	public void doSave(int ordine_id,int farmacia_id,List<OrdiniDettaglioBean> ordiniDettaglioBean,Connection connection) throws SQLException {
 		String insertsql= "INSERT INTO ordini_dettaglio (ordini_id,prodotto_id,quantita_prodotto,nome_prodotto,prezzo_prodotto) values(?,?,?,?,?)";
 		try(PreparedStatement preparedStatement= connection.prepareStatement(insertsql)){
         	for(OrdiniDettaglioBean ordineDettaglio: ordiniDettaglioBean) {
@@ -26,9 +28,10 @@ public class OrdiniDettaglioDaoImp implements OrdiniDettaglioDao {
     			preparedStatement.setString(4, ordineDettaglio.getNomeProdotto());
     			preparedStatement.setBigDecimal(5, ordineDettaglio.getPrezzoProdotto());
     			preparedStatement.addBatch();
+    			magazzinoDao.editQuantitaProdotto(farmacia_id,ordineDettaglio.getProdottoId(),ordineDettaglio.getQuantitaProdotto(),connection);
         	}
         	preparedStatement.executeBatch();
-		}
+		} 
 	}
 
 }
