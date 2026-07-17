@@ -731,6 +731,7 @@ img.img-fluid {
     color: #fff;
     background-color: rgba(220, 53, 69, 0.9);
     border-radius: 0.25rem;
+    z-index:1;
 }
 fieldset {
     border: none;

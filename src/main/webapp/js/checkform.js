@@ -1,5 +1,5 @@
 const searchfarmaco = document.getElementById('searchfarmaco');
-
+const spedizionefarmaco= document.getElementById("formSpedizione");
 
 //form di ricerca in home
 if (searchfarmaco) {
@@ -9,6 +9,7 @@ if (searchfarmaco) {
 	const erroreFarmaco = farmacoInput.parentElement.querySelector('.invalidinput');
     searchfarmaco.addEventListener('submit', function(event) {
         
+		//controllo cap
         if (capInput) {
             const capValue = capInput.value.trim();
             if (capValue.length !== 5 || isNaN(capValue)) {
@@ -17,18 +18,71 @@ if (searchfarmaco) {
 				erroreCap.classList.remove("displaynone");
             }
         }
+		//controllo farmaco
 		if(capInput.value.trim() === ""){
 			event.preventDefault(); 
 			farmacoInput.classList.add("validation");
 			erroreFarmaco.classList.remove("displaynone");
 		}
     });
-	capInput.addEventListener('focus', function() {
+	searchfarmaco.addEventListener('focus', function() {
         capInput.classList.remove("validation");
 		erroreCap.classList.add("displaynone");
-    });
-	farmacoInput.addEventListener('focus', function() {
-	    farmacoInput.classList.remove("validation");
+		farmacoInput.classList.remove("validation");
 		erroreFarmaco.classList.add("displaynone");
-	});
+    },true);
 } 
+
+//form checkout pagamento
+if(spedizionefarmaco){
+	const indirizzoInput = document.querySelector('input[name="indirizzo"]');
+	const cittaInput = document.querySelector('input[name="citta"]');
+	const capInput = document.querySelector('input[name="cap"]');
+	const erroreIndirizzo = indirizzoInput.parentElement.querySelector('.invalidinput');
+	const erroreCitta = cittaInput.parentElement.querySelector('.invalidinput');
+	const erroreCap = capInput.parentElement.querySelector('.invalidinput');
+	const inputCarta= document.querySelector('input[name="carta"]');
+	const erroreCarta = inputCarta.parentElement.querySelector('.invalidinput');
+	const inputScadenza= document.querySelector('input[name="scadenza"]');
+	const erroreScadenza = inputScadenza.parentElement.querySelector('.invalidinput');
+	spedizionefarmaco.addEventListener('submit', function(event){
+		if(indirizzoInput.value.trim()===""){
+			event.preventDefault();
+			indirizzoInput.classList.add("validation");
+			erroreIndirizzo.classList.remove("displaynone");
+		}
+		if(capInput.value.trim()===""){
+			event.preventDefault();
+			capInput.classList.add("validation");
+			erroreCap.classList.remove("displaynone");
+		}
+		if(cittaInput.value.trim()===""){
+			event.preventDefault();
+			cittaInput.classList.add("validation");
+			erroreCitta.classList.remove("displaynone");
+		}
+		if(inputCarta.value.trim() < 12){
+			event.preventDefault();
+			inputCarta.classList.add("validation");
+			erroreCarta.classList.remove("displaynone");
+		}
+		if(inputScadenza.value.trim() < 12){
+			event.preventDefault();
+			inputScadenza.classList.add("validation");
+			erroreScadenza.classList.remove("displaynone");
+		}
+	})
+	spedizionefarmaco.addEventListener('focus', function(){
+		capInput.classList.remove("validation");
+		erroreCap.classList.add("displaynone");
+		cittaInput.classList.remove("validation");
+		erroreCitta.classList.add("displaynone");
+		indirizzoInput.classList.remove("validation");
+		erroreIndirizzo.classList.add("displaynone");
+		inputCarta.classList.remove("validation");
+		erroreCarta.classList.add("displaynone");
+		inputScadenza.classList.remove("validation");
+		erroreScadenza.classList.add("displaynone");
+	},true);
+
+}

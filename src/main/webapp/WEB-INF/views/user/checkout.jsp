@@ -59,9 +59,9 @@
 									     <form class="py-1 displaynone" id="inFarmacia" action="order" method="POST">
 										  <input type="hidden" name="inFarmacia">
 										 	 <% if (session.getAttribute("userid") == null) { %>
-										   		<button type="submit" class="btn btn-primary" disabled>Conferma</button>
+										   		<button type="submit" class="btn btn-outline-success" disabled>Conferma</button>
 										   	 <% } else { %>
-										   	 	<button type="submit" class="btn btn-primary">Conferma</button>
+										   	 	<button type="submit" class="btn btn-outline-success">Conferma</button>
 										   	 <% } %>
 										</form>
 									</div>
@@ -76,36 +76,44 @@
 								    
 								    <form class="py-1 displaynone" id="formSpedizione">
 								      <fieldset>Spedizione</fieldset>
-									  <div class="col-md-10">
-									    <label for="inputAddress" class="form-label">indirizzo</label>
-									    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+									  <div class="col-md-10 pos-relative">
+									    <label for="inputAddress" class="form-label">Indirizzo</label>
+									    <input type="text" name="indirizzo" class="form-control" id="inputAddress" placeholder="Indirizzo">
+									    <div class="invalidinput displaynone">Il campo indirizzo è vuoto</div>
 									  </div>
-									  <div class="col-md-6">
+									  <div class="col-md-6 pos-relative">
 									    <label for="inputCity" class="form-label">citta</label>
-									    <input type="text" class="form-control" id="inputCity">
+									    <input type="text" name="citta" class="form-control" id="inputCitta">
+									    <div class="invalidinput displaynone">Il campo citta è vuoto</div>
 									  </div>
-									  <div class="col-md-2 mb-20">
-									    <label for="inputZip" class="form-label">cap</label>
-									    <input type="text" class="form-control" id="inputZip">
+									  <div class="col-md-2 mb-20 pos-relative">
+									    <label for="inputCap" class="form-label">cap</label>
+									    <input type="text" name="cap" class="form-control" id="inputCap">
+									    <div class="invalidinput displaynone">Il campo cap non è valido</div>
 									  </div>
 									  <fieldset>Pagamento</fieldset>
-									  <div class="col-md-10">
-									    <label for="inputAddress" class="form-label">numero di carta</label>
-									    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+									  <div class="col-md-10 pos-relative">
+									    <label for="inputCarta" class="form-label">Numero di carta</label>
+									    <input type="text" name="carta" class="form-control" id="inputCarta" placeholder="Numero di carta">
+									    <div class="invalidinput displaynone">Numero di carta non valido</div>
 									  </div>
-									  <div class="col-md-6">
-									    <label for="inputCity" class="form-label">scadenza</label>
-									    <input type="text" class="form-control" id="inputCity">
+									  <div class="col-md-6 pos-relative">
+									    <label for="inputScadenza" class="form-label">Scadenza</label>
+									    <input type="text" name="scadenza" class="form-control" id="inputScadenza">
+									    <div class="invalidinput displaynone">Scadenza non valida</div>
 									  </div>
-									  <div class="col-md-2">
-									    <label for="inputZip" class="form-label">circuito</label>
-									    <input type="text" class="form-control" id="inputZip">
+									  <div class="col-md-2 pos-relative">
+									    <label for="inputZip" class="form-label">Circuito</label>
+									    <select class="form-control" name="circuito">
+									    	<option value="vista">visa</option>
+									    	<option value="mastercard">mastercard</option>
+									    </select>
 									  </div>
 									  <div class="col-md-12 py-1">
 									     <% if (session.getAttribute("userid") == null) { %>
-									   		<button type="submit" class="btn btn-primary" disabled>Conferma</button>
+									   		<button type="submit" class="btn btn-outline-success" disabled>Conferma</button>
 									   	 <% } else { %>
-									   	 	<button type="submit" class="btn btn-primary">Conferma</button>
+									   	 	<button type="submit" class="btn btn-outline-success">Conferma</button>
 									   	 <% } %>
 									  </div>
 									</form>
@@ -134,5 +142,6 @@ document.querySelectorAll('input[name="choise"]').forEach((radio) => {
 });
 </script>
 <script src="${pageContext.request.contextPath}/js/cart.js"></script>
+<script src="${pageContext.request.contextPath}/js/checkform.js"></script>
 </body>
 </html>
