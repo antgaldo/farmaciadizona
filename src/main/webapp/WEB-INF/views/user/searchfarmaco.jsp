@@ -15,7 +15,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Ricerca farmaco</title>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/user/menu.jsp" %>

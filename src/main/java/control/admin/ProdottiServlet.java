@@ -38,7 +38,6 @@ import util.UploadPath;
 	fileSizeThreshold = 2* 1024 * 1024) // 2 MB after which the file will be temporarily stored on disk
 public class ProdottiServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String UPLOAD_DIR = "uploads";
 	private ProdottiDao prodottiDao;
 	private MagazzinoDao magazzinoDao;
 	private ImgDao imgDao;
@@ -53,11 +52,11 @@ public class ProdottiServlet extends HttpServlet {
 	    	magazzinoDao=new MagazzinoDaoImp(ds);
 	    	imgDao= new ImgDaoImp(ds);
 			// Crea la cartella uploads
-			String uploadPath = getServletContext().getRealPath(File.separator + UPLOAD_DIR);
+			String uploadPath = System.getenv("UPLOAD_PATH");
 			//System.out.println(uploadPath);
-			File uploadDir = new File(uploadPath);
-			if (!uploadDir.exists())
-				uploadDir.mkdir();
+			if (uploadPath == null || uploadPath.isBlank()) {
+			    throw new ServletException("Variabile ambiente UPLOAD_PATH non configurata");
+			}
 	    }
 	 
     /**
@@ -179,7 +178,8 @@ public class ProdottiServlet extends HttpServlet {
 			if (originalFileName != null && !originalFileName.isEmpty() && part.getSize() > 0) {
 				String mimeType = part.getContentType();
 				String uniqueFileName = uploadPathService.buildUniqueFileName(part);
-				String uploadPath = getServletContext().getRealPath(File.separator + UPLOAD_DIR + File.separator + uniqueFileName);
+				String uploadDir = System.getenv("UPLOAD_PATH");
+				String uploadPath = uploadDir + File.separator + uniqueFileName;
 				img.setMimeType(mimeType);
 				img.setPath(uniqueFileName);
 				img.setProdottoId(prodotto_id);

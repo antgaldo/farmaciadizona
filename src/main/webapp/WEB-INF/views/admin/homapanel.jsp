@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Home</title>
 <%@ include file="/WEB-INF/views/admin/header.jsp" %>
 </head>
 <body>

@@ -101,6 +101,7 @@ public class OrderServlet extends HttpServlet {
 		        savePayment(request, ordineId);
 		        saveSpedizione(request, ordineId);
 		    }
+		    request.getSession().removeAttribute("cart");
 		}
 
 		request.getSession().removeAttribute("cart");
