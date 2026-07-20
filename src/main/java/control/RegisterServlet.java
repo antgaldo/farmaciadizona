@@ -58,6 +58,7 @@ public class RegisterServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.removeAttribute("errore");
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/views/register.jsp");
 		dispatcher.forward(request,response);
 		
@@ -99,7 +100,7 @@ public class RegisterServlet extends HttpServlet {
 		if(usersDao.getUser(user) ==null) {
 			usersDao.doSave(user);
 		} else {
-			request.setAttribute("error","Utente gia registrato");
+			request.setAttribute("errore","Utente gia registrato");
 		}
 	}
 	
@@ -137,7 +138,7 @@ public class RegisterServlet extends HttpServlet {
 				gestisceDao.doSave(gestisce);
 			}
 		} else {
-			request.setAttribute("error","Utente gia registrato");
+			request.setAttribute("errore","Utente gia registrato");
 		}
 	}
 }

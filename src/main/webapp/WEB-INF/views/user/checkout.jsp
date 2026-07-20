@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Checkout</title>
 </head>
 <body>
@@ -50,13 +51,13 @@
 								  <% } %>
 								  <div class="col-md-12">								  
 								    <div class="form-check">
-								      <input class="form-check-input" type="radio" id="gridCheck" value="infarmacia" name="choise">
+								      <input class="form-check-input" type="radio" id="gridCheck" value="form-1" name="choise">
 								      <label class="form-check-label" for="gridCheck">
 								        Ritiro in farmacia
 								      </label>
 								    </div>
 								     <div class="col-md-12">
-									     <form class="py-1 displaynone" id="inFarmacia" action="order" method="POST">
+									     <form class="py-1 displaynone" id="form-1" action="order" method="POST">
 										  <input type="hidden" name="inFarmacia" value="inFarmacia">
 										 	 <% if (session.getAttribute("userid") == null) { %>
 										   		<button type="submit" class="btn btn-outline-success" disabled>Conferma</button>
@@ -68,13 +69,13 @@
 								  </div>
 								  <div class="col-md-12 py-1">
 								    <div class="form-check">
-								      <input class="form-check-input" type="radio" id="gridCheck" value="spedizione" name="choise">
+								      <input class="form-check-input" type="radio" id="gridCheck" value="form-2" name="choise">
 								      <label class="form-check-label" for="gridCheck">
 								        Spedizione
 								      </label>
 								    </div>
 								    
-								    <form class="py-1 displaynone" id="formSpedizione" action="order" method="POST">
+								    <form class="py-1 displaynone" id="form-2" action="order" method="POST">
 								      <fieldset>Spedizione</fieldset>
 								      <input type="hidden" name="formSpedizione" value="formSpedizione">
 								      <div class="col-md-10 pos-relative">
@@ -136,23 +137,8 @@
 		</section>
 	</div>
 </section>
-<script>
-document.querySelectorAll('input[name="choise"]').forEach((radio) => {
-  radio.addEventListener('change', function() {
-    if (this.checked) {
-    	if(this.value=="infarmacia"){
-    		document.getElementById("inFarmacia").classList.remove("displaynone");
-    		document.getElementById("formSpedizione").classList.add("displaynone");
-    	}
-    	if(this.value=="spedizione"){
-    		document.getElementById("formSpedizione").classList.remove("displaynone");
-    		document.getElementById("inFarmacia").classList.add("displaynone");
-    	}
-    }
-  });
-});
-</script>
 <script src="${pageContext.request.contextPath}/js/cart.js"></script>
 <script src="${pageContext.request.contextPath}/js/checkform.js"></script>
+<script src="${pageContext.request.contextPath}/js/choiceradio.js"></script>
 </body>
 </html>

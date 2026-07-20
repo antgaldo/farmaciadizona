@@ -5,6 +5,7 @@
 <%@ include file="/WEB-INF/views/user/header.jsp" %>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
 <title>Ordini</title>
 </head>

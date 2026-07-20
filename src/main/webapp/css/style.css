@@ -727,8 +727,21 @@ body {
     width: 200px;
 }
 
-
-
-
+.displaynone{
+	display:none;
+}
+.btn-outline-success {
+    color: #198754;
+    border-color: #198754;
+}
+.py-1{
+	padding: 1rem 0;
+}
+.textleft{
+	text-align: left;
+}
+.my-1{
+	margin: 1rem 0;
+}
 
 

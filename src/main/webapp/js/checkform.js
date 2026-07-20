@@ -1,5 +1,7 @@
 const searchfarmaco = document.getElementById('searchfarmaco');
-const spedizionefarmaco= document.getElementById("formSpedizione");
+const spedizionefarmaco= document.getElementById("form-2");
+
+const registrazione= document.getElementById("formSpedizione");
 
 //form di ricerca in home
 if (searchfarmaco) {
@@ -101,5 +103,4 @@ if(spedizionefarmaco){
 		inputScadenza.classList.remove("validation");
 		erroreScadenza.classList.add("displaynone");
 	},true);
-
 }
