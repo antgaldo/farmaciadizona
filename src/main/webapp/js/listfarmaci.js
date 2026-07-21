@@ -1,6 +1,13 @@
 function isExistFarmaco(){
-	var farmaco= "q=" + document.getElementById("farmaco").value;
-	loadAjaxDoc('CercaFarmacoJson',"GET",farmaco,handleIndirizzo);
+	var farmaco= document.getElementById("farmaco").value;
+	var cap= document.getElementById("cap").value;
+	if (farmaco.length < 2) { 
+	    document.getElementById("risultatoProdotto").innerHTML = "";
+	    document.getElementById("autocompleteFarmaco").classList.remove("displayblock");
+	    return;
+	}
+	var params = 'q=' + encodeURIComponent(farmaco) + '&cap=' + encodeURIComponent(cap);
+	loadAjaxDoc('CercaFarmacoJson',"GET",params,handleIndirizzo);
 }
 
 function loadAjaxDoc(url,method,params,cFunction){
@@ -39,21 +46,28 @@ function loadAjaxDoc(url,method,params,cFunction){
 
 function handleIndirizzo(request){
     var response = JSON.parse(request.responseText);
-    document.getElementById("risultatoProdotto").innerHTML =
-        response.map(function(place){
-            var nomeprodotto = place.replace(/'/g, "\\'");
-            return "<button type='button' " +
-                   "class='list-group-item list-group-item-action' " +
-                   "onclick=\"confermaProdotto('" + nomeprodotto + "')\">" +
-                   place +
-                   "</button>";
+	console.log(response);
+	document.getElementById("risultatoProdotto").innerHTML =
+	    (response && response.length > 0 && response[0] !== "") 
+	    ? response.map(function(place){
+	        var nomeprodotto = place.replace(/'/g, "\\'");
+	        return "<button type='button' " +
+	               "class='list-group-item list-group-item-action' " +
+	               "onclick=\"confermaProdotto('" + nomeprodotto + "')\">" +
+	               place +
+	               "</button>";
+	      }).join("")
+	    : "<button type='button' " +
+	      "class='list-group-item list-group-item-action text-danger' " +
+	      "onclick=\"confermaProdotto('Farmaco non trovato in questo cap')\">" +
+	      "Farmaco non trovato in questo CAP" +
+	      "</button>";
 
-        }).join("");
     document.getElementById("autocompleteFarmaco").classList.add("displayblock");
 }
 function confermaProdotto(nomeprodotto){
     var input = document.getElementById("farmaco");
-    input.value = nomeprodotto;
+	input.value = nomeprodotto;
     document.getElementById("risultatoProdotto").innerHTML = "";
     document.getElementById("autocompleteFarmaco").classList.remove("displayblock");
     input.focus();

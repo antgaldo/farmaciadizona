@@ -79,12 +79,17 @@ public class ProdottiDaoImp implements ProdottiDao{
 	}
 	
 	@Override
-	public List<String> getNameProdotto(String nome) throws SQLException{
-		String selectSQL= "SELECT prodotti.nome FROM prodotti WHERE nome LIKE ?" ;
+	public List<String> getNameProdotto(String nome,String cap) throws SQLException{
+		String selectSQL= "SELECT DISTINCT prodotti.nome, farmacie.cap"
+				+ " FROM prodotti "
+				+ " JOIN magazzino ON prodotti.id=prodotto_id"
+				+ " JOIN farmacie ON farmacia_id=farmacie.id"
+				+ " WHERE prodotti.nome LIKE ? AND farmacie.cap=?" ;
 		List<String> lista= new ArrayList<>();
 		try(Connection connection = ds.getConnection();
 			PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)){
 			preparedStatement.setString(1, "%"+nome+"%");
+			preparedStatement.setString(2, cap);
 			ResultSet rs = preparedStatement.executeQuery();
 			while(rs.next()) {
 				String nomeprodotto= rs.getString("nome");

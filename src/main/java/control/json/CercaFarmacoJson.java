@@ -47,9 +47,10 @@ public class CercaFarmacoJson extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String nomeprodotto = request.getParameter("q");
-    	if(nomeprodotto!=null) {
+		String cap = request.getParameter("cap");
+    	if(nomeprodotto!=null && cap!=null) {
     		try {
-    			List<String> result= prodottiDao.getNameProdotto(nomeprodotto);
+    			List<String> result= prodottiDao.getNameProdotto(nomeprodotto,cap);
     			response.setContentType("application/json");
     			response.setCharacterEncoding("UTF-8");
     			String json = "[\"" + String.join("\",\"", result) + "\"]";
