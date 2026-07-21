@@ -783,10 +783,28 @@ fieldset {
     vertical-align: top;
 }
 
+.bi {
+    display: inline-block;
+    font-family: "bootstrap-icons";
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+}
+
+.text-success {
+    color: #198754 !important;
+}
+
+.fs-2 {
+    font-size: 2rem !important;
+}
+
+.bg-transparent {
+    background-color: transparent !important;
+}
 
 
 
-/* Mobile */
 @media (max-width: 600px) {
     html {
         font-size: 14px;
