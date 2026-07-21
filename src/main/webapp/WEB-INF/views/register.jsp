@@ -27,15 +27,15 @@
 		<input name="action" value="registerUser" type="hidden">
 		<div class="mb-3">
 			<label class="form-label">Nome</label>
-			<input id="nome" type="text" class="form-control" name="nome" placeholder="nome">
+			<input id="nome" required type="text" class="form-control" name="nome" placeholder="nome">
 		</div>
 		<div class="mb-3">
 			<label class="form-label">Password</label>
-			<input id="password" class="form-control" type="password" name="password" placeholder="password">
+			<input id="password" required class="form-control" type="password" name="password" placeholder="password">
 		</div>
 		<div class="mb-3">
 			<label class="form-label">Email</label>
-			<input id="email" class="form-control" type="text" name="email" placeholder="email">
+			<input id="email" required class="form-control" type="text" name="email" placeholder="email">
 		</div>
 		<c:if test="${not empty errore}">
 			<div class="alert alert-danger">
@@ -54,29 +54,34 @@
 		<input name="action" value="registerAdmin" type="hidden">
 		<div class="mb-3">
 			<label class="form-label">Nome</label>
-			<input id="nome" type="text" class="form-control" name="nome" placeholder="nome">
+			<input id="nome" required type="text" class="form-control" name="nome" placeholder="nome">
 		</div>
 		<div class="mb-3">
 			<label class="form-label">Password</label>
-			<input id="password" class="form-control" type="password" name="password" placeholder="password">
+			<input id="password" required class="form-control" type="password" name="password" placeholder="password">
 		</div>
 		<div class="mb-3">
 			<label class="form-label">Email</label>
-			<input id="email" class="form-control" type="text" name="email" placeholder="email">
+			<input id="email" required class="form-control" type="email" name="email" placeholder="email">
 		</div>
 		<div class="mb-3">
 			<label class="form-label">Nome Farmacia</label>
-			<input id="nomeFarmacia" class="form-control" type="text" name="nomeFarmacia" placeholder="nome Farmacia">
+			<input id="nomeFarmacia" required class="form-control" type="text" name="nomeFarmacia" placeholder="nome Farmacia">
 		</div>
 		<div class="mb-3">
 			<label class="form-label">Cap</label>
-			<input id="cap" class="form-control" type="integer" name="cap" placeholder="cap">
+			<input id="cap" required class="form-control" type="integer" name="cap" placeholder="cap">
 		</div>
 		<input id="lat" type="hidden" name="lat">
 		<input id="lon"  type="hidden" name="lon">
-		<div class="mb-3">
+		<div class="mb-3 pos-relative">
 			<label class="form-label">Indirizzo</label>
-			<input id="indirizzo" class="form-control" type="text" name="indirizzo" placeholder="Indirizzo" oninput="cercaIndirizzo()">
+			<input id="indirizzo" required class="form-control" type="text" name="indirizzo" placeholder="Indirizzo" oninput="cercaIndirizzo()">
+			<div id="autocompleteIndirizzo" class="autocomplete-results">
+				<div id="risultatoProdotto" class="autocomplete-item p-2">
+			  		<div id="risultatoindirizzo"></div>
+			  	</div>
+			</div>
 		</div>
 		<c:if test="${not empty errore}">
 			<div class="alert alert-danger">
@@ -95,4 +100,5 @@
 </body>
 <script src="${pageContext.request.contextPath}/js/searchaddress.js"></script>
 <script src="${pageContext.request.contextPath}/js/choiceradio.js"></script>
+<script src="${pageContext.request.contextPath}/js/checkform.js"></script>
 </html>

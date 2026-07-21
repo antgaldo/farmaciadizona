@@ -79,7 +79,11 @@ public class RegisterServlet extends HttpServlet {
 				 insertAdmin(request);
 				 break;
 			 }
-			 doGet(request, response);
+		        if (request.getAttribute("errore") != null) {
+		            doGet(request, response);
+		        } else {
+		            response.sendRedirect(request.getContextPath() + "/login");
+		        }
 		    } catch (SQLException e) {
 		        throw new ServletException(e);
 		    }

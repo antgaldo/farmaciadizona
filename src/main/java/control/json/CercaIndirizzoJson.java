@@ -26,14 +26,20 @@ public class CercaIndirizzoJson extends HttpServlet {
     }
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-    	String q = request.getParameter("q");
-    	if(q != null) {
-    		String urlStr = "https://nominatim.openstreetmap.org/search?q="+ URLEncoder.encode(q, "UTF-8") + "&format=json&limit=5&addressdetails=1";
+    	String indirizzo = request.getParameter("indirizzo");
+    	String cap = request.getParameter("cap");
+    	if(indirizzo != null) {
+    		String urlStr = "https://nominatim.openstreetmap.org/search?street="
+                    + URLEncoder.encode(indirizzo, "UTF-8")
+                    + "&postalcode=" + URLEncoder.encode(cap, "UTF-8")
+                    + "&country=Italy"
+                    + "&format=json&limit=5&addressdetails=1";
     		HttpURLConnection conn = (HttpURLConnection) new URL(urlStr).openConnection();
     		conn.setRequestMethod("GET");
     		conn.setRequestProperty("User-Agent", "farmaciadizona");
     		conn.setRequestProperty("From", "antonio@awwviaggi.it");
     		String res = new String(conn.getInputStream().readAllBytes());
+    		
     		response.setContentType("application/json");
     		response.setCharacterEncoding("UTF-8");
     		response.getWriter().write(res);    	

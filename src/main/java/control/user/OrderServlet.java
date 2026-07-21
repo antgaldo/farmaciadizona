@@ -105,7 +105,7 @@ public class OrderServlet extends HttpServlet {
 		}
 
 		request.getSession().removeAttribute("cart");
-		response.sendRedirect("confermaOrdine.jsp");
+		response.sendRedirect(request.getContextPath() + "/order");
 	}
 	
 	private void savePayment(HttpServletRequest request,int ordine_id) throws ServletException, IOException {

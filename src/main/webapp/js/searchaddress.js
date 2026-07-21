@@ -3,12 +3,13 @@ var timerRicerca;
 function cercaIndirizzo(){
 	clearTimeout(timerRicerca);
 	var indirizzo= document.getElementById('indirizzo').value;
+	var cap= document.getElementById('cap').value;
 	if (indirizzo.length < 6) {
         document.getElementById("risultatoindirizzo").innerHTML = "";
         return;
     }
 	timerRicerca= setTimeout(function(){
-		var params= 'q=' + indirizzo;
+		var params = 'indirizzo=' + encodeURIComponent(indirizzo) + '&cap=' + encodeURIComponent(cap);
 		loadAjaxDoc('CercaIndirizzoJson',"GET",params,handleIndirizzo);
 	},1000);
 }
@@ -64,15 +65,18 @@ function handleIndirizzo(request){
         var lat = rawLat.replace(/'/g, "\\'");
         var lon = rawLon.replace(/'/g, "\\'");
 
-        return "<button type='button' onclick=\"confermaIndirizzo('" 
-               + postcode + "', '" 
-               + city + "', '" 
-               + road + "', '" 
-               + lat + "', '" 
-               + lon + "')\">" + 
-               place.display_name + 
-               "</button>";
+	   return "<button type='button' " +
+	          "class='list-group-item list-group-item-action' " +
+	          "onclick=\"confermaIndirizzo('"
+				  + postcode + "', '" 
+				  + city + "', '" 
+				  + road + "', '" 
+				  + lat + "', '" 
+				  + lon + "')\">" + 
+	          place.display_name +
+	          "</button>";
     }).join("");
+	document.getElementById("autocompleteIndirizzo").classList.add("displayblock");
 }
 
 function confermaIndirizzo(postcode,city,road,lat,lon){
