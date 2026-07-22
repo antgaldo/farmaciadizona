@@ -3,7 +3,7 @@
     <a href="app"><img class="width200" src="${pageContext.request.contextPath}/img/logo.png"/></a>
 	    <% if (session.getAttribute("userid") != null) { %>
 	    	<div class="ml-auto me-2"><%= session.getAttribute("usernome") %></div>
-	    	<div class="me-2"><a href="${pageContext.request.contextPath}/logout">logout</a></div>
+	    	<div class="me-2"><a class="registrati" href="${pageContext.request.contextPath}/logout">- logout</a></div>
 	    <%}%>
     <button class="menu" type="button"
 	        data-bs-toggle="offcanvas"

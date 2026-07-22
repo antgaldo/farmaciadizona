@@ -30,7 +30,12 @@
 		        ${errore}
 	      </div>
 	  </c:if>
-	  <button type="submit" class="btn btn-primary" value="submit">Submit</button>
+	  <% if (session.getAttribute("userid") == null) { %>
+	  	<div class="mb-3">
+	  		<a class="registrati" href="/register">Registrati</a>
+	  	</div>
+	  <% } %>
+	  <button type="submit" class="btn btn-outline-success" value="submit">Accedi</button>
 	</form>
    </div>
   </div>

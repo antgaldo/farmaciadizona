@@ -802,7 +802,10 @@ fieldset {
 .bg-transparent {
     background-color: transparent !important;
 }
-
+.registrati{
+    color: #212529;
+    text-decoration: none;
+}
 
 
 @media (max-width: 600px) {
