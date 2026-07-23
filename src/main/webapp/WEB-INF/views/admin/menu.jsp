@@ -25,13 +25,5 @@
                 <i class="bi bi-shop"></i>
             </span>
         </li>
-        <li class="sidebar-item">
-            <div class="sidebar-link">
-                Account
-            </div>
-            <span class="sidebar-icon">
-                <i class="bi bi-person-circle"></i>
-            </span>
-        </li>
     </ul>
 </div>

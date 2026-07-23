@@ -35,7 +35,17 @@ public class MagazzinoDaoImp implements MagazzinoDao {
 				preparedStatement.executeUpdate();
 			}
 	}
-	
+	public void doEdit(MagazzinoBean magazzino) throws SQLException{
+		String updateSQL= "UPDATE magazzino SET quantita_disponibile=? , prezzo=?  WHERE farmacia_id=? AND prodotto_id=?";
+		try(Connection connection = ds.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(updateSQL)){
+			preparedStatement.setInt(1, magazzino.getQuantita());
+			preparedStatement.setBigDecimal(2, magazzino.getPrezzo());
+			preparedStatement.setInt(3, magazzino.getFarmaciaId());
+			preparedStatement.setInt(4, magazzino.getProdottoId());
+			preparedStatement.executeUpdate();
+		}
+	}
 	@Override
 	public void delete(int idFarmacia, int idProdotto) throws SQLException{
 		String deletesql= "DELETE FROM magazzino WHERE farmacia_id=? AND prodotto_id=?";

@@ -94,9 +94,6 @@
   </div>
 </div>
 
-
-
-
 </body>
 <script src="${pageContext.request.contextPath}/js/searchaddress.js"></script>
 <script src="${pageContext.request.contextPath}/js/choiceradio.js"></script>

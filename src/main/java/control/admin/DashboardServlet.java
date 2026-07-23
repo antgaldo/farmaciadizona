@@ -14,6 +14,8 @@ import javax.sql.DataSource;
 import dao.interfaceDao.MagazzinoDao;
 import dao.ProdottiDaoImp;
 import dao.MagazzinoDaoImp;
+import dao.interfaceDao.PrenotazioniDao;
+import dao.PrenotazioniDaoImp;
 
 /**
  * Servlet implementation class AdminServlet
@@ -22,6 +24,7 @@ import dao.MagazzinoDaoImp;
 public class DashboardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MagazzinoDao magazzinoDao;
+	private PrenotazioniDao prenotazioniDao;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -39,6 +42,7 @@ public class DashboardServlet extends HttpServlet {
 	    		throw new ServletException("DataSource non disponibile nel contesto");
 	    	}
 	    	magazzinoDao=new MagazzinoDaoImp(ds);
+	    	prenotazioniDao= new PrenotazioniDaoImp(ds);
 	    }
 
 	/**
@@ -49,8 +53,10 @@ public class DashboardServlet extends HttpServlet {
 		int idFarmacia= (Integer) request.getSession().getAttribute("idFarmacia");
 		if(idFarmacia != 0) {
 			try {
-				int count = magazzinoDao.getCountProdotti(idFarmacia);
-				request.setAttribute("nprodotti", count);
+				int countProdotti = magazzinoDao.getCountProdotti(idFarmacia);
+				int countPrenotazioni = prenotazioniDao.getCountPrenotazioni(idFarmacia);
+				request.setAttribute("nprodotti", countProdotti);
+				request.setAttribute("nprenotazioni", countPrenotazioni);
 			} catch (SQLException e) {
 		        throw new ServletException(e);
 		    }

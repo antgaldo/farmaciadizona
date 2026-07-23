@@ -2,7 +2,7 @@
 <div class="row">
 	<div class="card mb-3 col-md-12 p-5 border-0">
 		<div class="col-md-12 pb-5">
-			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+			<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
 			  Inserisci prodotto
 			</button>
 			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -13,7 +13,7 @@
 			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			      </div>
 			      <div class="modal-body">
-			        <form action="/farmaciadizona/admin/prodotti" method="POST" enctype="multipart/form-data">
+			        <form action="${pageContext.request.contextPath}/admin/prodotti" method="POST" enctype="multipart/form-data">
 			          <input type="hidden" name="action" value="addprodotto">
 					  <div class="mb-3">
 					    <label class="form-label">Nome</label>
@@ -21,7 +21,7 @@
 					  </div>
 					  <div class="mb-3">
 					  	<label>descrizione</label>
-						<input id="descrizione" type="text" class="form-control" name="descrizione" placeholder="descrizione">
+						<textarea id="descrizione" type="text" class="form-control" name="descrizione" placeholder="descrizione"></textarea>
 					  </div>
 					  <div class="mb-3">
 						<label>prezzo</label>
@@ -39,11 +39,11 @@
 						<label>categoria</label>
 						<input id="categoria" type="text" class="form-control" name="categoria" placeholder="categoria">
 					  </div>
-					  <button type="submit" value="submit" class="btn btn-primary">Save changes</button>
+					  <button type="submit" value="submit" class="btn btn-success">Salva prodotto</button>
 					</form>
 			      </div>
 			      <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+			        <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
 			      </div>
 			    </div>
 			  </div>
@@ -87,15 +87,38 @@
 						  <div class="modal-dialog">
 						    <div class="modal-content">
 						      <div class="modal-header">
-						        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+						        <h1 class="modal-title fs-5" id="exampleModalLabel">Modifica</h1>
 						        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						      </div>
 						      <div class="modal-body">
-						        ...
+						         <form action="${pageContext.request.contextPath}/admin/prodotti" method="POST">
+						          <input type="hidden" name="action" value="editprodotto">
+						          <input type="hidden" name="id" value="${p.idProdotto}">
+								  <div class="mb-3">
+								    <label class="form-label">Nome</label>
+								    <input id="nome" class="form-control" type="text" name="nome" placeholder="nome" disabled value="${p.nomeProdotto}">
+								  </div>
+								  <div class="mb-3">
+								  	<label>descrizione</label>
+									<textarea id="descrizione" type="text" class="form-control" name="descrizione" placeholder="descrizione">${p.descrizione}</textarea>
+								  </div>
+								  <div class="mb-3">
+									<label>prezzo</label>
+									<input id="prezzo" type="int" class="form-control" name="prezzo" placeholder="prezzo" value="${p.prezzo}">
+								  </div>
+								  <div class="mb-3">
+									<label>quantita</label>
+									<input id="quantita" type="int" class="form-control" name="quantita" placeholder="quantita" value="${p.quantita}">
+								  </div>
+								  <div class="mb-3">
+									<label>categoria</label>
+									<input id="categoria" type="text" class="form-control" name="categoria" placeholder="categoria" disabled value="${p.categoria}">
+								  </div>
+								  <button type="submit" value="submit" class="btn btn-primary">Salva</button>
+								</form>
 						      </div>
 						      <div class="modal-footer">
-						        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-						        <button type="button" class="btn btn-primary">Save changes</button>
+						        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
 						      </div>
 						    </div>
 						  </div>

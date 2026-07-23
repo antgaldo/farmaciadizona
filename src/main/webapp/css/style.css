@@ -330,9 +330,7 @@ body {
 }
 
 .chart-container{
-
     flex:1;
-
     display:flex;
     justify-content:center;
     align-items:center;
@@ -778,4 +776,7 @@ body {
 .registrati{
     color: #212529;
     text-decoration: none;
+}
+.bi{
+	cursor: pointer;
 }

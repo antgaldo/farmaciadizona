@@ -33,9 +33,9 @@ import util.UploadPath;
  * Servlet implementation class AdminDashboard
  */
 @WebServlet("/admin/prodotti")
-@MultipartConfig(maxFileSize = 5 * 1024 * 1024, // max 5 MB per file
-	maxRequestSize = 10 * 1024 * 1024, // max 10 MB per request
-	fileSizeThreshold = 2* 1024 * 1024) // 2 MB after which the file will be temporarily stored on disk
+@MultipartConfig(maxFileSize = 5 * 1024 * 1024, // max 5 MB
+	maxRequestSize = 10 * 1024 * 1024, // max 10 MB
+	fileSizeThreshold = 2* 1024 * 1024) // 2 MB
 public class ProdottiServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ProdottiDao prodottiDao;
@@ -94,10 +94,15 @@ public class ProdottiServlet extends HttpServlet {
 		 try {
 			 switch(action) {
 			 	case "addprodotto":
-			 		ProdottiBean prodotto= insertProdotto(request);
+			 		insertProdotto(request);
 			 	    request.getSession().setAttribute("success", "Prodotto inserito");
 			 	    response.sendRedirect(request.getContextPath() + "/admin/prodotti");
-			 	return;
+			 	    return;
+			 	case "editprodotto":
+			 		editProdotto(request);
+			 	    request.getSession().setAttribute("success", "Prodotto modificato");
+			 	    response.sendRedirect(request.getContextPath() + "/admin/prodotti");
+			 	    return;
 			 	case "deletevendeprodotto":
 			 		deleteVendeProdotto(request,Integer.parseInt(request.getParameter("idProdotto")));
 			 		response.sendRedirect(request.getContextPath() + "/admin/prodotti");
@@ -123,7 +128,7 @@ public class ProdottiServlet extends HttpServlet {
 		}
 	}
 	
-	private ProdottiBean insertProdotto(HttpServletRequest request) throws SQLException{
+	private void insertProdotto(HttpServletRequest request) throws SQLException{
 		ProdottiBean prodotto= new ProdottiBean();
 		String nome= request.getParameter("nome");
 		String descrizione= request.getParameter("descrizione");
@@ -154,9 +159,17 @@ public class ProdottiServlet extends HttpServlet {
 			System.err.println("Error:" + i.getMessage());
 		}
 		
-		return prodotto;
 	}
-	
+	private void editProdotto(HttpServletRequest request) throws SQLException{
+		ProdottiBean prodotto= new ProdottiBean();
+		String descrizione= request.getParameter("descrizione");
+		int prodotto_id=  Integer.parseInt(request.getParameter("id"));
+		prodotto.setDescrizione(descrizione);
+		prodotto.setId(prodotto_id);
+		prodottiDao.doEdit(prodotto);
+		MagazzinoBean magazzino= editMagazzino(request,prodotto_id);
+		magazzinoDao.doEdit(magazzino);
+	}
 	private MagazzinoBean insertMagazzino(HttpServletRequest request,int prodotto_id){
 		MagazzinoBean magazzino= new MagazzinoBean();
 		BigDecimal prezzo = new BigDecimal(request.getParameter("prezzo"));
@@ -168,7 +181,16 @@ public class ProdottiServlet extends HttpServlet {
 		magazzino.setProdottoId(prodotto_id);
 		return magazzino;
 	}
-	
+	private MagazzinoBean editMagazzino(HttpServletRequest request,int prodotto_id){
+		MagazzinoBean magazzino= new MagazzinoBean();
+		BigDecimal prezzo = new BigDecimal(request.getParameter("prezzo"));
+		int quantita = Integer.parseInt(request.getParameter("quantita"));
+		magazzino.setFarmaciaId((Integer)request.getSession().getAttribute("idFarmacia"));
+		magazzino.setPrezzo(prezzo);
+		magazzino.setQuantita(quantita);
+		magazzino.setProdottoId(prodotto_id);
+		return magazzino;
+	}
 	private ImgBean insertImg(HttpServletRequest request,int prodotto_id) throws SQLException, ServletException, IOException{
 		ImgBean img= new ImgBean();
 		Part part = request.getPart("img");

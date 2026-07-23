@@ -1,15 +1,13 @@
 <div class="dashboard-row">
-    <section class="dashboard-card chart-card">
-        <div class="chart-container">
-            <canvas id="myChart"></canvas>
+    <section class="dashboard-card stats-card">
+        <div class="stats-number">
+            ${nprenotazioni}
         </div>
         <div class="card-content">
-            <h3>Card title</h3>
+            <h3>Prenotazioni</h3>
             <p>
-                This is a wider card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit longer.
+            	Prenotazioni presenti
             </p>
-            <small>Last updated 3 mins ago</small>
         </div>
     </section>
     <section class="dashboard-card stats-card">
@@ -18,49 +16,8 @@
         </div>
         <div class="card-content">
             <h3>Prodotti attivi</h3>
-            <p>
-                This is a wider card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit longer.
+            <p>Prodotti attualmente presenti in magazzino
             </p>
-            <small>Last updated 3 mins ago</small>
         </div>
     </section>
 </div>
-<script>
-function initDashboardPage() {
-
-    const ctx = document.getElementById("myChart");
-
-    if (!ctx || typeof Chart === "undefined") return;
-    
-    new Chart(ctx, {
-	  type: 'bar',
-	  data: {
-		  labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange','Black'],
-		  datasets: [{
-		    label: 'My First Dataset',
-		    data: [65, 59, 80, 81, 56, 55, 40],
-		    backgroundColor: [
-		      'rgba(255, 99, 132, 0.2)',
-		      'rgba(255, 159, 64, 0.2)',
-		      'rgba(255, 205, 86, 0.2)',
-		      'rgba(75, 192, 192, 0.2)',
-		      'rgba(54, 162, 235, 0.2)',
-		      'rgba(153, 102, 255, 0.2)',
-		      'rgba(201, 203, 207, 0.2)'
-		    ],
-		    borderColor: [
-		      'rgb(255, 99, 132)',
-		      'rgb(255, 159, 64)',
-		      'rgb(255, 205, 86)',
-		      'rgb(75, 192, 192)',
-		      'rgb(54, 162, 235)',
-		      'rgb(153, 102, 255)',
-		      'rgb(201, 203, 207)'
-		    ],
-		    borderWidth: 1
-		  }]
-	  },
-    });
-}
-</script>

@@ -37,6 +37,15 @@ public class ProdottiDaoImp implements ProdottiDao{
 		}
 		return 0;
 	}
+	public void doEdit(ProdottiBean prodotti) throws SQLException{
+		String updateSQL= "UPDATE prodotti SET descrizione=? WHERE id=?";
+		try(Connection connection = ds.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(updateSQL)){
+			preparedStatement.setString(1, prodotti.getDescrizione());
+			preparedStatement.setInt(2, prodotti.getId());
+			preparedStatement.executeUpdate();
+		}
+	}
 	
 	
 	@Override

@@ -2,16 +2,12 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <%@ include file="/WEB-INF/views/user/header.jsp" %>
-<!-- Leaflet -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"></script>
 <!-- Maplibre GL -->
-<link href="https://unpkg.com/maplibre-gl/dist/maplibre-gl.css" rel="stylesheet" />
-<script src="https://unpkg.com/maplibre-gl/dist/maplibre-gl.js"></script>
-
-<!-- Maplibre GL Leaflet  -->
-<script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet/leaflet-maplibre-gl.js"></script>
+<link href="https://unpkg.com/maplibre-gl@2.2.1/dist/maplibre-gl.css" rel="stylesheet"/>
+<script src="https://unpkg.com/maplibre-gl@2.2.1/dist/maplibre-gl.js"></script>
+<script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet@0.0.20/leaflet-maplibre-gl.js"></script>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">

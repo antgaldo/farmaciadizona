@@ -101,4 +101,16 @@ public class PrenotazioniDaoImp implements PrenotazioniDao{
 		}
 		return lista;
 	}
+	public int getCountPrenotazioni(int farmacia_id) throws SQLException {
+		String getSQL="SELECT COUNT(id) AS totale FROM ordini WHERE farmacia_id=?";
+		try(Connection connection = ds.getConnection();PreparedStatement preparedStatement=connection.prepareStatement(getSQL)){
+			preparedStatement.setInt(1, farmacia_id);
+			ResultSet rs= preparedStatement.executeQuery();
+			if(rs.next()) {
+				return rs.getInt("totale");
+			}
+		}
+		return 0;
+	}
+	
 }
