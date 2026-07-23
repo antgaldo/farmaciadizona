@@ -1,10 +1,23 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <div class="row">
 	<div class="card mb-3 col-md-12 p-5 border-0">
-		<div class="col-md-12 pb-5">
+		<div class="col-md-12">
 			<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
 			  Inserisci prodotto
 			</button>
+			<c:if test="${not empty successInsert}">
+				<div class="banner">
+				    ${successInsert}			    
+				    <% session.removeAttribute("successInsert"); %>
+				</div>
+			</c:if>
+			<c:if test="${not empty successEdit}">
+				<div class="banner">
+				 	${successEdit}
+				 	<% session.removeAttribute("successEdit"); %>
+				</div>				    
+			</c:if>
+			</div>
 			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			  <div class="modal-dialog">
 			    <div class="modal-content">
@@ -114,7 +127,7 @@
 									<label>categoria</label>
 									<input id="categoria" type="text" class="form-control" name="categoria" placeholder="categoria" disabled value="${p.categoria}">
 								  </div>
-								  <button type="submit" value="submit" class="btn btn-primary">Salva</button>
+								  <button type="submit" value="submit" class="btn btn-success">Salva</button>
 								</form>
 						      </div>
 						      <div class="modal-footer">
@@ -133,10 +146,10 @@
 						        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						      </div>
 						      <div class="modal-body">
-						        <form action="/farmaciadizona/admin/prodotti" method="POST">
+						        <form action="${pageContext.request.contextPath}/admin/prodotti" method="POST">
 						        	<input type="hidden" name="action" value="deletevendeprodotto">
 								    <input type="hidden" name="idProdotto" value="${p.idProdotto}">
-								    <button type="submit" class="btn btn-secondary">
+								    <button type="submit" class="btn btn-warning">
 								        Elimina
 								    </button>
 								</form>

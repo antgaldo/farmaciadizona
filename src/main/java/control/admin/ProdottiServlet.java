@@ -95,12 +95,12 @@ public class ProdottiServlet extends HttpServlet {
 			 switch(action) {
 			 	case "addprodotto":
 			 		insertProdotto(request);
-			 	    request.getSession().setAttribute("success", "Prodotto inserito");
+			 	    request.getSession().setAttribute("successInsert", "Prodotto inserito");
 			 	    response.sendRedirect(request.getContextPath() + "/admin/prodotti");
 			 	    return;
 			 	case "editprodotto":
 			 		editProdotto(request);
-			 	    request.getSession().setAttribute("success", "Prodotto modificato");
+			 	    request.getSession().setAttribute("successEdit", "Prodotto modificato");
 			 	    response.sendRedirect(request.getContextPath() + "/admin/prodotti");
 			 	    return;
 			 	case "deletevendeprodotto":

@@ -780,3 +780,10 @@ body {
 .bi{
 	cursor: pointer;
 }
+.banner {
+    margin-top: 18px;
+    background-color: #198754c2;
+    padding: 10px;
+    color: white;
+    font-weight: 700;
+}
