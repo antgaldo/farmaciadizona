@@ -100,7 +100,10 @@ public class LoginServlet extends HttpServlet {
 			request.getSession().setAttribute("userid", usercheck.getId());
 			request.getSession().setAttribute("usernome", usercheck.getNome());
 			if(usercheck.getRuolo().equals("ADMIN")) {
-				int idFarmacia= gestisceDao.getGestisce(usercheck);
+				Object[] lista= gestisceDao.getGestisce(usercheck);
+				int idFarmacia= (int) lista[0];
+				String nomeFarmacia= (String) lista[1];
+				request.getSession().setAttribute("nomeFarmacia", nomeFarmacia);
 				request.getSession().setAttribute("idFarmacia", idFarmacia);
 			}
 		}

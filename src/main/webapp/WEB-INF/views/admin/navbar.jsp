@@ -4,6 +4,7 @@
     <% if (session.getAttribute("userid") != null) { %>
     	<div class="me-2">
     		<%= session.getAttribute("usernome") %>
+    		(<%= session.getAttribute("nomeFarmacia") %>)
     		<a href="${pageContext.request.contextPath}/logout">logout</a>
     	</div>
     <%}%>

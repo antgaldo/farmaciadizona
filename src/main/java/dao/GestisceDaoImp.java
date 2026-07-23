@@ -27,17 +27,25 @@ public class GestisceDaoImp implements GestisceDao{
 		}
 	}
 	
-	public int getGestisce(UsersBean user) throws SQLException{
-		String getSQL= "SELECT farmacia_id FROM gestisce WHERE user_id=?";
+	public Object[] getGestisce(UsersBean user) throws SQLException{
+		String getSQL= "SELECT farmacia_id,farmacie.nome "
+				+ " FROM gestisce"
+				+ " JOIN farmacie ON farmacie.id=farmacia_id "
+				+ " WHERE user_id=?";
+		Object[] lista= new Object[2];
 		try(Connection connection=ds.getConnection();
 			PreparedStatement preparedStatement = connection.prepareStatement(getSQL)){
 			preparedStatement.setInt(1,user.getId());
 			ResultSet rs = preparedStatement.executeQuery();
 			if(rs.next()) {
 				int id= rs.getInt("farmacia_id");
-				return id;
+				String nome= rs.getString("nome");
+				lista[0]=id;
+				lista[1]=nome;
+				return lista;
+				
 			}
 		};
-		return 0;
+		return null;
 	}
 }
