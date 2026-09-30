@@ -41,3 +41,19 @@ Assicurati di aver installato:
 1. **Clona il repository:**
    ```bash
    git clone [https://github.com/antgaldo/farmaciadizona.git](https://github.com/antgaldo/farmaciadizona.git)
+
+---
+
+## 🛠️ Struttura
+
+farmaciadizona/
+├── public/          # Asset statici (icone, immagini)
+├── src/             # Codice sorgente dell'applicazione
+│   ├── assets/      # Stili CSS, immagini e icone
+│   ├── components/  # Componenti dell'interfaccia
+│   └── main.js      # Punto di ingresso dell'applicazione
+├── .gitignore       # Configurazione file da ignorare su Git
+├── package.json     # Gestione dipendenze e script
+└── README.md        # Documentazione del progetto
+
+
