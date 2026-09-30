@@ -56,4 +56,6 @@ farmaciadizona/
 ├── package.json     # Gestione dipendenze e script
 └── README.md        # Documentazione del progetto
 
+---
+**Autore**: Antonio Galdo (Università degli Studi di Salerno)
 
